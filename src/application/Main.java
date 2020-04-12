@@ -17,9 +17,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ControlPane controlPane = new ControlPane();
-        GamePane gamePane = new GamePane();
-
         HBox root = GUIController.initialize();
         GameController.initialize("map_1");
 

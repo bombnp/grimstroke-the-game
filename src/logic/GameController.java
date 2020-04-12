@@ -6,11 +6,10 @@ public class GameController {
     private static GameMap gameMap;
 
     public static void initialize(String mapName) {
-        String[][] mapCSV = Utility.readCSV("map/" + mapName + "_csv_Background.csv");
-        String[][] decorCSV = Utility.readCSV("map/" + mapName + "_csv_Decor.csv");
-        String[][] buildingSpotCSV = Utility.readCSV("map/" + mapName + "_csv_BuildingSpots.csv");
+        String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
+        String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         assert mapCSV != null;
-        gameMap = new GameMap(mapCSV, decorCSV, buildingSpotCSV);
+        gameMap = new GameMap(mapCSV, decorCSV);
     }
 
     public static GameMap getGameMap() {

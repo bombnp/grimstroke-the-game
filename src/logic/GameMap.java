@@ -1,14 +1,15 @@
 package logic;
 
+import entity.Buildspot;
 import gui.BoardCell;
 import gui.BoardGrid;
 import gui.GUIController;
+import gui.Sprite;
 
 public class GameMap {
-    private Cell[][] cellMap;
     private final int width, height;
 
-    public GameMap(String[][] mapCSV, String[][] decorCSV, String[][] buildingSpotCSV) {
+    public GameMap(String[][] mapCSV, String[][] decorCSV) {
         height = mapCSV.length;
         width = mapCSV[0].length;
 
@@ -20,7 +21,11 @@ public class GameMap {
                 BoardCell cell = boardGrid.addCell(spriteIndex, row, col);
 
                 spriteIndex = Integer.parseInt(decorCSV[row][col]);
-                cell.addImage(spriteIndex);
+                if (spriteIndex == Sprite.BUILD_SPOT) {
+                    cell.setBuilding(new Buildspot(cell));
+                } else {
+                    cell.addImage(spriteIndex);
+                }
             }
         }
     }

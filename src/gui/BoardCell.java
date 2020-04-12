@@ -1,28 +1,35 @@
 package gui;
 
 import application.Utility;
+import entity.base.Building;
 import exception.SpriteIndexOutOfBoundsException;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 public class BoardCell extends StackPane {
 
-    public BoardCell(int spriteIndex) {
+    private Building building;
+
+    public BoardCell(int bgSprite) {
         this.setPrefWidth(48);
         this.setPrefHeight(48);
 
-        addImage(spriteIndex);
+        addImage(bgSprite);
     }
 
     public void addImage(int spriteIndex) {
-        ImageView imageView;
-        try {
-            imageView = new ImageView(Utility.getSprite(spriteIndex));
-        } catch (SpriteIndexOutOfBoundsException e) {
-            imageView = new ImageView();
+        this.getChildren().add(new CellImage(spriteIndex));
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building newBuilding) {
+        if (building != null) {
+            this.getChildren().remove(building);
         }
-        imageView.setFitWidth(48);
-        imageView.setFitHeight(48);
-        this.getChildren().add(imageView);
+        building = newBuilding;
+        this.getChildren().add(building);
     }
 }

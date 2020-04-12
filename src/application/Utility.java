@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Utility {
-    private static final Image tileset = new Image("tilesheet/tilesheet.png");
+    private static final Image tileset = new Image("tilesheet/tilesheet2.png");
 
     public static String[][] readCSV(String filename) {
 

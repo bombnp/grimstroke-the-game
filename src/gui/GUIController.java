@@ -4,8 +4,11 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 
 public class GUIController {
+    private static HBox root;
+
     private static ControlPane controlPane;
     private static GamePane gamePane;
+
     private static BoardGrid boardGrid;
 
     public static HBox initialize() {
@@ -13,12 +16,14 @@ public class GUIController {
         gamePane = new GamePane();
         boardGrid = gamePane.getBoardGrid();
 
-        HBox root = new HBox(controlPane, gamePane);
+        root = new HBox(controlPane, gamePane);
         root.setPadding(new Insets(10));
         root.setSpacing(10);
 
         return root;
     }
+
+    public static HBox getRoot() { return root; }
 
     public static ControlPane getControlPane() {
         return controlPane;
