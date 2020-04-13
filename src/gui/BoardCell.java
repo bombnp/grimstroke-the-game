@@ -5,6 +5,7 @@ import entity.base.Building;
 import exception.SpriteIndexOutOfBoundsException;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import logic.Coordinate;
 
 public class BoardCell extends StackPane {
 

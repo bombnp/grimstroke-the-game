@@ -23,6 +23,7 @@ public class GameMap {
                 spriteIndex = Integer.parseInt(decorCSV[row][col]);
                 if (spriteIndex == Sprite.BUILD_SPOT) {
                     cell.setBuilding(new Buildspot(cell));
+                    System.out.println(String.format("BUILDSPOT: %d %d", row, col));
                 } else {
                     cell.addImage(spriteIndex);
                 }
