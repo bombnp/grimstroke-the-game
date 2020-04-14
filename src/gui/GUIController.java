@@ -2,6 +2,7 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
+import logic.GameController;
 
 public class GUIController {
     private static HBox root;

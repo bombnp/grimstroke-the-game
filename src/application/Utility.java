@@ -1,6 +1,7 @@
 package application;
 
 import exception.SpriteIndexOutOfBoundsException;
+import gui.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 
@@ -28,7 +29,6 @@ public class Utility {
 
             for (String line; (line = in.readLine()) != null;) {
                 String[] parsedData = line.split(",");
-
                 result.add(parsedData);
             }
 
