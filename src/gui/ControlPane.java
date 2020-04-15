@@ -13,6 +13,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameController;
 
 public class ControlPane extends VBox {
@@ -24,8 +25,8 @@ public class ControlPane extends VBox {
         this.setPrefWidth(ControlPaneSize);
         this.setSpacing(10);
     }
-    public TowerCell addTower(int bgSprite,String Name,String Damage,String Rates,String Range) {
-    	TowerCell cell = new TowerCell(bgSprite,Name,Damage,Rates,Range);
+    public TowerCell addTower(int bgSprite,String Name,String Damage,String Rates,String Range,boolean isTool) {
+    	TowerCell cell = new TowerCell(bgSprite,Name,Damage,Rates,Range,isTool);
     	this.getChildren().add(cell);
 		return cell;
     }

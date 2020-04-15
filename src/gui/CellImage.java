@@ -2,7 +2,6 @@ package gui;
 
 import application.Utility;
 import exception.SpriteIndexOutOfBoundsException;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CellImage extends ImageView {

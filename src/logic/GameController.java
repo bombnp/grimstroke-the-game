@@ -5,6 +5,7 @@ import com.sun.tools.javac.code.Attribute.Array;
 
 import Debug.DebugCSV;
 import application.Utility;
+import gui.BoardCell;
 import gui.ControlPane;
 import gui.GUIController;
 import gui.GamePane;
@@ -15,6 +16,7 @@ public class GameController {
     private static String[][] mapCSV;
     private static String[][] decorCSV;
     private static String[][] TowerDataCSV;
+    public static BoardCell SelectedCell;
     public static void initialize(String mapName) {
         mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
@@ -26,8 +28,8 @@ public class GameController {
     public static void AddAllTower() {
         ControlPane pane = GUIController.getControlPane();
 	    for(String[] str: TowerDataCSV) {
-	    	// ImgIDX,Name,DamageRange,RateOfFire,Range
-	    	pane.addTower(Integer.parseInt(str[0]), str[1], str[2], str[3], str[4]);
+	    	// ImgIDX,Name,DamageRange,RateOfFire,Range,isTool
+	    	pane.addTower(Integer.parseInt(str[0]), str[1], str[2], str[3], str[4],Boolean.parseBoolean(str[5]));
 	    }
     }
     public static String[][] GetTowerData(){

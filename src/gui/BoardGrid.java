@@ -1,5 +1,8 @@
 package gui;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 
 public class BoardGrid extends GridPane {
@@ -21,7 +24,6 @@ public class BoardGrid extends GridPane {
 
         BoardGrid.setColumnIndex(boardCell, col);
         BoardGrid.setRowIndex(boardCell, row);
-
         return boardCell;
     }
 
