@@ -3,30 +3,29 @@ package gui;
 import entity.Buildspot;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import logic.GameController;
 
 public class TowerCell extends Button{
-	int PrefSize = ControlPane.getControlPaneSize();
+	int prefSize = ControlPane.getControlPaneSize();
 	private int bgSprite;
 	private String name;
 	private String damage;
-	private String rates;
+	private String rate;
 	private String range;
 	private boolean isTool;
-	public TowerCell(int bgSprite, String name, String damage, String rates, String range, boolean isTool) {
+	public TowerCell(int bgSprite, String name, String damage, String rate, String range, boolean isTool) {
 		this.setGraphic(new TowerImage(bgSprite));
-		this.setPrefWidth(PrefSize);
-		this.setPrefHeight(PrefSize);
-		this.setData(bgSprite,name, damage, rates, range, isTool);
+		this.setPrefWidth(prefSize);
+		this.setPrefHeight(prefSize);
+		this.setData(bgSprite,name, damage, rate, range, isTool);
 		this.setTooltip();
 	}
-	public void setData(int bgSprite, String name, String damage, String rates, String range, boolean isTool) {
+	public void setData(int bgSprite, String name, String damage, String rate, String range, boolean isTool) {
 		this.bgSprite = bgSprite;
 		this.name = name;
 		this.damage = damage;
-		this.rates = rates;
+		this.rate = rate;
 		this.range = range;
 		this.isTool = isTool;
 	}
@@ -81,8 +80,8 @@ public class TowerCell extends Button{
 		return damage;
 	}
 
-	public String getRates() {
-		return rates;
+	public String getRate() {
+		return rate;
 	}
 
 	public String getRange() {
@@ -98,7 +97,7 @@ public class TowerCell extends Button{
 	}
 
 	public String getRatesWithText() {
-		return "\nRates : "+this.rates;
+		return "\nRates : "+this.rate;
 	}
 
 	public String getRangeWithText() {

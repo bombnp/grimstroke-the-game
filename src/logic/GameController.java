@@ -15,7 +15,7 @@ public class GameController {
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
-        TowerDataCSV = Utility.readCSV("Database/TowerData.csv");
+        TowerDataCSV = Utility.readCSV("data/TowerData.csv");
         assert mapCSV != null;
         gameMap = new GameMap(mapCSV, decorCSV);
         AddAllTower();
