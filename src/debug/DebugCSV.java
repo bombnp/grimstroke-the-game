@@ -1,4 +1,4 @@
-package Debug;
+package debug;
 
 public class DebugCSV {
     public static void DisplayCSV(String[][] CSV) {

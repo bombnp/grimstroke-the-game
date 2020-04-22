@@ -24,16 +24,14 @@ public abstract class Building extends StackPane {
         this.cell = cell;
         baseImage = new CellImage(baseSprite);
         this.getChildren().add(baseImage);
-        cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
-        	public void handle(MouseEvent arg0) {
-        		BoardCell PreviousCell = GameController.SelectedCell;
-        		if(PreviousCell != null) {
-        			PreviousCell.SetCellBG(BlankBG);
-        		}
-        		setSelectedCell(cell);
-        		cell.SetCellBG(SelectedBG);
-        	};
-		});
+        cell.setOnMouseClicked(mouseEvent -> {
+            BoardCell PreviousCell = GameController.SelectedCell;
+            if(PreviousCell != null) {
+                PreviousCell.SetCellBG(BlankBG);
+            }
+            setSelectedCell(cell);
+            cell.SetCellBG(SelectedBG);
+        });
     }
     public void setSelectedCell(BoardCell cell) {
     	GameController.SelectedCell = cell;

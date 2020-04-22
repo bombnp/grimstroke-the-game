@@ -1,14 +1,8 @@
 package gui;
 
-import application.Utility;
 import entity.base.Building;
-import exception.SpriteIndexOutOfBoundsException;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
-import logic.Coordinate;
 
 public class BoardCell extends StackPane {
 
@@ -28,10 +22,11 @@ public class BoardCell extends StackPane {
     public Building getBuilding() {
         return building;
     }
-    public void setbuildable(boolean bool) {
+
+    public void setBuildable(boolean bool) {
     	this.buildable = bool;
     }
-    public boolean getbuildable() {
+    public boolean getBuildable() {
     	return this.buildable;
     }
 
@@ -40,7 +35,7 @@ public class BoardCell extends StackPane {
             this.getChildren().remove(building);
         }
         building = newBuilding;
-        setbuildable(true);
+        setBuildable(true);
         this.getChildren().add(building);
     }
     public void SetCellBG(Background BG) {

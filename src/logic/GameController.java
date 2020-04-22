@@ -1,25 +1,20 @@
 package logic;
-import java.util.Arrays;
 
-import com.sun.tools.javac.code.Attribute.Array;
-
-import Debug.DebugCSV;
 import application.Utility;
 import gui.BoardCell;
 import gui.ControlPane;
 import gui.GUIController;
-import gui.GamePane;
-import gui.TowerCell;
-import gui.ControlPane;
+
 public class GameController {
     private static GameMap gameMap;
-    private static String[][] mapCSV;
-    private static String[][] decorCSV;
+
     private static String[][] TowerDataCSV;
+
     public static BoardCell SelectedCell;
+
     public static void initialize(String mapName) {
-        mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
-        decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
+        String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
+        String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         TowerDataCSV = Utility.readCSV("Database/TowerData.csv");
         assert mapCSV != null;
         gameMap = new GameMap(mapCSV, decorCSV);
