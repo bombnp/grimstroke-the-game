@@ -1,5 +1,6 @@
 package gui;
 
+import entity.building.base.Tower;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
@@ -10,12 +11,15 @@ public class TowerCell extends StackPane {
 	int prefSize = ControlPane.getControlPaneWidth();
 
 	private int bgSprite;
+
 	private String name;
 	private String damage;
 	private String rate;
 	private String range;
 
 	private Background currentBG;
+
+	private Tower towerType;
 
 	public TowerCell(int bgSprite, String name, String damage, String rate, String range) {
 		this.setPrefWidth(prefSize);
@@ -25,6 +29,8 @@ public class TowerCell extends StackPane {
 
 		this.currentBG = GUIController.BG.TOWER_UNSELECTED;
 		this.setBackground(currentBG);
+
+
 
 		setData(bgSprite,name, damage, rate, range);
 

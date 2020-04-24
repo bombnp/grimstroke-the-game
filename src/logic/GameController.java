@@ -1,6 +1,10 @@
 package logic;
 
 import application.Utility;
+import entity.building.*;
+import entity.building.base.Tower;
+import exception.InvalidTowerException;
+import gui.BoardCell;
 import gui.GUIController;
 import gui.TowerCell;
 
@@ -20,6 +24,19 @@ public class GameController {
             selectedTower.setCurrentBG(GUIController.BG.TOWER_UNSELECTED);
         selectedTower = tower;
         selectedTower.setCurrentBG(GUIController.BG.TOWER_SELECTED);
+    }
+
+    public static Tower generateSelectedTowerEntity(BoardCell targetCell) throws InvalidTowerException {
+        if (selectedTower == null)
+            throw new InvalidTowerException("No tower is selected");
+        switch (selectedTower.getName()) {
+            case "Machine Gun Tower" : return new MachineGunTower(targetCell);
+            case "Rocket Tower" : return new RocketTower1(targetCell);
+            case "Rocket Tower Lv. 2" : return new RocketTower2(targetCell);
+            case "Cannon Tower" : return new CannonTower1(targetCell);
+            case "Cannon Tower Lv. 2" : return new CannonTower2(targetCell);
+            default: throw new InvalidTowerException("Tower name is incorrect.");
+        }
     }
 
     public static TowerCell getSelectedTower() {
