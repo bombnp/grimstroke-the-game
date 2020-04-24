@@ -1,63 +1,72 @@
 package gui;
 
-import entity.Buildspot;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import logic.GameController;
 
-public class TowerCell extends Button{
+public class TowerCell extends StackPane {
 	int prefSize = ControlPane.getControlPaneWidth();
+
 	private int bgSprite;
 	private String name;
 	private String damage;
 	private String rate;
 	private String range;
-	private boolean isTool;
-	public TowerCell(int bgSprite, String name, String damage, String rate, String range, boolean isTool) {
-		this.setGraphic(new TowerImage(bgSprite));
+
+	private Background currentBG;
+
+	public TowerCell(int bgSprite, String name, String damage, String rate, String range) {
 		this.setPrefWidth(prefSize);
 		this.setPrefHeight(prefSize);
-		this.setData(bgSprite,name, damage, rate, range, isTool);
-		this.setTooltip();
+
+		this.getChildren().add(new TowerImage(bgSprite));
+
+		this.currentBG = GUIController.BG.TOWER_UNSELECTED;
+		this.setBackground(currentBG);
+
+		setData(bgSprite,name, damage, rate, range);
+
+		setTooltip();
+
+		addListener();
 	}
-	public void setData(int bgSprite, String name, String damage, String rate, String range, boolean isTool) {
+
+	public void setData(int bgSprite, String name, String damage, String rate, String range) {
 		this.bgSprite = bgSprite;
 		this.name = name;
 		this.damage = damage;
 		this.rate = rate;
 		this.range = range;
-		this.isTool = isTool;
 	}
+
 	public void setTooltip() {
     	Tooltip tooltip = new Tooltip();
     	tooltip.setFont(new Font(12));
     	this.SetTooltipText(tooltip);
-    	this.setOnMouseMoved(mouseEvent -> tooltip.show(this, mouseEvent.getScreenX() + 5, mouseEvent.getScreenY() + 10));
-    	this.setOnMouseExited(mouseEvent -> tooltip.hide());
-		//
-		this.setOnAction(actionEvent -> {
-			//On Click
-			BoardCell cell = GameController.SelectedCell;
-			if(cell != null) {
-				if(cell.getBuildable() && !getIsTool()) {
-					// Build
-					cell.getChildren().remove(getCellSize(cell)-1);
-					cell.addImage(getBgSprite());
-					cell.setBuildable(false);
-					System.out.println(cell);
-				}else {
-					if(getIsTool() && !cell.getBuildable()) {
-						//Using Tool
-						cell.getChildren().remove(getCellSize(cell)-1);
-						cell.setBuilding(new Buildspot(cell));
-						cell.setBuildable(true);
-					}
-				}
-			}
 
+		this.setOnMouseMoved(mouseEvent -> tooltip.show(this, mouseEvent.getScreenX() + 5, mouseEvent.getScreenY() + 10));
+		this.setOnMouseExited(mouseEvent -> {
+			tooltip.hide();
+			this.setBackground(currentBG);
 		});
 	}
+
+	public void addListener() {
+		this.setOnMouseEntered(mouseEvent -> this.setBackground(GUIController.BG.TOWER_HOVER));
+		this.setOnMouseClicked(mouseEvent -> GameController.setSelectedTower(this));
+	}
+
+	public Background getCurrentBG() {
+		return currentBG;
+	}
+
+	public void setCurrentBG(Background currentBG) {
+		this.currentBG = currentBG;
+		this.setBackground(currentBG);
+	}
+
 	public int getBgSprite(){
 		return this.bgSprite;
 	}
@@ -66,8 +75,8 @@ public class TowerCell extends Button{
 		return cell.getChildren().size();
 	}
 
-	public boolean getIsTool() {
-		return this.isTool;
+	public boolean isTool() {
+		return this.name.equals("DELETE");
 	}
 
 	public String getName() {
@@ -103,7 +112,7 @@ public class TowerCell extends Button{
 	}
 
 	public void SetTooltipText(Tooltip tool) {
-		if(this.isTool)
+		if(this.isTool())
 			tool.setText("Remove Tool");
 		else
 			tool.setText(this.getNameWithText() + this.getDamageWithText() + this.getRatesWithText() + this.getRangeWithText());

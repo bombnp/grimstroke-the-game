@@ -1,6 +1,6 @@
-203,MG,0-0,Fast,Medium,FALSE
-205,M1,0-0,Slow,Medium,FALSE
-206,M2,0-0,Medium,Long,FALSE
-249,C1,0-0,Slow,Short,FALSE
-250,C2,0-0,Medium,Short,FALSE
-86,This,is,Delete,Tool,TRUE
+203,MG,0-0,Fast,Medium
+205,M1,0-0,Slow,Medium
+206,M2,0-0,Medium,Long
+249,C1,0-0,Slow,Short
+250,C2,0-0,Medium,Short
+86,DELETE,DELETE,DELETE,DELETE

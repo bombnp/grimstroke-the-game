@@ -1,6 +1,6 @@
-package entity;
+package entity.building;
 
-import entity.base.Building;
+import entity.building.base.Building;
 import gui.BoardCell;
 import gui.Sprite;
 

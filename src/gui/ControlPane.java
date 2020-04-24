@@ -19,12 +19,12 @@ public class ControlPane extends VBox {
         String[][] TowerDataCSV = Utility.readCSV("data/TowerData.csv");
         for(String[] str: TowerDataCSV) {
             // ImgIDX,Name,DamageRange,RateOfFire,Range,isTool
-            addTower(Integer.parseInt(str[0]), str[1], str[2], str[3], str[4],Boolean.parseBoolean(str[5]));
+            addTower(Integer.parseInt(str[0]), str[1], str[2], str[3], str[4]);
         }
     }
 
-    public void addTower(int bgSprite, String name, String damage, String rates, String range, boolean isTool) {
-    	TowerCell cell = new TowerCell(bgSprite, name, damage, rates, range, isTool);
+    public void addTower(int bgSprite, String name, String damage, String rates, String range) {
+    	TowerCell cell = new TowerCell(bgSprite, name, damage, rates, range);
     	this.getChildren().add(cell);
     }
 

@@ -1,6 +1,6 @@
 package logic;
 
-import entity.Buildspot;
+import entity.building.Buildspot;
 import gui.BoardCell;
 import gui.BoardGrid;
 import gui.GUIController;

@@ -1,13 +1,13 @@
 package gui;
 
-import entity.base.Building;
+import entity.building.base.Building;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 
 public class BoardCell extends StackPane {
 
     private Building building;
-    private boolean buildable;
+
     public BoardCell(int bgSprite) {
         this.setPrefWidth(48);
         this.setPrefHeight(48);
@@ -23,22 +23,23 @@ public class BoardCell extends StackPane {
         return building;
     }
 
-    public void setBuildable(boolean bool) {
-    	this.buildable = bool;
-    }
-    public boolean getBuildable() {
-    	return this.buildable;
-    }
-
     public void setBuilding(Building newBuilding) {
         if (building != null) {
             this.getChildren().remove(building);
         }
         building = newBuilding;
-        setBuildable(true);
+
+//        if (building instanceof Buildspot) {
+//            this.setOnMouseClicked(mouseEvent -> {
+//                if (!GameController.getSelectedTower().isTool()) {
+//                    //BUILD
+//                }
+//            });
+//        }
+
         this.getChildren().add(building);
     }
-    public void SetCellBG(Background BG) {
+    public void setCellBG(Background BG) {
     	building.setBackground(BG);
     }
 }

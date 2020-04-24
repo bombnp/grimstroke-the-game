@@ -1,14 +1,13 @@
 package logic;
 
 import application.Utility;
-import gui.BoardCell;
-import gui.ControlPane;
 import gui.GUIController;
+import gui.TowerCell;
 
 public class GameController {
     private static GameMap gameMap;
 
-    public static BoardCell SelectedCell;
+    private static TowerCell selectedTower;
 
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
@@ -16,7 +15,18 @@ public class GameController {
         gameMap = new GameMap(mapCSV, decorCSV);
     }
 
-	public static GameMap getGameMap() {
+    public static void setSelectedTower(TowerCell tower) {
+        if (selectedTower != null)
+            selectedTower.setCurrentBG(GUIController.BG.TOWER_UNSELECTED);
+        selectedTower = tower;
+        selectedTower.setCurrentBG(GUIController.BG.TOWER_SELECTED);
+    }
+
+    public static TowerCell getSelectedTower() {
+        return selectedTower;
+    }
+
+    public static GameMap getGameMap() {
         return gameMap;
     }
 }
