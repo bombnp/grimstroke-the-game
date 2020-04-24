@@ -1,7 +1,5 @@
 package application;
 
-import exception.SpriteIndexOutOfBoundsException;
-import gui.Sprite;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 
@@ -39,10 +37,7 @@ public class Utility {
         }
     }
 
-    public static Image getSprite(int spriteIndex) throws SpriteIndexOutOfBoundsException {
-        if (spriteIndex < 0)
-            throw new SpriteIndexOutOfBoundsException("spriteIndex: " + spriteIndex);
-
+    public static Image getSprite(int spriteIndex) {
         int row = spriteIndex/23, col = spriteIndex%23;
         return new WritableImage(tileset.getPixelReader(), col*128, row*128, 128, 128);
     }
