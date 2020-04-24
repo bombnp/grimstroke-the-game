@@ -35,7 +35,7 @@ public class Utility {
             return result.toArray(new String[result.size()][]);
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return new String[0][0];
         }
     }
 

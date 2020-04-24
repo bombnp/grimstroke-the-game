@@ -11,8 +11,8 @@ public class TowerImage extends ImageView{
         } catch (SpriteIndexOutOfBoundsException e) {
             this.setImage(null);
         }
-        this.setFitWidth(ControlPane.getControlPaneSize());
-        this.setFitHeight(ControlPane.getControlPaneSize());
+        this.setFitWidth(ControlPane.getControlPaneWidth());
+        this.setFitHeight(ControlPane.getControlPaneWidth());
         
     }
 }

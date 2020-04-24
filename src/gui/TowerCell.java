@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 import logic.GameController;
 
 public class TowerCell extends Button{
-	int prefSize = ControlPane.getControlPaneSize();
+	int prefSize = ControlPane.getControlPaneWidth();
 	private int bgSprite;
 	private String name;
 	private String damage;
@@ -33,9 +33,7 @@ public class TowerCell extends Button{
     	Tooltip tooltip = new Tooltip();
     	tooltip.setFont(new Font(12));
     	this.SetTooltipText(tooltip);
-    	this.setOnMouseMoved(mouseEvent -> {
-    		tooltip.show(this, mouseEvent.getScreenX() + 5, mouseEvent.getScreenY() + 10);
-    	});
+    	this.setOnMouseMoved(mouseEvent -> tooltip.show(this, mouseEvent.getScreenX() + 5, mouseEvent.getScreenY() + 10));
     	this.setOnMouseExited(mouseEvent -> tooltip.hide());
 		//
 		this.setOnAction(actionEvent -> {
