@@ -76,7 +76,7 @@ public class TowerCell extends StackPane {
 	}
 
 	public boolean isTool() {
-		return this.name.equals("DELETE");
+		return this.name.equals("DESTROY");
 	}
 
 	public String getName() {
@@ -113,7 +113,7 @@ public class TowerCell extends StackPane {
 
 	public void SetTooltipText(Tooltip tool) {
 		if(this.isTool())
-			tool.setText("Remove Tool");
+			tool.setText("Destroy Tool");
 		else
 			tool.setText(this.getNameWithText() + this.getDamageWithText() + this.getRatesWithText() + this.getRangeWithText());
 	}
