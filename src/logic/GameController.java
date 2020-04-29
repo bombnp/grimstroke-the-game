@@ -1,12 +1,14 @@
 package logic;
 
 import application.Utility;
+import entity.Updatable;
 import entity.building.*;
 import entity.building.base.Tower;
 import exception.InvalidTowerException;
 import gui.BoardCell;
 import gui.GUIController;
 import gui.TowerCell;
+import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
 
@@ -17,12 +19,27 @@ public class GameController {
 
     private static ArrayList<Coordinate> minionPath;
 
+    private static final ArrayList<Updatable> updatables = new ArrayList<>();
+
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         gameMap = new GameMap(mapCSV, decorCSV);
 
         minionPath = Utility.readMinionPath("data/" + mapName + "_MinionPath.csv");
+
+        new AnimationTimer() {
+            private long lastFrameNanoTime = System.nanoTime();
+
+            @Override
+            public void handle(long currentNanoTime) {
+                double deltaTime = (currentNanoTime - lastFrameNanoTime) / 1000000000.0;
+                for (Updatable updatable : updatables) {
+                    updatable.update(deltaTime);
+                }
+                lastFrameNanoTime = currentNanoTime;
+            }
+        }.start();
     }
 
     public static void setSelectedTower(TowerCell tower) {
