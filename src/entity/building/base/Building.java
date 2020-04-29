@@ -9,7 +9,7 @@ public abstract class Building extends StackPane {
     private BoardCell cell;
     private CellImage baseImage;
 
-    private Coordinate centerPosition;
+    private final Coordinate centerPosition;
 
     public Building(BoardCell cell, int baseSprite) {
         this.cell = cell;

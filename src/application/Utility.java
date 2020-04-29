@@ -2,6 +2,7 @@ package application;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import logic.Coordinate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,6 +36,15 @@ public class Utility {
             e.printStackTrace();
             return new String[0][0];
         }
+    }
+
+    public static ArrayList<Coordinate> readMinionPath(String filename) {
+        String[][] data = readCSV(filename);
+        ArrayList<Coordinate> minionPath = new ArrayList<>();
+        for (String[] row : data) {
+            minionPath.add(new Coordinate(Integer.parseInt(row[0]), Integer.parseInt(row[0])));
+        }
+        return minionPath;
     }
 
     public static Image getSprite(int spriteIndex) {

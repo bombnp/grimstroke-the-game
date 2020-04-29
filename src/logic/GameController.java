@@ -8,15 +8,21 @@ import gui.BoardCell;
 import gui.GUIController;
 import gui.TowerCell;
 
+import java.util.ArrayList;
+
 public class GameController {
     private static GameMap gameMap;
 
     private static TowerCell selectedTower;
 
+    private static ArrayList<Coordinate> minionPath;
+
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         gameMap = new GameMap(mapCSV, decorCSV);
+
+        minionPath = Utility.readMinionPath("data/" + mapName + "_MinionPath.csv");
     }
 
     public static void setSelectedTower(TowerCell tower) {
@@ -43,7 +49,7 @@ public class GameController {
         return selectedTower;
     }
 
-    public static GameMap getGameMap() {
-        return gameMap;
+    public static ArrayList<Coordinate> getMinionPath() {
+        return minionPath;
     }
 }
