@@ -69,4 +69,8 @@ public class GameController {
     public static ArrayList<Coordinate> getMinionPath() {
         return minionPath;
     }
+
+    public static void addUpdatable(Updatable updatable) {
+        updatables.add(updatable);
+    }
 }

@@ -1,13 +1,14 @@
 package entity.minion.base;
 
 import application.Utility;
+import entity.Updatable;
 import javafx.scene.image.ImageView;
 import logic.Coordinate;
 import logic.GameController;
 
 import java.util.ArrayList;
 
-public abstract class Minion extends ImageView {
+public abstract class Minion extends ImageView implements Updatable {
     private ArrayList<Coordinate> path;
     private int destinationIndex;
 
@@ -19,7 +20,14 @@ public abstract class Minion extends ImageView {
         destinationIndex = 0;
         destination = path.get(destinationIndex);
 
+        GameController.addUpdatable(this);
+
         this.setTranslateX(-24);
         this.setTranslateY(-24);
+    }
+
+    @Override
+    public void update(double deltaTime) {
+        //TODO
     }
 }
