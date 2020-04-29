@@ -11,11 +11,16 @@ public class BoardCell extends StackPane {
 
     private Building building;
 
+    private int row, col;
+
     private final CellImage hoverImage;
 
-    public BoardCell(int bgSprite) {
+    public BoardCell(int bgSprite, int row, int col) {
         this.setPrefWidth(48);
         this.setPrefHeight(48);
+
+        this.row = row;
+        this.col = col;
 
         addImage(bgSprite);
         hoverImage = addImage(new CellImage("images/hoverImage.png"));
@@ -73,5 +78,13 @@ public class BoardCell extends StackPane {
 
     public void setCellBG(Background BG) {
     	building.setBackground(BG);
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 }
