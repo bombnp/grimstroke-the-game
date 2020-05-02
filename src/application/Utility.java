@@ -42,7 +42,7 @@ public class Utility {
         String[][] data = readCSV(filename);
         ArrayList<Coordinate> minionPath = new ArrayList<>();
         for (String[] row : data) {
-            minionPath.add(new Coordinate(Integer.parseInt(row[0]), Integer.parseInt(row[0])));
+            minionPath.add(new Coordinate(Integer.parseInt(row[0]), Integer.parseInt(row[1])));
         }
         return minionPath;
     }
