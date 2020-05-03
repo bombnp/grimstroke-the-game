@@ -19,18 +19,22 @@ public class GameController {
     private static TowerCell selectedTower;
 
     private static ArrayList<Coordinate> minionPath;
+    
+    private static MinionWaveController WaveController;
 
     private static final ArrayList<Updatable> updatables = new ArrayList<>();
 
     private static final ArrayList<Minion> minions = new ArrayList<>();
 
+    
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         gameMap = new GameMap(mapCSV, decorCSV);
 
         minionPath = Utility.readMinionPath("map/" + mapName + "_MinionPath.csv");
-
+        WaveController = new MinionWaveController();
+        
         new AnimationTimer() {
             private long lastFrameNanoTime = System.nanoTime();
 
@@ -43,6 +47,7 @@ public class GameController {
                 lastFrameNanoTime = currentNanoTime;
             }
         }.start();
+        
     }
 
     public static void setSelectedTower(TowerCell tower) {
@@ -72,12 +77,18 @@ public class GameController {
     public static ArrayList<Coordinate> getMinionPath() {
         return minionPath;
     }
-
+    public static MinionWaveController getWaveController() {
+    	return WaveController;
+    }
+    
     public static void addUpdatable(Updatable updatable) {
         updatables.add(updatable);
     }
 
     public static void addMinion(Minion minion) {
         minions.add(minion);
+    }
+    public static ArrayList<Minion> getminion(){
+    	return minions;
     }
 }

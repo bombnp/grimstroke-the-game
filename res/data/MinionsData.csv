@@ -1,0 +1,9 @@
+Conscript,noob unit,1,TRUE,1,0,0,0,245
+Armored Conscript,noob unit with more physical resistance,3,TRUE,0.6,30,22.5,15,246
+Infantry,normal unit and fast,2,TRUE,1.2,20,15,10,247
+Combat Medic,unit that can heal other units,3,TRUE,1,10,8,5,248
+Light Tank,fast but fragile,5,TRUE,1.25,65,40,25,268
+Heavy Tank,slow but sturdy,8,TRUE,0.5,95,75,50,269
+Light Plane,only machine gun can deal damage fast but fragile,4,FALSE,1.4,25,10,100,270
+Fighter Plane,only machine gun can deal damage slow but sturdy,7,FALSE,0.8,40,20,100,271
+(NAME),(DESCRIPTION),(REWARD),(IS_GROUND_UNIT),(SPEED),DMG RED (MG),DMG RED (Missile),DMG RED (Cannon),

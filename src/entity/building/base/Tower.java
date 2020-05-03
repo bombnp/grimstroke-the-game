@@ -1,17 +1,20 @@
 package entity.building.base;
 
+import entity.Updatable;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
 import logic.Coordinate;
+import logic.GameController;
 
-public abstract class Tower extends Building {
+public abstract class Tower extends Building implements Updatable{
     protected CellImage turretImage;
 
     public Tower(BoardCell cell, int turretSprite) {
         super(cell, Sprite.getRandomTowerBase());
         turretImage = new CellImage(turretSprite);
         this.getChildren().add(turretImage);
+        GameController.addUpdatable(this);
     }
 
     public void lookAt(Coordinate target) {
@@ -41,5 +44,14 @@ public abstract class Tower extends Building {
                 this.setRotate(360 - alpha);
             }
         }
+    }
+    @Override
+    public void update(double deltaTime) {
+    	// TODO Auto-generated method stub
+    	//WARNING!!!	INCOMPLETE METHOD!!!!!!!!
+    	if(GameController.getminion() != null) {
+    		Coordinate target = GameController.getminion().get(0).getCoordinate();
+    		this.lookAt(target);
+    	}
     }
 }
