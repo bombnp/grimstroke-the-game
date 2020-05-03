@@ -2,6 +2,7 @@
   <dictionary name="bombn">
     <words>
       <w>tileset</w>
+      <w>updatables</w>
     </words>
   </dictionary>
 </component>
