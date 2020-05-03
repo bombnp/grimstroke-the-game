@@ -3,7 +3,6 @@ package gui;
 import entity.building.Buildspot;
 import entity.building.base.Building;
 import exception.InvalidTowerException;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import logic.GameController;
 
@@ -11,7 +10,7 @@ public class BoardCell extends StackPane {
 
     private Building building;
 
-    private int row, col;
+    private final int row, col;
 
     private final CellImage hoverImage;
 
@@ -74,10 +73,6 @@ public class BoardCell extends StackPane {
     public void reAddHoverImage() {
         this.getChildren().remove(hoverImage);
         this.getChildren().add(hoverImage);
-    }
-
-    public void setCellBG(Background BG) {
-    	building.setBackground(BG);
     }
 
     public int getRow() {
