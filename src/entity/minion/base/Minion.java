@@ -21,7 +21,9 @@ public abstract class Minion extends ImageView implements Updatable {
         destination = path.get(destinationIndex);
 
         GameController.addUpdatable(this);
+        GameController.addMinion(this);
 
+        // offset to make image appear at center of position
         this.setTranslateX(-24);
         this.setTranslateY(-24);
     }

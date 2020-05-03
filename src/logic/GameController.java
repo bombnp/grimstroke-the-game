@@ -4,6 +4,7 @@ import application.Utility;
 import entity.Updatable;
 import entity.building.*;
 import entity.building.base.Tower;
+import entity.minion.base.Minion;
 import exception.InvalidTowerException;
 import gui.BoardCell;
 import gui.GUIController;
@@ -20,6 +21,8 @@ public class GameController {
     private static ArrayList<Coordinate> minionPath;
 
     private static final ArrayList<Updatable> updatables = new ArrayList<>();
+
+    private static final ArrayList<Minion> minions = new ArrayList<>();
 
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
@@ -72,5 +75,9 @@ public class GameController {
 
     public static void addUpdatable(Updatable updatable) {
         updatables.add(updatable);
+    }
+
+    public static void addMinion(Minion minion) {
+        minions.add(minion);
     }
 }
