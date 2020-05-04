@@ -14,7 +14,7 @@ public abstract class Tower extends Building implements Updatable{
         super(cell, Sprite.getRandomTowerBase());
         turretImage = new CellImage(turretSprite);
         this.getChildren().add(turretImage);
-        GameController.addUpdatable(this);
+        GameController.getUpdatables().add(this);
     }
 
     public void lookAt(Vector2 target) {
@@ -24,9 +24,9 @@ public abstract class Tower extends Building implements Updatable{
 
         if (dx == 0) { // on axis Y
             if (dy > 0) { // target is below centerPosition
-                this.setRotate(0);
-            } else { //target is above centerPosition
                 this.setRotate(180);
+            } else { //target is above centerPosition
+                this.setRotate(0);
             }
         }
         else if (dy == 0) { // on axis X
@@ -48,8 +48,8 @@ public abstract class Tower extends Building implements Updatable{
     @Override
     public void update(double deltaTime) {
     	//WARNING!!!	INCOMPLETE METHOD!!!!!!!!
-    	if(GameController.getMinionsList().size() > 0) {
-    		Vector2 target = GameController.getMinionsList().get(0).getCurrentPosition(); // TEMP
+    	if(GameController.getMinions().size() > 0) {
+    		Vector2 target = GameController.getMinions().get(0).getCurrentPosition(); // TEMP
     		this.lookAt(target);
     	}
     }

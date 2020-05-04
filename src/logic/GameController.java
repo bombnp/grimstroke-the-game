@@ -26,6 +26,8 @@ public class GameController {
 
     private static final ArrayList<Minion> minions = new ArrayList<>();
 
+    public static final double minionSpeed = 48;
+
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
@@ -78,15 +80,12 @@ public class GameController {
     public static MinionWaveController getWaveController() {
     	return WaveController;
     }
-    
-    public static void addUpdatable(Updatable updatable) {
-        updatables.add(updatable);
+
+    public static ArrayList<Updatable> getUpdatables() {
+        return updatables;
     }
 
-    public static void addMinion(Minion minion) {
-        minions.add(minion);
-    }
-    public static ArrayList<Minion> getMinionsList(){
-    	return minions;
+    public static ArrayList<Minion> getMinions() {
+        return minions;
     }
 }

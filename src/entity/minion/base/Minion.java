@@ -43,8 +43,8 @@ public abstract class Minion extends ImageView implements Updatable {
 
         GUIController.getGamePane().getChildren().add(this);
 
-        GameController.addUpdatable(this);
-        GameController.addMinion(this);
+        GameController.getUpdatables().add(this);
+        GameController.getMinions().add(this);
 
         currentPosition = destination;
         this.setX(currentPosition.getX());
@@ -57,38 +57,59 @@ public abstract class Minion extends ImageView implements Updatable {
 
     public void changeDestination() {
         destinationIndex++;
-        destination = path.get(destinationIndex);
+        if (destinationIndex == path.size()) {
+            GameController.getMinions().remove(this);
+            GameController.getUpdatables().remove(this);
+        }
+        else {
+            destination = path.get(destinationIndex);
+        }
     }
 
     @Override
     public void update(double deltaTime) {
-        //TODO
-    	if(currentPosition.getX() == destination.getX() && currentPosition.getY() == destination.getY()) {
+        double translationDistance = this.speed * GameController.minionSpeed * deltaTime;
+        double totalDistance = currentPosition.distance(destination);
+
+        if (totalDistance <= translationDistance) {
+            currentPosition = destination;
             changeDestination();
-    	}else{
-    		move();
-    	}
+        } else {
+            Vector2 direction = currentPosition.getDirectionTo(destination).normalize();
+            currentPosition = currentPosition.add(direction.multiply(translationDistance));
+        }
+
+        this.setX(currentPosition.getX());
+        this.setY(currentPosition.getY());
+        this.lookAt(destination);
     }
 
-    public void move() {
-			if(currentPosition.getX() < destination.getX()) {
-				currentPosition = new Vector2(currentPosition.getX() + 1*speed , currentPosition.getY());
-		        this.setRotate(0);
-			}
-			if(currentPosition.getX() > destination.getX()) {
-				currentPosition = new Vector2(currentPosition.getX() - 1*speed  , currentPosition.getY());
-		        this.setRotate(180);
-			}			
-			if(currentPosition.getY() < destination.getY()) {
-				currentPosition = new Vector2(currentPosition.getX(), currentPosition.getY() + 1*speed );
-		        this.setRotate(90);
-			}
-			if(currentPosition.getY() > destination.getY()) {
-				currentPosition = new Vector2(currentPosition.getX(), currentPosition.getY() - 1*speed );
-		        this.setRotate(-90);
-			}
-			this.setX(currentPosition.getX());
-			this.setY(currentPosition.getY());
+    public void lookAt(Vector2 target) {
+        double dx = target.getX() - currentPosition.getX();
+        double dy = target.getY() - currentPosition.getY();
+
+        if (dx == 0) { // on axis Y
+            if (dy > 0) { // target is below centerPosition
+                this.setRotate(180);
+            } else { //target is above centerPosition
+                this.setRotate(0);
+            }
+        }
+        else if (dy == 0) { // on axis X
+            if (dx > 0) { // target is to the right of centerPosition
+                this.setRotate(90);
+            } else { // target is to the left of centerPosition
+                this.setRotate(270);
+            }
+        }
+        else { // on quadrants
+            double alpha = Math.toDegrees(Math.atan(dx /dy));
+            if (dy > 0) { // target is below centerPosition, quadrant 3,4
+                this.setRotate(180 - alpha);
+            } else { // target is above centerPosition, quadrant 1,2
+                this.setRotate(360 - alpha);
+            }
+        }
     }
 
     public String getName() {
