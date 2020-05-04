@@ -9,12 +9,11 @@ import logic.GameController;
 
 public class GamePane extends AnchorPane{
     private final BoardGrid boardGrid;
-    
     public GamePane() {
         boardGrid = new BoardGrid();
         this.getChildren().add(boardGrid);
-        this.setMaxSize(500, 500);
         createCallWaveButton();
+        createEntityInfomationBox();
     }
     public void createCallWaveButton() {
         Button button = new Button("NEXT");
@@ -29,6 +28,11 @@ public class GamePane extends AnchorPane{
 				GameController.getWaveController().nextWave();
 			}
 		});
+    }
+    public void createEntityInfomationBox() {
+    	EntityInfomationPane Pane = new EntityInfomationPane();
+    	this.getChildren().add(Pane);
+    	Pane.CreateBox();
     }
     public BoardGrid getBoardGrid() {
         return boardGrid;

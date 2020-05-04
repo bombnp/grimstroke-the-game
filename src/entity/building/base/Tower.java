@@ -4,6 +4,8 @@ import entity.Updatable;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import logic.Coordinate;
 import logic.GameController;
 
@@ -49,9 +51,18 @@ public abstract class Tower extends Building implements Updatable{
     public void update(double deltaTime) {
     	// TODO Auto-generated method stub
     	//WARNING!!!	INCOMPLETE METHOD!!!!!!!!
-    	if(GameController.getminion() != null) {
+    	if(GameController.getminion().size() > 0) {
     		Coordinate target = GameController.getminion().get(0).getCoordinate();
     		this.lookAt(target);
     	}
+    	//
+    	turretImage.setOnMouseClicked(new EventHandler<Event>() {
+			
+			@Override
+			public void handle(Event arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("TEST");
+			}
+		});
     }
 }

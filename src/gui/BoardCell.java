@@ -3,6 +3,9 @@ package gui;
 import entity.building.Buildspot;
 import entity.building.base.Building;
 import exception.InvalidTowerException;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import logic.GameController;
 
@@ -23,6 +26,7 @@ public class BoardCell extends StackPane {
 
         addImage(bgSprite);
         hoverImage = addImage(new CellImage("images/hoverImage.png"));
+        hoverImage.setMouseTransparent(true);
         hoverImage.disable();
     }
 
