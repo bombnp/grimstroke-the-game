@@ -49,7 +49,7 @@ public abstract class Tower extends Building implements Updatable{
     public void update(double deltaTime) {
     	//WARNING!!!	INCOMPLETE METHOD!!!!!!!!
     	if(GameController.getMinionsList().size() > 0) {
-    		Coordinate target = GameController.getMinionsList().get(0).getCoordinate();
+    		Coordinate target = GameController.getMinionsList().get(0).getCurrentPosition(); // TEMP
     		this.lookAt(target);
     	}
     }

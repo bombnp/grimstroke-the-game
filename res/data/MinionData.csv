@@ -1,9 +1,9 @@
-245,Conscript,noob unit,1,1,0,0,0
-246,Armored Conscript,noob unit with more physical resistance,3,0.6,30,22.5,15
-247,Infantry,normal unit and fast,2,1.2,20,15,10
-248,Combat Medic,unit that can heal other units,3,1,10,8,5
-268,Light Tank,fast but fragile,5,1.25,65,40,25
-269,Heavy Tank,slow but sturdy,8,0.5,95,75,50
-270,Light Plane,only machine gun can deal damage fast but fragile,4,1.4,25,10,100
-271,Fighter Plane,only machine gun can deal damage slow but sturdy,7,0.8,40,20,100
-(SPRITE), (NAME), (DESCRIPTION), (REWARD), (SPEED), (RESIST_MG), (RESIST_ROCKET), (RESIST_CANNON)
+245,Conscript,noob unit,1,1,0,0,0,FALSE
+246,Armored Conscript,noob unit with more physical resistance,3,0.6,30,22.5,15,FALSE
+247,Infantry,normal unit and fast,2,1.2,20,15,10,FALSE
+248,Combat Medic,unit that can heal other units,3,1,10,8,5,FALSE
+268,Light Tank,fast but fragile,5,1.25,65,40,25,FALSE
+269,Heavy Tank,slow but sturdy,8,0.5,95,75,50,FALSE
+270,Light Plane,only machine gun can deal damage fast but fragile,4,1.4,25,10,100,TRUE
+271,Fighter Plane,only machine gun can deal damage slow but sturdy,7,0.8,40,20,100,TRUE
+(SPRITE), (NAME), (DESCRIPTION), (REWARD), (SPEED), (RESIST_MG), (RESIST_ROCKET), (RESIST_CANNON), (IS_FLYING)

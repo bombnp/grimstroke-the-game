@@ -6,80 +6,71 @@ import gui.GUIController;
 import javafx.scene.image.ImageView;
 import logic.Coordinate;
 import logic.GameController;
+import logic.MinionData;
 
 import java.util.ArrayList;
 
 public abstract class Minion extends ImageView implements Updatable {
-    private ArrayList<Coordinate> path;
+    private final ArrayList<Coordinate> path;
     private int destinationIndex;
 
     private Coordinate destination;
     private Coordinate currentPosition;
     
-    private String name,desc;
-    private int reward;
-    private boolean isGroundUnit;
-    private float speed,MG_RED,MIS_RED,CAN_RED;
+    private final String name, description;
+    private final int reward;
+    private final double speed, resist_MG,resist_Rocket,resist_Cannon;
     
-    public Minion(int minionSprite,int type) {
-        super(Utility.getSprite(minionSprite));
+    public Minion(MinionData minionData) {
+        super(Utility.getSprite(minionData.spriteIndex));
+        this.name = minionData.name;
+        this.description = minionData.description;
+        this.reward = minionData.reward;
+        this.speed = minionData.speed;
+        this.resist_MG = minionData.resist_MG;
+        this.resist_Rocket = minionData.resist_Rocket;
+        this.resist_Cannon = minionData.resist_Cannon;
+
         path = GameController.getMinionPath();
         destinationIndex = 0;
         destination = path.get(destinationIndex);
 
-        GameController.addUpdatable(this);
-        GameController.addMinion(this);
-
+        this.setFitHeight(48);
+        this.setFitWidth(48);
         // offset to make image appear at center of position
         this.setTranslateX(-24);
         this.setTranslateY(-24);
-        this.setFitHeight(48);
-        this.setFitWidth(48);
-        //
+
         GUIController.getGamePane().getChildren().add(this);
+
+        GameController.addUpdatable(this);
+        GameController.addMinion(this);
+
         currentPosition = destination;
-        
         this.setX(currentPosition.getX());
         this.setY(currentPosition.getY());
-        nextPath();
+        changeDestination();
     }
-    public Coordinate getCoordinate() {
+    public Coordinate getCurrentPosition() {
     	return currentPosition;
     }
-    public void setName(String Name) {
-    	this.name = Name;
-    }
-    public void setDesc(String Desc) {
-    	this.desc = Desc;
-    }
-    public void setReward(int Reward) {
-    	this.reward = Reward;
-    }
-    public void setType(boolean type) {
-    	this.isGroundUnit = type;
-    }
-    public void setSpeed(float Speed) {
-    	this.speed = Speed;
-    }
-    public void setResistance(float[] Resistance) {
-    	this.MG_RED = Resistance[0];
-    	this.MIS_RED = Resistance[1];
-    	this.CAN_RED = Resistance[2];
-    }
-    public void nextPath() {
+
+    public void changeDestination() {
         destinationIndex++;
         destination = path.get(destinationIndex);
     }
+
     @Override
     public void update(double deltaTime) {
         //TODO
     	if(currentPosition.getX() == destination.getX() && currentPosition.getY() == destination.getY()) {
-            nextPath();
+            changeDestination();
     	}else{
-    		Move();
+    		move();
     	}
     }
-    public void Move() {
+
+    public void move() {
 			if(currentPosition.getX() < destination.getX()) {
 				currentPosition = new Coordinate(currentPosition.getX() + 1*speed , currentPosition.getY());
 		        this.setRotate(0);
@@ -98,5 +89,33 @@ public abstract class Minion extends ImageView implements Updatable {
 			}
 			this.setX(currentPosition.getX());
 			this.setY(currentPosition.getY());
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getReward() {
+        return reward;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getResist_MG() {
+        return resist_MG;
+    }
+
+    public double getResist_Rocket() {
+        return resist_Rocket;
+    }
+
+    public double getResist_Cannon() {
+        return resist_Cannon;
     }
 }
