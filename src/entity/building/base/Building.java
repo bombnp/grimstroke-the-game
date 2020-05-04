@@ -1,29 +1,24 @@
 package entity.building.base;
 
-import java.util.ArrayList;
-
-import entity.Updatable;
-import entity.minion.base.Minion;
 import gui.BoardCell;
 import gui.CellImage;
 import javafx.scene.layout.StackPane;
-import logic.Coordinate;
-import logic.GameController;
+import logic.Vector2;
 
 public abstract class Building extends StackPane{
     private BoardCell cell;
     private CellImage baseImage;
 
-    private final Coordinate centerPosition;
+    private final Vector2 centerPosition;
     public Building(BoardCell cell, int baseSprite) {
         this.cell = cell;
         baseImage = new CellImage(baseSprite);
-        this.centerPosition = new Coordinate(cell.getCol()*48 + 24, cell.getRow()*48 + 24);
+        this.centerPosition = new Vector2(cell.getCol()*48 + 24, cell.getRow()*48 + 24);
 
         this.getChildren().add(baseImage);
     }
 
-    public Coordinate getCenterPosition() {
+    public Vector2 getCenterPosition() {
         return centerPosition;
     }
     

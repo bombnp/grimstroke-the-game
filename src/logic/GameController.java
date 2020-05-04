@@ -18,7 +18,7 @@ public class GameController {
 
     private static TowerCell selectedTower;
 
-    private static ArrayList<Coordinate> minionPath;
+    private static ArrayList<Vector2> minionPath;
     
     private static final MinionWaveController WaveController = new MinionWaveController();
 
@@ -72,7 +72,7 @@ public class GameController {
         return selectedTower;
     }
 
-    public static ArrayList<Coordinate> getMinionPath() {
+    public static ArrayList<Vector2> getMinionPath() {
         return minionPath;
     }
     public static MinionWaveController getWaveController() {

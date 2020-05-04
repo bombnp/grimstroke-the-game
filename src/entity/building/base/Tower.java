@@ -4,8 +4,8 @@ import entity.Updatable;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
-import logic.Coordinate;
 import logic.GameController;
+import logic.Vector2;
 
 public abstract class Tower extends Building implements Updatable{
     protected CellImage turretImage;
@@ -17,7 +17,7 @@ public abstract class Tower extends Building implements Updatable{
         GameController.addUpdatable(this);
     }
 
-    public void lookAt(Coordinate target) {
+    public void lookAt(Vector2 target) {
         double dx = target.getX() - this.getCenterPosition().getX();
         double dy = target.getY() - this.getCenterPosition().getY();
 
@@ -49,7 +49,7 @@ public abstract class Tower extends Building implements Updatable{
     public void update(double deltaTime) {
     	//WARNING!!!	INCOMPLETE METHOD!!!!!!!!
     	if(GameController.getMinionsList().size() > 0) {
-    		Coordinate target = GameController.getMinionsList().get(0).getCurrentPosition(); // TEMP
+    		Vector2 target = GameController.getMinionsList().get(0).getCurrentPosition(); // TEMP
     		this.lookAt(target);
     	}
     }

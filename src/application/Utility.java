@@ -2,7 +2,7 @@ package application;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import logic.Coordinate;
+import logic.Vector2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,11 +38,11 @@ public class Utility {
         }
     }
 
-    public static ArrayList<Coordinate> readMinionPath(String filename) {
+    public static ArrayList<Vector2> readMinionPath(String filename) {
         String[][] data = readCSV(filename);
-        ArrayList<Coordinate> minionPath = new ArrayList<>();
+        ArrayList<Vector2> minionPath = new ArrayList<>();
         for (String[] row : data) {
-            minionPath.add(new Coordinate(Integer.parseInt(row[0]), Integer.parseInt(row[1])));
+            minionPath.add(new Vector2(Integer.parseInt(row[0]), Integer.parseInt(row[1])));
         }
         return minionPath;
     }

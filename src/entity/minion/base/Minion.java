@@ -4,18 +4,18 @@ import application.Utility;
 import entity.Updatable;
 import gui.GUIController;
 import javafx.scene.image.ImageView;
-import logic.Coordinate;
 import logic.GameController;
 import logic.MinionData;
+import logic.Vector2;
 
 import java.util.ArrayList;
 
 public abstract class Minion extends ImageView implements Updatable {
-    private final ArrayList<Coordinate> path;
+    private final ArrayList<Vector2> path;
     private int destinationIndex;
 
-    private Coordinate destination;
-    private Coordinate currentPosition;
+    private Vector2 destination;
+    private Vector2 currentPosition;
     
     private final String name, description;
     private final int reward;
@@ -51,7 +51,7 @@ public abstract class Minion extends ImageView implements Updatable {
         this.setY(currentPosition.getY());
         changeDestination();
     }
-    public Coordinate getCurrentPosition() {
+    public Vector2 getCurrentPosition() {
     	return currentPosition;
     }
 
@@ -72,19 +72,19 @@ public abstract class Minion extends ImageView implements Updatable {
 
     public void move() {
 			if(currentPosition.getX() < destination.getX()) {
-				currentPosition = new Coordinate(currentPosition.getX() + 1*speed , currentPosition.getY());
+				currentPosition = new Vector2(currentPosition.getX() + 1*speed , currentPosition.getY());
 		        this.setRotate(0);
 			}
 			if(currentPosition.getX() > destination.getX()) {
-				currentPosition = new Coordinate(currentPosition.getX() - 1*speed  , currentPosition.getY());
+				currentPosition = new Vector2(currentPosition.getX() - 1*speed  , currentPosition.getY());
 		        this.setRotate(180);
 			}			
 			if(currentPosition.getY() < destination.getY()) {
-				currentPosition = new Coordinate(currentPosition.getX(), currentPosition.getY() + 1*speed );
+				currentPosition = new Vector2(currentPosition.getX(), currentPosition.getY() + 1*speed );
 		        this.setRotate(90);
 			}
 			if(currentPosition.getY() > destination.getY()) {
-				currentPosition = new Coordinate(currentPosition.getX(), currentPosition.getY() - 1*speed );
+				currentPosition = new Vector2(currentPosition.getX(), currentPosition.getY() - 1*speed );
 		        this.setRotate(-90);
 			}
 			this.setX(currentPosition.getX());
