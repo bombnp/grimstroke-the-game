@@ -1,6 +1,7 @@
-203,Machine Gun Tower,0-0,Fast,Medium
-205,Rocket Tower,0-0,Slow,Medium
-206,Rocket Tower Lv. 2,0-0,Medium,Long
-249,Cannon Tower,0-0,Slow,Short
-250,Cannon Tower Lv. 2,0-0,Medium,Short
-86,DESTROY,DESTROY,DESTROY,DESTROY
+203,Machine Gun Tower,0,0,Fast,Medium
+205,Rocket Tower,0,0,Slow,Medium
+206,Rocket Tower Lv. 2,0,0,Medium,Long
+249,Cannon Tower,0,0,Slow,Short
+250,Cannon Tower Lv. 2,0,0,Medium,Short
+86,DESTROY,DESTROY,DESTROY,DESTROY,DESTROY
+(SPRITE), (NAME), (MIN_DAMAGE), (MAX_DAMAGE), (RATE_OF_FIRE), (RANGE)

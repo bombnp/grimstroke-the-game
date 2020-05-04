@@ -26,13 +26,14 @@ public class GameController {
 
     private static final ArrayList<Minion> minions = new ArrayList<>();
 
-    
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         gameMap = new GameMap(mapCSV, decorCSV);
 
         minionPath = Utility.readMinionPath("map/" + mapName + "_MinionPath.csv");
+
+        Database.initialize();
         
         new AnimationTimer() {
             private long lastFrameNanoTime = System.nanoTime();

@@ -10,7 +10,7 @@ public class MinionWaveController{
 	private int waveNumber;
 	public MinionWaveController() {
 		waveNumber = 0;
-		minionsData = Utility.readCSV("data/MinionsData.csv");
+		minionsData = Utility.readCSV("data/MinionData.csv");
 		waveData = Utility.readCSV("data/WaveData.csv");
 	}
 	public void generateNextWave() {
