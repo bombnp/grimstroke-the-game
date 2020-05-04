@@ -1,12 +1,13 @@
 package gui;
 
-import application.Utility;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import logic.Database;
+import logic.TowerData;
 
 public class ControlPane extends VBox {
 	private static final int CONTROL_PANE_WIDTH = 100;
@@ -16,16 +17,18 @@ public class ControlPane extends VBox {
         this.setPrefWidth(CONTROL_PANE_WIDTH);
         this.setSpacing(10);
 
-        String[][] TowerDataCSV = Utility.readCSV("data/TowerData.csv");
-        for(String[] str: TowerDataCSV) {
-            // ImgIDX,Name,DamageRange,RateOfFire,Range,isTool
-            addTower(Integer.parseInt(str[0]), str[1], str[2], str[3], str[4]);
-        }
+        addTower(Database.MG);
+        addTower(Database.R1);
+        addTower(Database.R2);
+        addTower(Database.C1);
+        addTower(Database.C2);
+
+        this.getChildren().add(new TowerCell(true));
     }
 
-    public void addTower(int bgSprite, String name, String damage, String rates, String range) {
-    	TowerCell cell = new TowerCell(bgSprite, name, damage, rates, range);
-    	this.getChildren().add(cell);
+    public void addTower(TowerData towerData) {
+        TowerCell towerCell = new TowerCell(towerData);
+        this.getChildren().add(towerCell);
     }
 
     public static int getControlPaneWidth() {

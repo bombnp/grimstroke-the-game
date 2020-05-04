@@ -1,50 +1,59 @@
 package gui;
 
-import entity.building.base.Tower;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import logic.GameController;
+import logic.TowerData;
 
 public class TowerCell extends StackPane {
 	int prefSize = ControlPane.getControlPaneWidth();
 
-	private int bgSprite;
+	protected int bgSprite;
 
-	private String name;
+	private final String name;
 	private String damage;
-	private String rate;
-	private String range;
+	private double rateOfFire;
+	private int range;
 
-	private Background currentBG;
+	protected Background currentBG;
 
-	private Tower towerType;
+	public TowerCell(boolean isTool) {
+		this.bgSprite = Sprite.DESTROY_TOOL;
+		this.name = "Destroy Tool";
 
-	public TowerCell(int bgSprite, String name, String damage, String rate, String range) {
 		this.setPrefWidth(prefSize);
 		this.setPrefHeight(prefSize);
-
-		this.getChildren().add(new TowerImage(bgSprite));
 
 		this.currentBG = GUIController.BG.TOWER_UNSELECTED;
 		this.setBackground(currentBG);
 
-
-
-		setData(bgSprite,name, damage, rate, range);
+		this.getChildren().add(new TowerImage(bgSprite));
 
 		setTooltip();
 
 		addListener();
 	}
 
-	public void setData(int bgSprite, String name, String damage, String rate, String range) {
-		this.bgSprite = bgSprite;
-		this.name = name;
-		this.damage = damage;
-		this.rate = rate;
-		this.range = range;
+	public TowerCell(TowerData towerData) {
+		this.bgSprite = towerData.spriteIndex;
+		this.name = towerData.name;
+		this.damage = towerData.minDamage + "-" + towerData.maxDamage;
+		this.rateOfFire = towerData.rateOfFire;
+		this.range = towerData.range;
+
+		this.setPrefWidth(prefSize);
+		this.setPrefHeight(prefSize);
+
+		this.currentBG = GUIController.BG.TOWER_UNSELECTED;
+		this.setBackground(currentBG);
+
+		this.getChildren().add(new TowerImage(bgSprite));
+
+		setTooltip();
+
+		addListener();
 	}
 
 	public void setTooltip() {
@@ -62,10 +71,6 @@ public class TowerCell extends StackPane {
 	public void addListener() {
 		this.setOnMouseEntered(mouseEvent -> this.setBackground(GUIController.BG.TOWER_HOVER));
 		this.setOnMouseClicked(mouseEvent -> GameController.setSelectedTower(this));
-	}
-
-	public Background getCurrentBG() {
-		return currentBG;
 	}
 
 	public void setCurrentBG(Background currentBG) {
@@ -93,11 +98,11 @@ public class TowerCell extends StackPane {
 		return damage;
 	}
 
-	public String getRate() {
-		return rate;
+	public double getRateOfFire() {
+		return rateOfFire;
 	}
 
-	public String getRange() {
+	public int getRange() {
 		return range;
 	}
 
@@ -110,7 +115,7 @@ public class TowerCell extends StackPane {
 	}
 
 	public String getRatesWithText() {
-		return "\nRates : "+this.rate;
+		return "\nRates : "+this.rateOfFire;
 	}
 
 	public String getRangeWithText() {

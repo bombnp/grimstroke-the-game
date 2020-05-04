@@ -1,22 +1,19 @@
 package application;
 
-import gui.ControlPane;
 import gui.GUIController;
-import gui.GamePane;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import logic.Database;
 import logic.GameController;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        Database.initialize();
+
         HBox root = GUIController.initialize();
         GameController.initialize("map_1");
 

@@ -32,8 +32,6 @@ public class GameController {
         gameMap = new GameMap(mapCSV, decorCSV);
 
         minionPath = Utility.readMinionPath("map/" + mapName + "_MinionPath.csv");
-
-        Database.initialize();
         
         new AnimationTimer() {
             private long lastFrameNanoTime = System.nanoTime();
