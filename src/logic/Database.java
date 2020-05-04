@@ -2,46 +2,6 @@ package logic;
 
 import application.Utility;
 
-class TowerData {
-    public int spriteIndex;
-    public String name;
-    public int minDamage;
-    public int maxDamage;
-    public double rateOfFire; // shots/second
-    public int range;
-
-    public TowerData(String[] data) {
-        spriteIndex = Integer.parseInt(data[0]);
-        name = data[1];
-        minDamage = Integer.parseInt(data[2]);
-        maxDamage = Integer.parseInt(data[3]);
-        rateOfFire = Double.parseDouble(data[4]);
-        range = Integer.parseInt(data[5]);
-    }
-}
-
-class MinionData {
-    public int spriteIndex;
-    public String name;
-    public String description;
-    public int reward;
-    public double speed; // pixels/second
-    public double resist_MG;
-    public double resist_Rocket;
-    public double resist_Cannon;
-
-    public MinionData(String[] data) {
-        spriteIndex = Integer.parseInt(data[0]);
-        name = data[1];
-        description = data[2];
-        reward = Integer.parseInt(data[3]);
-        speed = Double.parseDouble(data[4]);
-        resist_MG = Double.parseDouble(data[5]);
-        resist_Rocket = Double.parseDouble(data[6]);
-        resist_Cannon = Double.parseDouble(data[7]);
-    }
-}
-
 public class Database {
     public static TowerData MG, R1, R2, C1, C2;
     public static MinionData conscript, armoredConscript, infantry, combatMedic, lightTank, heavyTank, lightPlane, fighterPlane;
