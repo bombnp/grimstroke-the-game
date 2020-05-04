@@ -2,9 +2,12 @@ package logic;
 
 import application.Utility;
 
+import java.util.ArrayList;
+
 public class Database {
     public static TowerData MG, R1, R2, C1, C2;
     public static MinionData conscript, armoredConscript, infantry, combatMedic, lightTank, heavyTank, lightPlane, fighterPlane;
+    public static ArrayList<MinionData> minionList = new ArrayList<>();
 
     public static void initialize() {
         String[][] towerData = Utility.readCSV("data/TowerData.csv");
@@ -16,13 +19,13 @@ public class Database {
         C1 = new TowerData(towerData[3]);
         C2 = new TowerData(towerData[4]);
 
-        conscript = new MinionData(minionData[0]);
-        armoredConscript = new MinionData(minionData[1]);
-        infantry = new MinionData(minionData[2]);
-        combatMedic = new MinionData(minionData[3]);
-        lightTank = new MinionData(minionData[4]);
-        heavyTank = new MinionData(minionData[5]);
-        lightPlane = new MinionData(minionData[6]);
-        fighterPlane = new MinionData(minionData[7]);
+        minionList.add(conscript = new MinionData(minionData[0]));
+        minionList.add(armoredConscript = new MinionData(minionData[1]));
+        minionList.add(infantry = new MinionData(minionData[2]));
+        minionList.add(combatMedic = new MinionData(minionData[3]));
+        minionList.add(lightTank = new MinionData(minionData[4]));
+        minionList.add(heavyTank = new MinionData(minionData[5]));
+        minionList.add(lightPlane = new MinionData(minionData[6]));
+        minionList.add(fighterPlane = new MinionData(minionData[7]));
     }
 }

@@ -9,6 +9,7 @@ public class MinionData {
     public double resist_MG;
     public double resist_Rocket;
     public double resist_Cannon;
+    public boolean isFlying;
 
     public MinionData(String[] data) {
         spriteIndex = Integer.parseInt(data[0]);
@@ -19,5 +20,6 @@ public class MinionData {
         resist_MG = Double.parseDouble(data[5]);
         resist_Rocket = Double.parseDouble(data[6]);
         resist_Cannon = Double.parseDouble(data[7]);
+        isFlying = Boolean.parseBoolean(data[8]);
     }
 }
