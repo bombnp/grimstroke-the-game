@@ -10,7 +10,7 @@ public class GamePane extends AnchorPane{
         boardGrid = new BoardGrid();
         this.getChildren().add(boardGrid);
         createCallWaveButton();
-        createEntityInfomationBox();
+        createEntityInformationPane();
     }
     public void createCallWaveButton() {
         Button button = new Button("NEXT");
@@ -20,10 +20,9 @@ public class GamePane extends AnchorPane{
         setBottomAnchor(button, 10.0);
         button.setOnAction(arg0 -> GameController.getWaveController().generateNextWave());
     }
-    public void createEntityInfomationBox() {
+    public void createEntityInformationPane() {
     	EntityInformationPane Pane = new EntityInformationPane();
     	this.getChildren().add(Pane);
-    	Pane.CreateBox();
     }
     public BoardGrid getBoardGrid() {
         return boardGrid;
