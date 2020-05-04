@@ -3,9 +3,6 @@ package gui;
 import entity.building.Buildspot;
 import entity.building.base.Building;
 import exception.InvalidTowerException;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import logic.GameController;
 
@@ -55,7 +52,7 @@ public class BoardCell extends StackPane {
         if (building instanceof Buildspot) {
             this.setOnMouseClicked(mouseEvent -> {
                 try {
-                    this.setBuilding(GameController.generateSelectedTowerEntity(this));
+                    this.setBuilding(GameController.generateSelectedTower(this));
                 } catch (InvalidTowerException ignored) {
 
                 }

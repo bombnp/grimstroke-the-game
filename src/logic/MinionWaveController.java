@@ -1,29 +1,27 @@
 package logic;
 
 import application.Utility;
-import entity.minions.AirUnit;
-import entity.minions.GroundUnit;
+import entity.minion.AirUnit;
+import entity.minion.GroundUnit;
 
 public class MinionWaveController{
-	private static String[][] MinionsData;
-	private static String[][] WaveData;
-	private static int WaveNumber;
+	private final String[][] minionsData;
+	private final String[][] waveData;
+	private int waveNumber;
 	public MinionWaveController() {
-		WaveNumber = 0;
-		MinionsData = Utility.readCSV("data/MinionsData.csv");
-		WaveData = Utility.readCSV("data/WaveData.csv");
+		waveNumber = 0;
+		minionsData = Utility.readCSV("data/MinionsData.csv");
+		waveData = Utility.readCSV("data/WaveData.csv");
 	}
-	public void nextWave() {
-		WaveNumber++;
-		getWaveMinions();
-	}
-	public void getWaveMinions() {
-		System.out.println("WAVE : "+ WaveNumber);
+	public void generateNextWave() {
+		waveNumber++;
+
+		System.out.println("WAVE : "+ waveNumber);
 		for(int i = 0 ; i < 8 ; i++) {
-			System.out.println(WaveData[0][i]+" : "+WaveData[WaveNumber][i]);
-			for(int j = 0 ; j < Integer.parseInt(WaveData[WaveNumber][i]) ; j++) {
-				boolean isGroundUnit = Boolean.parseBoolean(MinionsData[i][3]);
-				int spriteID = Integer.parseInt(MinionsData[i][8]);
+			System.out.println(waveData[0][i]+" : "+ waveData[waveNumber][i]);
+			for(int j = 0; j < Integer.parseInt(waveData[waveNumber][i]) ; j++) {
+				boolean isGroundUnit = Boolean.parseBoolean(minionsData[i][3]);
+				int spriteID = Integer.parseInt(minionsData[i][8]);
 				if(isGroundUnit) {
 					spawnGroundUnit(spriteID, i);
 				}else {
@@ -51,23 +49,23 @@ public class MinionWaveController{
 		newUnit.setResistance(getResistance(type));
 	}
 	public String getName(int type) {
-		return MinionsData[type][0];
+		return minionsData[type][0];
 	}
 	public String getDesc(int type) {
-		return MinionsData[type][1];
+		return minionsData[type][1];
 	}
 	public int getReward(int type) {
-		return Integer.parseInt(MinionsData[type][2]);
+		return Integer.parseInt(minionsData[type][2]);
 	}
 	public boolean getType(int type) {
-		return Boolean.parseBoolean(MinionsData[type][3]);
+		return Boolean.parseBoolean(minionsData[type][3]);
 	}
 	public float getSpeed(int type) {
-		return Float.parseFloat(MinionsData[type][4]);
+		return Float.parseFloat(minionsData[type][4]);
 	}
 	public float[] getResistance(int type){
-		return new float[] {Float.parseFloat(MinionsData[type][5]),
-							Float.parseFloat(MinionsData[type][6]),
-							Float.parseFloat(MinionsData[type][7])};
+		return new float[] {Float.parseFloat(minionsData[type][5]),
+							Float.parseFloat(minionsData[type][6]),
+							Float.parseFloat(minionsData[type][7])};
 	}
 }

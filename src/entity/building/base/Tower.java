@@ -4,8 +4,6 @@ import entity.Updatable;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import logic.Coordinate;
 import logic.GameController;
 
@@ -39,7 +37,7 @@ public abstract class Tower extends Building implements Updatable{
             }
         }
         else { // on quadrants
-            double alpha = Math.toDegrees(Math.atan((double)dx/dy));
+            double alpha = Math.toDegrees(Math.atan(dx /dy));
             if (dy > 0) { // target is below centerPosition, quadrant 3,4
                 this.setRotate(180 - alpha);
             } else { // target is above centerPosition, quadrant 1,2
@@ -49,20 +47,10 @@ public abstract class Tower extends Building implements Updatable{
     }
     @Override
     public void update(double deltaTime) {
-    	// TODO Auto-generated method stub
     	//WARNING!!!	INCOMPLETE METHOD!!!!!!!!
-    	if(GameController.getminion().size() > 0) {
-    		Coordinate target = GameController.getminion().get(0).getCoordinate();
+    	if(GameController.getMinionsList().size() > 0) {
+    		Coordinate target = GameController.getMinionsList().get(0).getCoordinate();
     		this.lookAt(target);
     	}
-    	//
-    	turretImage.setOnMouseClicked(new EventHandler<Event>() {
-			
-			@Override
-			public void handle(Event arg0) {
-				// TODO Auto-generated method stub
-				System.out.println("TEST");
-			}
-		});
     }
 }

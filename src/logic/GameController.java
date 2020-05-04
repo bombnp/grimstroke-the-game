@@ -20,7 +20,7 @@ public class GameController {
 
     private static ArrayList<Coordinate> minionPath;
     
-    private static MinionWaveController WaveController;
+    private static final MinionWaveController WaveController = new MinionWaveController();
 
     private static final ArrayList<Updatable> updatables = new ArrayList<>();
 
@@ -33,7 +33,6 @@ public class GameController {
         gameMap = new GameMap(mapCSV, decorCSV);
 
         minionPath = Utility.readMinionPath("map/" + mapName + "_MinionPath.csv");
-        WaveController = new MinionWaveController();
         
         new AnimationTimer() {
             private long lastFrameNanoTime = System.nanoTime();
@@ -57,7 +56,7 @@ public class GameController {
         selectedTower.setCurrentBG(GUIController.BG.TOWER_SELECTED);
     }
 
-    public static Tower generateSelectedTowerEntity(BoardCell targetCell) throws InvalidTowerException {
+    public static Tower generateSelectedTower(BoardCell targetCell) throws InvalidTowerException {
         if (selectedTower == null)
             throw new InvalidTowerException("No tower is selected");
         switch (selectedTower.getName()) {
@@ -88,7 +87,7 @@ public class GameController {
     public static void addMinion(Minion minion) {
         minions.add(minion);
     }
-    public static ArrayList<Minion> getminion(){
+    public static ArrayList<Minion> getMinionsList(){
     	return minions;
     }
 }
