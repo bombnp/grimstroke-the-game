@@ -33,6 +33,9 @@ public abstract class Minion extends ImageView implements Updatable {
         // offset to make image appear at center of position
         this.setTranslateX(-24);
         this.setTranslateY(-24);
+        this.setFitHeight(48);
+        this.setFitWidth(48);
+        //
         GUIController.getGamePane().getChildren().add(this);
         currentPosition = destination;
         
@@ -70,7 +73,7 @@ public abstract class Minion extends ImageView implements Updatable {
     @Override
     public void update(double deltaTime) {
         //TODO
-    	//System.out.println(currentPosition.toString()+destination.toString()); 	
+    	System.out.println(currentPosition.toString()+destination.toString()); 	
     	if(currentPosition.getX() == destination.getX() && currentPosition.getY() == destination.getY()) {
             nextPath();
     	}else{
@@ -79,19 +82,19 @@ public abstract class Minion extends ImageView implements Updatable {
     }
     public void Move() {
 			if(currentPosition.getX() < destination.getX()) {
-				currentPosition = new Coordinate(currentPosition.getX() + 1 , currentPosition.getY());
+				currentPosition = new Coordinate(currentPosition.getX() + 1*speed , currentPosition.getY());
 		        this.setRotate(0);
 			}
 			if(currentPosition.getX() > destination.getX()) {
-				currentPosition = new Coordinate(currentPosition.getX() - 1 , currentPosition.getY());
+				currentPosition = new Coordinate(currentPosition.getX() - 1*speed  , currentPosition.getY());
 		        this.setRotate(180);
 			}			
 			if(currentPosition.getY() < destination.getY()) {
-				currentPosition = new Coordinate(currentPosition.getX(), currentPosition.getY() + 1);
+				currentPosition = new Coordinate(currentPosition.getX(), currentPosition.getY() + 1*speed );
 		        this.setRotate(90);
 			}
 			if(currentPosition.getY() > destination.getY()) {
-				currentPosition = new Coordinate(currentPosition.getX(), currentPosition.getY() - 1);
+				currentPosition = new Coordinate(currentPosition.getX(), currentPosition.getY() - 1*speed );
 		        this.setRotate(-90);
 			}
 			this.setX(currentPosition.getX());

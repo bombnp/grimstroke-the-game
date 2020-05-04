@@ -1,22 +1,25 @@
 package logic;
 
 public class Coordinate {
-    private final int x, y;
+    private final double x, y;
 
     public Coordinate() {
         this.x = this.y = 0;
     }
-
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
+    public Coordinate(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 

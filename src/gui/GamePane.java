@@ -13,6 +13,7 @@ public class GamePane extends AnchorPane{
     public GamePane() {
         boardGrid = new BoardGrid();
         this.getChildren().add(boardGrid);
+        this.setMaxSize(500, 500);
         createCallWaveButton();
     }
     public void createCallWaveButton() {

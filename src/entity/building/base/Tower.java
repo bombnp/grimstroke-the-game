@@ -18,8 +18,8 @@ public abstract class Tower extends Building implements Updatable{
     }
 
     public void lookAt(Coordinate target) {
-        int dx = target.getX() - this.getCenterPosition().getX();
-        int dy = target.getY() - this.getCenterPosition().getY();
+        double dx = target.getX() - this.getCenterPosition().getX();
+        double dy = target.getY() - this.getCenterPosition().getY();
 
 
         if (dx == 0) { // on axis Y
