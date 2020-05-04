@@ -20,13 +20,8 @@ public class MinionWaveController{
 		for(int i = 0 ; i < 8 ; i++) {
 			System.out.println(waveData[0][i]+" : "+ waveData[waveNumber][i]);
 			for(int j = 0; j < Integer.parseInt(waveData[waveNumber][i]) ; j++) {
-				boolean isGroundUnit = Boolean.parseBoolean(minionsData[i][3]);
-				int spriteID = Integer.parseInt(minionsData[i][8]);
-				if(isGroundUnit) {
-					spawnGroundUnit(spriteID, i);
-				}else {
-					spawnAirUnit(spriteID, i);
-				}
+				int spriteID = Integer.parseInt(minionsData[i][0]);
+				spawnGroundUnit(spriteID, i);
 			}
 		}
 	}
@@ -35,7 +30,7 @@ public class MinionWaveController{
 		newUnit.setName(getName(type));
 		newUnit.setDesc(getDesc(type));
 		newUnit.setReward(getReward(type));
-		newUnit.setType(getType(type));
+//		newUnit.setType(getType(type));
 		newUnit.setSpeed(getSpeed(type));
 		newUnit.setResistance(getResistance(type));
 	}
@@ -44,21 +39,18 @@ public class MinionWaveController{
 		newUnit.setName(getName(type));
 		newUnit.setDesc(getDesc(type));
 		newUnit.setReward(getReward(type));
-		newUnit.setType(getType(type));
+		newUnit.setType(true);
 		newUnit.setSpeed(getSpeed(type));
 		newUnit.setResistance(getResistance(type));
 	}
 	public String getName(int type) {
-		return minionsData[type][0];
-	}
-	public String getDesc(int type) {
 		return minionsData[type][1];
 	}
-	public int getReward(int type) {
-		return Integer.parseInt(minionsData[type][2]);
+	public String getDesc(int type) {
+		return minionsData[type][2];
 	}
-	public boolean getType(int type) {
-		return Boolean.parseBoolean(minionsData[type][3]);
+	public int getReward(int type) {
+		return Integer.parseInt(minionsData[type][3]);
 	}
 	public float getSpeed(int type) {
 		return Float.parseFloat(minionsData[type][4]);

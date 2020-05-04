@@ -73,7 +73,6 @@ public abstract class Minion extends ImageView implements Updatable {
     @Override
     public void update(double deltaTime) {
         //TODO
-    	System.out.println(currentPosition.toString()+destination.toString()); 	
     	if(currentPosition.getX() == destination.getX() && currentPosition.getY() == destination.getY()) {
             nextPath();
     	}else{
