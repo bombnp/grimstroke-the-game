@@ -58,8 +58,7 @@ public abstract class Minion extends ImageView implements Updatable {
     public void changeDestination() {
         destinationIndex++;
         if (destinationIndex == path.size()) {
-            GameController.getMinions().remove(this);
-            GameController.getUpdatables().remove(this);
+            GameController.removeMinion(this);
         }
         else {
             destination = path.get(destinationIndex);

@@ -12,6 +12,7 @@ public class GamePane extends AnchorPane{
         createCallWaveButton();
         createEntityInformationPane();
     }
+
     public void createCallWaveButton() {
         Button button = new Button("NEXT");
         this.getChildren().add(button);
@@ -20,11 +21,14 @@ public class GamePane extends AnchorPane{
         setBottomAnchor(button, 10.0);
         button.setOnAction(arg0 -> GameController.getWaveController().generateNextWave());
     }
+
     public void createEntityInformationPane() {
     	EntityInformationPane Pane = new EntityInformationPane();
     	this.getChildren().add(Pane);
     }
+
     public BoardGrid getBoardGrid() {
         return boardGrid;
     }
+
 }
