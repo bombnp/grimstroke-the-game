@@ -3,6 +3,7 @@ package entity.minion.base;
 import application.Utility;
 import entity.Updatable;
 import gui.GUIController;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import logic.GameController;
 import logic.MinionData;
@@ -19,21 +20,20 @@ public abstract class Minion extends ImageView implements Updatable {
     
     private final String name, description;
     private final int reward;
-    private final double speed, resist_MG,resist_Rocket,resist_Cannon;
+    private final double health, speed, resist_MG,resist_Rocket,resist_Cannon;
+
+    private ProgressBar healthBar;
     
     public Minion(MinionData minionData) {
         super(Utility.getSprite(minionData.spriteIndex));
         this.name = minionData.name;
         this.description = minionData.description;
         this.reward = minionData.reward;
+        this.health = minionData.health;
         this.speed = minionData.speed;
         this.resist_MG = minionData.resist_MG;
         this.resist_Rocket = minionData.resist_Rocket;
         this.resist_Cannon = minionData.resist_Cannon;
-
-        path = GameController.getMinionPath();
-        destinationIndex = 0;
-        destination = path.get(destinationIndex);
 
         this.setFitHeight(48);
         this.setFitWidth(48);
@@ -42,15 +42,25 @@ public abstract class Minion extends ImageView implements Updatable {
         this.setTranslateY(-24);
 
         GUIController.getGamePane().getChildren().add(this);
-
         GameController.getUpdatables().add(this);
         GameController.getMinions().add(this);
 
+        path = GameController.getMinionPath();
+        destinationIndex = 0;
+        destination = path.get(destinationIndex);
         currentPosition = destination;
         this.setX(currentPosition.getX());
         this.setY(currentPosition.getY());
         changeDestination();
+
+        setHealthBar();
     }
+
+    public void setHealthBar() {
+        healthBar = new ProgressBar(1);
+        // TODO: Change super class to Pane instead of ImageView
+    }
+
     public Vector2 getCurrentPosition() {
     	return currentPosition;
     }
@@ -121,6 +131,10 @@ public abstract class Minion extends ImageView implements Updatable {
 
     public int getReward() {
         return reward;
+    }
+
+    public double getHealth() {
+        return health;
     }
 
     public double getSpeed() {
