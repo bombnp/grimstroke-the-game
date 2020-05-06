@@ -17,19 +17,16 @@ public abstract class Minion extends StackPane implements Updatable {
 
     private Vector2 destination;
     private Vector2 currentPosition;
-    
-    private final String name, description;
+
     private final int reward;
-    private final double health, speed, resist_MG,resist_Rocket,resist_Cannon;
+    private final double maxHealth, currentHealth, speed, resist_MG,resist_Rocket,resist_Cannon;
 
     private ProgressBar healthBar;
-    private CellImage minionImage;
+    private final CellImage minionImage;
 
     public Minion(MinionData minionData) {
-        this.name = minionData.name;
-        this.description = minionData.description;
         this.reward = minionData.reward;
-        this.health = minionData.health;
+        this.currentHealth = this.maxHealth = minionData.health;
         this.speed = minionData.speed;
         this.resist_MG = minionData.resist_MG;
         this.resist_Rocket = minionData.resist_Rocket;
@@ -57,7 +54,11 @@ public abstract class Minion extends StackPane implements Updatable {
     }
 
     public void setHealthBar() {
-        healthBar = new ProgressBar(1);
+        healthBar = new ProgressBar();
+        healthBar.setPrefWidth(48);
+        healthBar.setPrefHeight(12);
+        healthBar.setTranslateY(-24);
+        this.getChildren().add(healthBar);
     }
 
     public Vector2 getCurrentPosition() {
@@ -87,9 +88,12 @@ public abstract class Minion extends StackPane implements Updatable {
             currentPosition = currentPosition.add(direction.multiply(translationDistance));
         }
 
+        healthBar.setProgress(currentHealth / maxHealth);
+
+        this.lookAt(destination);
+
         this.setLayoutX(currentPosition.getX());
         this.setLayoutY(currentPosition.getY());
-        this.lookAt(destination);
     }
 
     public void lookAt(Vector2 target) {
@@ -98,57 +102,26 @@ public abstract class Minion extends StackPane implements Updatable {
 
         if (dx == 0) { // on axis Y
             if (dy > 0) { // target is below centerPosition
-                this.setRotate(180);
+                minionImage.setRotate(180);
             } else { //target is above centerPosition
-                this.setRotate(0);
+                minionImage.setRotate(0);
             }
         }
         else if (dy == 0) { // on axis X
             if (dx > 0) { // target is to the right of centerPosition
-                this.setRotate(90);
+                minionImage.setRotate(90);
             } else { // target is to the left of centerPosition
-                this.setRotate(270);
+                minionImage.setRotate(270);
             }
         }
         else { // on quadrants
             double alpha = Math.toDegrees(Math.atan(dx /dy));
             if (dy > 0) { // target is below centerPosition, quadrant 3,4
-                this.setRotate(180 - alpha);
+                minionImage.setRotate(180 - alpha);
             } else { // target is above centerPosition, quadrant 1,2
-                this.setRotate(360 - alpha);
+                minionImage.setRotate(360 - alpha);
             }
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getReward() {
-        return reward;
-    }
-
-    public double getHealth() {
-        return health;
-    }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public double getResist_MG() {
-        return resist_MG;
-    }
-
-    public double getResist_Rocket() {
-        return resist_Rocket;
-    }
-
-    public double getResist_Cannon() {
-        return resist_Cannon;
-    }
 }
