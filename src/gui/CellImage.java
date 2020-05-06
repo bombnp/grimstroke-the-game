@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 public class CellImage extends ImageView {
 
-    private Image image;
+    private final Image image;
 
     public CellImage(int spriteIndex) {
         image = Utility.getSprite(spriteIndex);
