@@ -49,6 +49,10 @@ public class GameController {
                     minions.remove(garbage);
                     updatables.remove(garbage);
                     GUIController.getGamePane().getChildren().remove(garbage);
+
+                    if (minions.isEmpty()) {
+                        GUIController.getGamePane().getNextWaveButton().setDisable(false);
+                    }
                 }
                 garbageCollector.clear();
                 lastFrameNanoTime = currentNanoTime;

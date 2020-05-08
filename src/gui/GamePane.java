@@ -6,29 +6,38 @@ import logic.GameController;
 
 public class GamePane extends AnchorPane{
     private final BoardGrid boardGrid;
+    private Button nextWaveButton;
+    private EntityInformationPane informationPane;
+
     public GamePane() {
         boardGrid = new BoardGrid();
         this.getChildren().add(boardGrid);
-        createCallWaveButton();
+        createNextWaveButton();
         createEntityInformationPane();
     }
 
-    public void createCallWaveButton() {
-        Button button = new Button("NEXT");
-        this.getChildren().add(button);
-        button.setPrefSize(75, 50);
-        setRightAnchor(button, 10.0);
-        setBottomAnchor(button, 10.0);
-        button.setOnAction(arg0 -> GameController.getWaveController().generateNextWave());
+    public void createNextWaveButton() {
+        nextWaveButton = new Button("NEXT");
+        this.getChildren().add(nextWaveButton);
+        nextWaveButton.setPrefSize(75, 50);
+        setRightAnchor(nextWaveButton, 10.0);
+        setBottomAnchor(nextWaveButton, 10.0);
+        nextWaveButton.setOnAction(arg0 -> {
+            GameController.getWaveController().generateNextWave();
+            nextWaveButton.setDisable(true);
+        });
     }
 
     public void createEntityInformationPane() {
-    	EntityInformationPane Pane = new EntityInformationPane();
-    	this.getChildren().add(Pane);
+    	informationPane = new EntityInformationPane();
+    	this.getChildren().add(informationPane);
     }
 
     public BoardGrid getBoardGrid() {
         return boardGrid;
     }
 
+    public Button getNextWaveButton() {
+        return nextWaveButton;
+    }
 }
