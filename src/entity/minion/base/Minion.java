@@ -1,12 +1,12 @@
 package entity.minion.base;
 
+import database.MinionData;
 import entity.Updatable;
 import gui.CellImage;
 import gui.GUIController;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
 import logic.GameController;
-import logic.MinionData;
 import logic.Vector2;
 
 import java.util.ArrayList;
@@ -18,19 +18,14 @@ public abstract class Minion extends StackPane implements Updatable {
     private Vector2 destination;
     private Vector2 currentPosition;
 
-    private final int reward;
-    private final double maxHealth, currentHealth, speed, resist_MG,resist_Rocket,resist_Cannon;
+    private int reward;
+    private double maxHealth, currentHealth, speed, resist_MG,resist_Rocket,resist_Cannon;
 
     private ProgressBar healthBar;
     private final CellImage minionImage;
 
     public Minion(MinionData minionData) {
-        this.reward = minionData.reward;
-        this.currentHealth = this.maxHealth = minionData.health;
-        this.speed = minionData.speed;
-        this.resist_MG = minionData.resist_MG;
-        this.resist_Rocket = minionData.resist_Rocket;
-        this.resist_Cannon = minionData.resist_Cannon;
+        extractData(minionData);
 
         // offset to make image appear at center of position
         this.setTranslateX(-24);
@@ -50,7 +45,17 @@ public abstract class Minion extends StackPane implements Updatable {
 
         minionImage = new CellImage(minionData.spriteIndex);
         this.getChildren().add(minionImage);
+
         setHealthBar();
+    }
+
+    public void extractData(MinionData minionData) {
+        this.reward = minionData.reward;
+        this.currentHealth = this.maxHealth = minionData.health;
+        this.speed = minionData.speed;
+        this.resist_MG = minionData.resist_MG;
+        this.resist_Rocket = minionData.resist_Rocket;
+        this.resist_Cannon = minionData.resist_Cannon;
     }
 
     public void setHealthBar() {
@@ -77,8 +82,19 @@ public abstract class Minion extends StackPane implements Updatable {
 
     @Override
     public void update(double deltaTime) {
+        move(deltaTime);
+
+        healthBar.setProgress(currentHealth / maxHealth);
+
+        this.lookAt(destination);
+
+        this.setLayoutX(currentPosition.getX());
+        this.setLayoutY(currentPosition.getY());
+    }
+
+    public void move(double deltaTime) {
         double translationDistance = this.speed * GameController.minionSpeed * deltaTime;
-        double totalDistance = currentPosition.distance(destination);
+        double totalDistance = Vector2.distance(currentPosition, destination);
 
         if (totalDistance <= translationDistance) {
             currentPosition = destination;
@@ -87,13 +103,6 @@ public abstract class Minion extends StackPane implements Updatable {
             Vector2 direction = currentPosition.getDirectionTo(destination).normalize();
             currentPosition = currentPosition.add(direction.multiply(translationDistance));
         }
-
-        healthBar.setProgress(currentHealth / maxHealth);
-
-        this.lookAt(destination);
-
-        this.setLayoutX(currentPosition.getX());
-        this.setLayoutY(currentPosition.getY());
     }
 
     public void lookAt(Vector2 target) {
@@ -124,4 +133,11 @@ public abstract class Minion extends StackPane implements Updatable {
         }
     }
 
+    public double distanceToDestination() {
+        return Vector2.distance(currentPosition, destination);
+    }
+
+    public int getDestinationIndex() {
+        return destinationIndex;
+    }
 }

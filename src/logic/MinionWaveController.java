@@ -1,6 +1,8 @@
 package logic;
 
 import application.Utility;
+import database.Database;
+import database.MinionData;
 import entity.minion.AirUnit;
 import entity.minion.GroundUnit;
 import javafx.application.Platform;

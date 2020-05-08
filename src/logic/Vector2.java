@@ -32,9 +32,9 @@ public class Vector2 {
         return new Vector2(target.getX()-x, target.getY()-y);
     }
 
-    public double distance(Vector2 point) {
-        double dx = this.getX() - point.getX();
-        double dy = this.getY() - point.getY();
+    public static double distance(Vector2 p1, Vector2 p2) {
+        double dx = p1.getX() - p2.getX();
+        double dy = p1.getY() - p2.getY();
         return Math.sqrt(dx*dx + dy*dy);
     }
 

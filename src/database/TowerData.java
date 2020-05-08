@@ -1,4 +1,4 @@
-package logic;
+package database;
 
 public class TowerData {
     public int spriteIndex;
@@ -6,7 +6,7 @@ public class TowerData {
     public int minDamage;
     public int maxDamage;
     public double rateOfFire; // shots/second
-    public int range;
+    public double range;
 
     public TowerData(String[] data) {
         spriteIndex = Integer.parseInt(data[0]);
@@ -14,6 +14,6 @@ public class TowerData {
         minDamage = Integer.parseInt(data[2]);
         maxDamage = Integer.parseInt(data[3]);
         rateOfFire = Double.parseDouble(data[4]);
-        range = Integer.parseInt(data[5]);
+        range = Double.parseDouble(data[5]);
     }
 }

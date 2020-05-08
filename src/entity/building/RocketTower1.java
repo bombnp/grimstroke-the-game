@@ -1,11 +1,11 @@
 package entity.building;
 
+import database.Database;
 import entity.building.base.Tower;
 import gui.BoardCell;
-import gui.Sprite;
 
 public class RocketTower1 extends Tower {
     public RocketTower1(BoardCell cell) {
-        super(cell, Sprite.ROCKET_TURRET_1);
+        super(cell, Database.R1);
     }
 }

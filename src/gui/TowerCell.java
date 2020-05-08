@@ -1,11 +1,11 @@
 package gui;
 
+import database.TowerData;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import logic.GameController;
-import logic.TowerData;
 
 public class TowerCell extends StackPane {
 	int prefSize = ControlPane.getControlPaneWidth();
@@ -15,7 +15,7 @@ public class TowerCell extends StackPane {
 	private final String name;
 	private String damage;
 	private double rateOfFire;
-	private int range;
+	private double range;
 
 	protected Background currentBG;
 
@@ -78,32 +78,12 @@ public class TowerCell extends StackPane {
 		this.setBackground(currentBG);
 	}
 
-	public int getBgSprite(){
-		return this.bgSprite;
-	}
-
-	public int getCellSize(BoardCell cell) {
-		return cell.getChildren().size();
-	}
-
 	public boolean isTool() {
 		return this.name.equals("DESTROY");
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public String getDamage() {
-		return damage;
-	}
-
-	public double getRateOfFire() {
-		return rateOfFire;
-	}
-
-	public int getRange() {
-		return range;
 	}
 
 	public String getNameWithText() {
@@ -119,7 +99,7 @@ public class TowerCell extends StackPane {
 	}
 
 	public String getRangeWithText() {
-		return "\nRange : "+this.range;
+		return "\nRange : "+(int)this.range;
 	}
 
 	public void SetTooltipText(Tooltip tool) {

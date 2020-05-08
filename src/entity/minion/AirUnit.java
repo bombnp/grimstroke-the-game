@@ -1,7 +1,7 @@
 package entity.minion;
 
+import database.MinionData;
 import entity.minion.base.Minion;
-import logic.MinionData;
 
 public class AirUnit extends Minion{
 

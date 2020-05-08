@@ -1,13 +1,13 @@
 package gui;
 
+import database.Database;
+import database.TowerData;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import logic.Database;
-import logic.TowerData;
 
 public class ControlPane extends VBox {
 	private static final int CONTROL_PANE_WIDTH = 100;

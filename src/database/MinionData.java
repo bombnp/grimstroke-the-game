@@ -1,4 +1,4 @@
-package logic;
+package database;
 
 public class MinionData {
     public int spriteIndex;

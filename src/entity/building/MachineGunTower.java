@@ -1,12 +1,12 @@
 package entity.building;
 
+import database.Database;
 import entity.building.base.Tower;
 import gui.BoardCell;
-import gui.Sprite;
 
 public class MachineGunTower extends Tower {
     public MachineGunTower(BoardCell cell) {
-        super(cell, Sprite.MACHINE_GUN_TURRET);
+        super(cell, Database.MG);
         this.turretImage.setTranslateY(-5);
     }
 }
