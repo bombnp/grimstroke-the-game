@@ -6,8 +6,8 @@ import entity.minion.base.Minion;
 import gui.BoardCell;
 
 public class CannonTower extends Tower {
-    public CannonTower(BoardCell cell) {
-        super(cell, Database.C1);
+    public CannonTower(BoardCell cell, int level) {
+        super(cell, Database.Cannon[level-1]);
         this.turretImage.setTranslateY(-5);
     }
 

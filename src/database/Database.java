@@ -5,7 +5,7 @@ import application.Utility;
 import java.util.ArrayList;
 
 public class Database {
-    public static TowerData M1, M2, R1, R2, C1, C2;
+    public static TowerData[] MG, Rocket, Cannon;
     public static MinionData conscript, armoredConscript, infantry, combatMedic, lightTank, heavyTank, lightPlane, fighterPlane;
     public static ArrayList<MinionData> minionList = new ArrayList<>();
 
@@ -13,12 +13,9 @@ public class Database {
         String[][] towerData = Utility.readCSV("data/TowerData.csv");
         String[][] minionData = Utility.readCSV("data/MinionData.csv");
 
-        M1 = new TowerData(towerData[0]);
-        M2 = new TowerData(towerData[1]);
-        R1 = new TowerData(towerData[2]);
-        R2 = new TowerData(towerData[3]);
-        C1 = new TowerData(towerData[4]);
-        C2 = new TowerData(towerData[5]);
+        MG = new TowerData[]{new TowerData(towerData[0]), new TowerData(towerData[1])};
+        Rocket = new TowerData[]{new TowerData(towerData[2]), new TowerData(towerData[3])};
+        Cannon = new TowerData[]{new TowerData(towerData[4]), new TowerData(towerData[5])};
 
         minionList.add(conscript = new MinionData(minionData[0]));
         minionList.add(armoredConscript = new MinionData(minionData[1]));

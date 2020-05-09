@@ -6,8 +6,8 @@ import entity.minion.base.Minion;
 import gui.BoardCell;
 
 public class RocketTower extends Tower {
-    public RocketTower(BoardCell cell) {
-        super(cell, Database.R1);
+    public RocketTower(BoardCell cell, int level) {
+        super(cell, Database.Rocket[level-1]);
     }
 
     @Override

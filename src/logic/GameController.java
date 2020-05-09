@@ -78,9 +78,9 @@ public class GameController {
         if (selectedTower == null)
             throw new InvalidTowerException("No tower is selected");
         switch (selectedTower.getName()) {
-            case "Machine Gun Tower" : return new MachineGunTower(targetCell);
-            case "Rocket Tower" : return new RocketTower(targetCell);
-            case "Cannon Tower" : return new CannonTower(targetCell);
+            case "Machine Gun Tower" : return new MachineGunTower(targetCell, 1);
+            case "Rocket Tower" : return new RocketTower(targetCell, 1);
+            case "Cannon Tower" : return new CannonTower(targetCell, 1);
             default: throw new InvalidTowerException("Tower name is incorrect.");
         }
     }

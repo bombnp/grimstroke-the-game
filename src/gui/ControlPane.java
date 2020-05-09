@@ -17,9 +17,9 @@ public class ControlPane extends VBox {
         this.setPrefWidth(CONTROL_PANE_WIDTH);
         this.setSpacing(10);
 
-        addTower(Database.M1);
-        addTower(Database.R1);
-        addTower(Database.C1);
+        addTower(Database.MG[0]);
+        addTower(Database.Rocket[0]);
+        addTower(Database.Cannon[0]);
 
         this.getChildren().add(new TowerCell("Upgrade Tool"));
         this.getChildren().add(new TowerCell("Sell Tool"));
