@@ -35,7 +35,7 @@ public class MachineGunTower extends Tower {
             particle.setScaleX(0.7);
             particle.setScaleY(0.7);
             particle.disable();
-            this.getChildren().add(particle);
+            this.turret.getChildren().add(particle);
         }
     }
 

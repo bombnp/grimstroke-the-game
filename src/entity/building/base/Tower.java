@@ -6,24 +6,28 @@ import entity.minion.base.Minion;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
+import javafx.scene.layout.Pane;
 import logic.GameController;
 import logic.Vector2;
 
 import java.util.ArrayList;
 
 public abstract class Tower extends Building implements Updatable{
-    protected CellImage turretImage;
     protected int minDamage, maxDamage;
     protected double rateOfFire, range;
     protected Minion currentTarget;
     protected double cooldown = 0;
+
+    protected Pane turret = new Pane();
+    protected CellImage turretImage;
 
     public Tower(BoardCell cell, TowerData towerData) {
         super(cell, Sprite.getRandomTowerBase());
         extractData(towerData);
 
         turretImage = new CellImage(towerData.spriteIndex);
-        this.getChildren().add(turretImage);
+        this.getChildren().add(turret);
+        turret.getChildren().add(turretImage);
 
         GameController.getUpdatables().add(this);
     }
@@ -41,24 +45,24 @@ public abstract class Tower extends Building implements Updatable{
 
         if (dx == 0) { // on axis Y
             if (dy > 0) { // target is below centerPosition
-                this.setRotate(180);
+                turret.setRotate(180);
             } else { //target is above centerPosition
-                this.setRotate(0);
+                turret.setRotate(0);
             }
         }
         else if (dy == 0) { // on axis X
             if (dx > 0) { // target is to the right of centerPosition
-                this.setRotate(90);
+                turret.setRotate(90);
             } else { // target is to the left of centerPosition
-                this.setRotate(270);
+                turret.setRotate(270);
             }
         }
         else { // on quadrants
             double alpha = Math.toDegrees(Math.atan(dx /dy));
             if (dy > 0) { // target is below centerPosition, quadrant 3,4
-                this.setRotate(180 - alpha);
+                turret.setRotate(180 - alpha);
             } else { // target is above centerPosition, quadrant 1,2
-                this.setRotate(360 - alpha);
+                turret.setRotate(360 - alpha);
             }
         }
     }
