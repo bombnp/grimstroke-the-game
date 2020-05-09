@@ -46,7 +46,7 @@ public class TowerCell extends StackPane {
 	public TowerCell(TowerData towerData) {
 		this.bgSprite = towerData.spriteIndex;
 		this.name = towerData.name;
-		this.damage = towerData.minDamage + "-" + towerData.maxDamage;
+		this.damage = (int)towerData.minDamage + "-" + (int)towerData.maxDamage;
 		this.rateOfFire = towerData.rateOfFire;
 		this.range = towerData.range;
 

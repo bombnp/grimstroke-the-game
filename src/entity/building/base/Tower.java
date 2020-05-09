@@ -11,9 +11,10 @@ import logic.GameController;
 import logic.Vector2;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Tower extends Building implements Updatable{
-    protected int minDamage, maxDamage;
+    protected double minDamage, maxDamage;
     protected double rateOfFire, range;
     protected Minion currentTarget;
     protected double cooldown = 0;
@@ -66,6 +67,7 @@ public abstract class Tower extends Building implements Updatable{
             }
         }
     }
+
     @Override
     public void update(double deltaTime) {
         if (currentTarget == null || Vector2.distance(this.getCenterPosition(), currentTarget.getCurrentPosition()) > range) {
@@ -105,6 +107,11 @@ public abstract class Tower extends Building implements Updatable{
                 }
             }
         }
+    }
+
+    public double randomizeDamage() {
+        Random randomizer = new Random();
+        return randomizer.nextDouble() * (maxDamage-minDamage) + minDamage;
     }
 
     public Minion getCurrentTarget() {

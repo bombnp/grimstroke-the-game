@@ -6,6 +6,7 @@ import gui.CellImage;
 import gui.GUIController;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
+import logic.DamageType;
 import logic.GameController;
 import logic.Vector2;
 
@@ -59,10 +60,11 @@ public abstract class Minion extends StackPane implements Updatable {
     }
 
     public void setHealthBar() {
-        healthBar = new ProgressBar();
+        healthBar = new ProgressBar(1);
         healthBar.setPrefWidth(48);
         healthBar.setPrefHeight(12);
         healthBar.setTranslateY(-24);
+        healthBar.setVisible(false);
         this.getChildren().add(healthBar);
     }
 
@@ -83,8 +85,6 @@ public abstract class Minion extends StackPane implements Updatable {
     @Override
     public void update(double deltaTime) {
         move(deltaTime);
-
-        healthBar.setProgress(currentHealth / maxHealth);
 
         this.lookAt(destination);
 
@@ -139,5 +139,30 @@ public abstract class Minion extends StackPane implements Updatable {
 
     public int getDestinationIndex() {
         return destinationIndex;
+    }
+
+    public void takeDamage(double rawDamage, DamageType damageType) {
+        double damage;
+        switch (damageType) {
+            case MG:
+                damage = rawDamage*(1-resist_MG);
+                break;
+            case Rocket:
+                damage = rawDamage*(1-resist_Rocket);
+                break;
+            case Cannon:
+                damage = rawDamage*(1-resist_Cannon);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + damageType);
+        }
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
+            // TODO: Increase money on death
+            GameController.removeMinion(this);
+        }
+
+        healthBar.setProgress(currentHealth / maxHealth);
+        healthBar.setVisible(true);
     }
 }

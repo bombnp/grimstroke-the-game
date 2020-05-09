@@ -6,6 +6,7 @@ import entity.minion.base.Minion;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
+import logic.DamageType;
 
 public class MachineGunTower extends Tower {
     private CellImage[] particles;
@@ -55,5 +56,7 @@ public class MachineGunTower extends Tower {
             }
         });
         enableParticle.start();
+
+        target.takeDamage(randomizeDamage(), DamageType.MG);
     }
 }
