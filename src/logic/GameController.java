@@ -49,6 +49,12 @@ public class GameController {
                 }
                 for (Minion garbage : garbageCollector) {
                     minions.remove(garbage);
+                    for (Updatable updatable : updatables) {
+                        if (updatable instanceof Tower && ((Tower) updatable).getCurrentTarget() == garbage) {
+                            ((Tower) updatable).setCurrentTarget(null);
+                            break;
+                        }
+                    }
                     updatables.remove(garbage);
                     GUIController.getGamePane().getChildren().remove(garbage);
 

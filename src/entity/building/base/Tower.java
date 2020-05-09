@@ -107,5 +107,13 @@ public abstract class Tower extends Building implements Updatable{
         }
     }
 
+    public Minion getCurrentTarget() {
+        return currentTarget;
+    }
+
+    public void setCurrentTarget(Minion currentTarget) {
+        this.currentTarget = currentTarget;
+    }
+
     public abstract void attack(Minion target);
 }
