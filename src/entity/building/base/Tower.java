@@ -16,6 +16,7 @@ public abstract class Tower extends Building implements Updatable{
     protected int minDamage, maxDamage;
     protected double rateOfFire, range;
     protected Minion currentTarget;
+    protected double cooldown = 0;
 
     public Tower(BoardCell cell, TowerData towerData) {
         super(cell, Sprite.getRandomTowerBase());
@@ -70,6 +71,15 @@ public abstract class Tower extends Building implements Updatable{
         if (currentTarget != null) {
             lookAt(currentTarget.getCurrentPosition());
         }
+
+        cooldown -= deltaTime;
+        if (cooldown < 0)
+            cooldown = 0;
+
+        if (cooldown == 0 && currentTarget != null) {
+            this.attack(currentTarget);
+            cooldown = 1/rateOfFire;
+        }
     }
 
     public boolean isMinionInRange(Minion minion) {
@@ -92,4 +102,6 @@ public abstract class Tower extends Building implements Updatable{
             }
         }
     }
+
+    public abstract void attack(Minion target);
 }
