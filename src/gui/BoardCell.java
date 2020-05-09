@@ -42,15 +42,15 @@ public class BoardCell extends StackPane {
 
     public void setBuilding(Building newBuilding) {
         if (building != null) {
-            this.getChildren().remove(building);
+            GUIController.getGamePane().getChildren().remove(building);
         }
         building = newBuilding;
 
-        this.setOnMouseEntered(mouseEvent -> hoverImage.enable());
-        this.setOnMouseExited(mouseEvent -> hoverImage.disable());
+        building.setOnMouseEntered(mouseEvent -> hoverImage.enable());
+        building.setOnMouseExited(mouseEvent -> hoverImage.disable());
 
         if (building instanceof Buildspot) {
-            this.setOnMouseClicked(mouseEvent -> {
+            building.setOnMouseClicked(mouseEvent -> {
                 try {
                     this.setBuilding(GameController.generateSelectedTower(this));
                 } catch (InvalidTowerException ignored) {
@@ -58,14 +58,14 @@ public class BoardCell extends StackPane {
                 }
             });
         } else {
-            this.setOnMouseClicked(mouseEvent -> {
+            building.setOnMouseClicked(mouseEvent -> {
                 if (GameController.getSelectedTower().isTool()) {
                     this.setBuilding(new Buildspot(this));
                 }
             });
         }
 
-        this.getChildren().add(building);
+        GUIController.getGamePane().getChildren().add(building);
 
         // make hoverImage always on top
         reAddHoverImage();

@@ -14,12 +14,13 @@ public abstract class Building extends StackPane{
         this.cell = cell;
         baseImage = new CellImage(baseSprite);
         this.centerPosition = new Vector2(cell.getCol()*48 + 24, cell.getRow()*48 + 24);
-
+        this.setLayoutX(centerPosition.getX()-24);
+        this.setLayoutY(centerPosition.getY()-24);
         this.getChildren().add(baseImage);
     }
 
     public Vector2 getCenterPosition() {
         return centerPosition;
     }
-    
+
 }
