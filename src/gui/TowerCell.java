@@ -12,24 +12,31 @@ public class TowerCell extends StackPane {
 
 	protected int bgSprite;
 
-	private final String name;
+	private String name;
 	private String damage;
 	private double rateOfFire;
 	private double range;
 
 	protected Background currentBG;
 
-	public TowerCell(boolean isTool) {
-		this.bgSprite = Sprite.DESTROY_TOOL;
-		this.name = "Destroy Tool";
+	public TowerCell(String toolName) {
+		switch (toolName) {
+			case "Sell Tool":
+				this.name = "Sell Tool";
+				this.getChildren().add(new TowerImage("images/sellIcon.png"));
+				break;
+			case "Upgrade Tool":
+				this.name = "Upgrade Tool";
+				this.getChildren().add(new TowerImage("images/upgradeIcon.png"));
+				break;
+		}
+
 
 		this.setPrefWidth(prefSize);
 		this.setPrefHeight(prefSize);
 
 		this.currentBG = GUIController.BG.TOWER_UNSELECTED;
 		this.setBackground(currentBG);
-
-		this.getChildren().add(new TowerImage(bgSprite));
 
 		setTooltip();
 
@@ -79,7 +86,7 @@ public class TowerCell extends StackPane {
 	}
 
 	public boolean isTool() {
-		return this.name.equals("DESTROY");
+		return this.name.contains("Tool");
 	}
 
 	public String getName() {
@@ -95,7 +102,7 @@ public class TowerCell extends StackPane {
 	}
 
 	public String getRatesWithText() {
-		return "\nRates : "+this.rateOfFire;
+		return "\nRates : "+this.rateOfFire+" shots/sec";
 	}
 
 	public String getRangeWithText() {
@@ -104,7 +111,7 @@ public class TowerCell extends StackPane {
 
 	public void SetTooltipText(Tooltip tool) {
 		if(this.isTool())
-			tool.setText("Destroy Tool");
+			tool.setText(this.getName());
 		else
 			tool.setText(this.getNameWithText() + this.getDamageWithText() + this.getRatesWithText() + this.getRangeWithText());
 	}

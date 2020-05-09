@@ -2,7 +2,9 @@ package logic;
 
 import application.Utility;
 import entity.Updatable;
-import entity.building.*;
+import entity.building.CannonTower;
+import entity.building.MachineGunTower;
+import entity.building.RocketTower;
 import entity.building.base.Tower;
 import entity.minion.base.Minion;
 import exception.InvalidTowerException;
@@ -77,10 +79,8 @@ public class GameController {
             throw new InvalidTowerException("No tower is selected");
         switch (selectedTower.getName()) {
             case "Machine Gun Tower" : return new MachineGunTower(targetCell);
-            case "Rocket Tower" : return new RocketTower1(targetCell);
-            case "Rocket Tower Lv. 2" : return new RocketTower2(targetCell);
-            case "Cannon Tower" : return new CannonTower1(targetCell);
-            case "Cannon Tower Lv. 2" : return new CannonTower2(targetCell);
+            case "Rocket Tower" : return new RocketTower(targetCell);
+            case "Cannon Tower" : return new CannonTower(targetCell);
             default: throw new InvalidTowerException("Tower name is incorrect.");
         }
     }
