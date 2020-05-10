@@ -32,12 +32,6 @@ public class Vector2 {
         return new Vector2(target.getX()-x, target.getY()-y);
     }
 
-    public static double distance(Vector2 p1, Vector2 p2) {
-        double dx = p1.getX() - p2.getX();
-        double dy = p1.getY() - p2.getY();
-        return Math.sqrt(dx*dx + dy*dy);
-    }
-
     public double getMagnitude() {
         return Math.sqrt(x*x + y*y);
     }
@@ -53,5 +47,15 @@ public class Vector2 {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    public static double distance(Vector2 p1, Vector2 p2) {
+        double dx = p1.getX() - p2.getX();
+        double dy = p1.getY() - p2.getY();
+        return Math.sqrt(dx*dx + dy*dy);
+    }
+
+    public static Vector2 fromMagnitudeAndDirection(double magnitude, double direction) {
+        return new Vector2(magnitude * Math.sin(Math.toRadians(direction)), -1 * magnitude * Math.cos(Math.toRadians(direction)));
     }
 }

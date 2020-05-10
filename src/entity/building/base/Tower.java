@@ -29,7 +29,10 @@ public abstract class Tower extends Building implements Updatable{
         extractData(towerData);
         this.level = level;
 
-        turretImage = new CellImage(towerData.spriteIndex);
+        if (towerData.name.contains("Rocket Tower"))
+            turretImage = new CellImage(Sprite.ROCKET_TURRET[level-1]);
+        else
+            turretImage = new CellImage(towerData.spriteIndex);
         this.getChildren().add(turret);
         turret.getChildren().add(turretImage);
 

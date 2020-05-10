@@ -25,11 +25,13 @@ public class GameController {
     private static final MinionWaveController WaveController = new MinionWaveController();
 
     private static final ArrayList<Updatable> updatables = new ArrayList<>();
+    private static final ArrayList<Updatable> garbageCollector = new ArrayList<>();
+    private static final ArrayList<Updatable> updatablesAddList = new ArrayList<>();
 
     private static final ArrayList<Minion> minions = new ArrayList<>();
-    private static final ArrayList<Updatable> garbageCollector = new ArrayList<>();
 
     public static final double minionSpeed = 48;
+    public static final double bulletSpeed = 192;
 
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
@@ -44,9 +46,11 @@ public class GameController {
             @Override
             public void handle(long currentNanoTime) {
                 double deltaTime = (currentNanoTime - lastFrameNanoTime) / 1000000000.0;
+
                 for (Updatable updatable : updatables) {
                     updatable.update(deltaTime);
                 }
+
                 for (Updatable garbage : garbageCollector) {
                     if (garbage instanceof Minion){
                         minions.remove(garbage);
@@ -66,14 +70,22 @@ public class GameController {
                     }
                 }
                 garbageCollector.clear();
+
+                updatables.addAll(updatablesAddList);
+                updatablesAddList.clear();
+
                 lastFrameNanoTime = currentNanoTime;
             }
         }.start();
         
     }
 
-    public static void removeUpdatable(Updatable minion) {
-        garbageCollector.add(minion);
+    public static void removeUpdatable(Updatable updatable) {
+        garbageCollector.add(updatable);
+    }
+
+    public static void addUpdatable(Updatable updatable) {
+        updatablesAddList.add(updatable);
     }
 
     public static void setSelectedTower(TowerCell tower) {
