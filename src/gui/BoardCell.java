@@ -1,7 +1,12 @@
 package gui;
 
+import entity.Updatable;
 import entity.building.Buildspot;
+import entity.building.CannonTower;
+import entity.building.MachineGunTower;
+import entity.building.RocketTower;
 import entity.building.base.Building;
+import entity.building.base.Tower;
 import exception.InvalidTowerException;
 import javafx.scene.layout.StackPane;
 import logic.GameController;
@@ -42,7 +47,10 @@ public class BoardCell extends StackPane {
 
     public void setBuilding(Building newBuilding) {
         if (building != null) {
-            GUIController.getGamePane().getChildren().remove(building);
+            if (building instanceof Tower)
+                GameController.removeUpdatable((Updatable) building);
+            else
+                GUIController.getGamePane().getChildren().remove(building);
         }
         building = newBuilding;
 
@@ -59,8 +67,20 @@ public class BoardCell extends StackPane {
             });
         } else {
             building.setOnMouseClicked(mouseEvent -> {
-                if (GameController.getSelectedTower().isTool()) {
+                if (GameController.getSelectedTower().getName().equals("Sell Tool")) {
                     this.setBuilding(new Buildspot(this));
+                } else if (GameController.getSelectedTower().getName().equals("Upgrade Tool") && ((Tower)building).getLevel() == 1) {
+                    switch (building.getClass().getName()) {
+                        case "entity.building.MachineGunTower" :
+                            this.setBuilding(new MachineGunTower(this, 2));
+                            break;
+                        case "entity.building.RocketTower" :
+                            this.setBuilding(new RocketTower(this, 2));
+                            break;
+                        case "entity.building.CannonTower" :
+                            this.setBuilding(new CannonTower(this, 2));
+                            break;
+                    }
                 }
             });
         }

@@ -27,7 +27,7 @@ public class GameController {
     private static final ArrayList<Updatable> updatables = new ArrayList<>();
 
     private static final ArrayList<Minion> minions = new ArrayList<>();
-    private static final ArrayList<Minion> garbageCollector = new ArrayList<>();
+    private static final ArrayList<Updatable> garbageCollector = new ArrayList<>();
 
     public static final double minionSpeed = 48;
 
@@ -47,13 +47,16 @@ public class GameController {
                 for (Updatable updatable : updatables) {
                     updatable.update(deltaTime);
                 }
-                for (Minion garbage : garbageCollector) {
-                    minions.remove(garbage);
-                    for (Updatable updatable : updatables) {
-                        if (updatable instanceof Tower && ((Tower) updatable).getCurrentTarget() == garbage) {
-                            ((Tower) updatable).setCurrentTarget(null);
-                            break;
+                for (Updatable garbage : garbageCollector) {
+                    if (garbage instanceof Minion){
+                        minions.remove(garbage);
+                        for (Updatable updatable : updatables) {
+                            if (updatable instanceof Tower && ((Tower) updatable).getCurrentTarget() == garbage) {
+                                ((Tower) updatable).setCurrentTarget(null);
+                                break;
+                            }
                         }
+
                     }
                     updatables.remove(garbage);
                     GUIController.getGamePane().getChildren().remove(garbage);
@@ -69,7 +72,7 @@ public class GameController {
         
     }
 
-    public static void removeMinion(Minion minion) {
+    public static void removeUpdatable(Updatable minion) {
         garbageCollector.add(minion);
     }
 

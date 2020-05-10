@@ -75,7 +75,7 @@ public abstract class Minion extends StackPane implements Updatable {
     public void changeDestination() {
         destinationIndex++;
         if (destinationIndex == path.size()) {
-            GameController.removeMinion(this);
+            GameController.removeUpdatable(this);
         }
         else {
             destination = path.get(destinationIndex);
@@ -159,7 +159,7 @@ public abstract class Minion extends StackPane implements Updatable {
         currentHealth -= damage;
         if (currentHealth <= 0) {
             // TODO: Increase money on death
-            GameController.removeMinion(this);
+            GameController.removeUpdatable(this);
         }
 
         healthBar.setProgress(currentHealth / maxHealth);

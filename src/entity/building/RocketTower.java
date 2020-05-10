@@ -7,7 +7,8 @@ import gui.BoardCell;
 
 public class RocketTower extends Tower {
     public RocketTower(BoardCell cell, int level) {
-        super(cell, Database.Rocket[level-1]);
+        super(cell, Database.Rocket[level-1], level);
+        System.out.println("CREATED TOWER: ROCKET LV." + level);
     }
 
     @Override

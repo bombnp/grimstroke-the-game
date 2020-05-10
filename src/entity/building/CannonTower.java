@@ -7,7 +7,8 @@ import gui.BoardCell;
 
 public class CannonTower extends Tower {
     public CannonTower(BoardCell cell, int level) {
-        super(cell, Database.Cannon[level-1]);
+        super(cell, Database.Cannon[level-1], level);
+        System.out.println("CREATED TOWER: CANNON LV." + level);
         this.turretImage.setTranslateY(-5);
     }
 

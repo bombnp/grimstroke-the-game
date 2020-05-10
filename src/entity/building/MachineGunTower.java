@@ -12,7 +12,8 @@ public class MachineGunTower extends Tower {
     private CellImage[] particles;
 
     public MachineGunTower(BoardCell cell, int level) {
-        super(cell, Database.MG[level-1]);
+        super(cell, Database.MG[level-1], level);
+        System.out.println("CREATED TOWER: MACHINE GUN LV." + level);
         this.turretImage.setTranslateY(-5);
 
         setupFiringParticle(level);

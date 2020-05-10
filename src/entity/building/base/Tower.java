@@ -22,9 +22,12 @@ public abstract class Tower extends Building implements Updatable{
     protected Pane turret = new Pane();
     protected CellImage turretImage;
 
-    public Tower(BoardCell cell, TowerData towerData) {
+    protected int level;
+
+    public Tower(BoardCell cell, TowerData towerData, int level) {
         super(cell, Sprite.getRandomTowerBase());
         extractData(towerData);
+        this.level = level;
 
         turretImage = new CellImage(towerData.spriteIndex);
         this.getChildren().add(turret);
@@ -123,4 +126,8 @@ public abstract class Tower extends Building implements Updatable{
     }
 
     public abstract void attack(Minion target);
+
+    public int getLevel() {
+        return level;
+    }
 }
