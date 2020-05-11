@@ -12,39 +12,36 @@ public abstract class Bullet extends CellImage implements Updatable {
     protected Vector2 currentPosition;
     protected final double damage;
 
-    public Bullet(Vector2 position, double rotation, int spriteIndex, double damage) {
+    // for RocketBullet
+    public Bullet(int spriteIndex, double damage) {
         super(spriteIndex);
-        this.currentPosition = position;
         this.damage = damage;
 
         GameController.addUpdatable(this);
         GUIController.getGamePane().getChildren().add(this);
 
         this.setCenter();
-        this.setX(position.getX());
-        this.setY(position.getY());
-        this.setRotate(rotation);
         this.setVisible(false);
     }
 
+    // for CannonBullet
     public Bullet(Vector2 position, double rotation, Minion target, int spriteIndex, double damage) {
         super(spriteIndex);
         this.currentPosition = position;
         this.target = target;
         this.damage = damage;
+        updatePosition();
 
         GameController.addUpdatable(this);
         GUIController.getGamePane().getChildren().add(this);
 
         this.setCenter();
-        this.setX(position.getX());
-        this.setY(position.getY());
         this.setRotate(rotation);
     }
 
-    public void setTarget(Minion target) {
-        this.target = target;
-        this.setVisible(true);
+    public void updatePosition() {
+        this.setX(currentPosition.getX());
+        this.setY(currentPosition.getY());
     }
 
     public void lookAt(Vector2 target) {
@@ -84,8 +81,7 @@ public abstract class Bullet extends CellImage implements Updatable {
 
         this.lookAt(target.getCurrentPosition());
 
-        this.setX(currentPosition.getX());
-        this.setY(currentPosition.getY());
+        updatePosition();
     }
 
     public void move(double deltaTime, Vector2 destination) {

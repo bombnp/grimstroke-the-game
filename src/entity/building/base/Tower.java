@@ -88,6 +88,18 @@ public abstract class Tower extends Building implements Updatable{
             lookAt(currentTarget.getCurrentPosition());
         }
 
+//        if (this instanceof RocketTower) {
+//            switch (level) {
+//                case 1:
+//                    ((RocketTower) this).setupRocket();
+//                    break;
+//                case 2:
+//                    ((RocketTower) this).setupRocket(RocketTower.RocketSide.LEFT);
+//                    ((RocketTower) this).setupRocket(RocketTower.RocketSide.RIGHT);
+//                    break;
+//            }
+//        }
+
         cooldown -= deltaTime;
         if (cooldown < 0)
             cooldown = 0;

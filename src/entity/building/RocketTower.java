@@ -19,7 +19,7 @@ public class RocketTower extends Tower {
 
     private final double ROCKET_ALPHA = 54.462;
 
-    enum RocketSide {
+    public enum RocketSide {
         LEFT,
         RIGHT
     }
@@ -33,7 +33,7 @@ public class RocketTower extends Tower {
                 rocketBulletImage = new CellImage(Sprite.ROCKET[0]);
                 rocketBulletImage.setTranslateY(-5);
                 this.turret.getChildren().add(rocketBulletImage);
-                setupRocket();
+                new Invoker(this::setupRocket).startIn(1);
                 break;
             case 2:
                 rocketLeftImage = new CellImage(Sprite.ROCKET[1]);
@@ -45,26 +45,28 @@ public class RocketTower extends Tower {
                 rocketRightImage.setTranslateY(-5);
 
                 this.turret.getChildren().addAll(rocketLeftImage, rocketRightImage);
-                setupRocket(RocketSide.LEFT);
-                setupRocket(RocketSide.RIGHT);
+                new Invoker(() -> {
+                    setupRocket(RocketSide.LEFT);
+                    setupRocket(RocketSide.RIGHT);
+                }).startIn(1);
                 break;
         }
 
     }
 
-    private void setupRocket() {
-        rocketBullet = new RocketBullet(this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(5, this.turret.getRotate())), this.turret.getRotate(), this.level, this.getDamage());
+    public void setupRocket() {
+        rocketBullet = new RocketBullet(this.level, this.getDamage());
         rocketBulletImage.setVisible(true);
     }
 
-    private void setupRocket(RocketSide side) {
+    public void setupRocket(RocketSide side) {
         switch (side) {
             case LEFT:
-                rocketLeft = new RocketBullet(this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()- ROCKET_ALPHA)), this.turret.getRotate(), this.level, this.getDamage());
+                rocketLeft = new RocketBullet(this.level, this.getDamage());
                 rocketLeftImage.setVisible(true);
                 break;
             case RIGHT:
-                rocketRight = new RocketBullet(this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()+ ROCKET_ALPHA)), this.turret.getRotate(), this.level, this.getDamage());
+                rocketRight = new RocketBullet(this.level, this.getDamage());
                 rocketRightImage.setVisible(true);
                 break;
         }
@@ -74,7 +76,7 @@ public class RocketTower extends Tower {
     public void attack(Minion target) {
         switch(this.level) {
             case 1:
-                rocketBullet.setTarget(target);
+                rocketBullet.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(5, this.turret.getRotate())), this.turret.getRotate());
                 rocketBullet = null;
                 rocketBulletImage.setVisible(false);
 
@@ -83,13 +85,13 @@ public class RocketTower extends Tower {
                 break;
             case 2:
                 if (rocketLeft != null) {
-                    rocketLeft.setTarget(target);
+                    rocketLeft.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()-ROCKET_ALPHA)), this.turret.getRotate());
                     rocketLeft = null;
                     rocketLeftImage.setVisible(false);
 
                     new Invoker(() -> setupRocket(RocketSide.LEFT)).startIn((long) ((7.0/5)*(1/rateOfFire)*(1000)));
                 } else if (rocketRight != null) {
-                    rocketRight.setTarget(target);
+                    rocketRight.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()+ROCKET_ALPHA)), this.turret.getRotate());
                     rocketRight = null;
                     rocketRightImage.setVisible(false);
 
