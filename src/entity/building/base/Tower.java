@@ -1,6 +1,7 @@
 package entity.building.base;
 
 import database.TowerData;
+import debug.Debug;
 import entity.Updatable;
 import entity.building.MachineGunTower;
 import entity.minion.base.Minion;
@@ -38,6 +39,8 @@ public abstract class Tower extends Building implements Updatable{
         turret.getChildren().add(turretImage);
 
         GameController.getUpdatables().add(this);
+
+        Debug.drawTowerRange(this);
     }
 
     public void extractData(TowerData towerData) {
@@ -122,7 +125,7 @@ public abstract class Tower extends Building implements Updatable{
         }
     }
 
-    public double randomizeDamage() {
+    public double getDamage() {
         Random randomizer = new Random();
         return randomizer.nextDouble() * (maxDamage-minDamage) + minDamage;
     }
@@ -139,5 +142,9 @@ public abstract class Tower extends Building implements Updatable{
 
     public int getLevel() {
         return level;
+    }
+
+    public double getRange() {
+        return range;
     }
 }

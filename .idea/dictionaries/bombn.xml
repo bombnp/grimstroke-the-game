@@ -2,6 +2,7 @@
   <dictionary name="bombn">
     <words>
       <w>cooldown</w>
+      <w>targetable</w>
       <w>tileset</w>
       <w>updatable</w>
       <w>updatables</w>

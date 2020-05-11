@@ -63,7 +63,7 @@ public abstract class Minion extends StackPane implements Updatable {
 
     public void setHealthBar() {
         healthBar = new ProgressBar(1);
-        healthBar.setPrefWidth(48);
+        healthBar.setPrefWidth(24);
         healthBar.setPrefHeight(12);
         healthBar.setTranslateY(-24);
         healthBar.setVisible(false);

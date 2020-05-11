@@ -1,5 +1,6 @@
 package gui;
 
+import debug.Debug;
 import entity.Updatable;
 import entity.building.Buildspot;
 import entity.building.CannonTower;
@@ -47,8 +48,10 @@ public class BoardCell extends StackPane {
 
     public void setBuilding(Building newBuilding) {
         if (building != null) {
-            if (building instanceof Tower)
+            if (building instanceof Tower) {
                 GameController.removeUpdatable((Updatable) building);
+                Debug.removeTowerRange((Tower) building);
+            }
             this.getChildren().remove(building);
         }
         building = newBuilding;

@@ -57,6 +57,6 @@ public class MachineGunTower extends Tower {
         });
         enableParticle.start();
 
-        target.takeDamage(randomizeDamage(), DamageType.MG);
+        target.takeDamage(getDamage(), DamageType.MG);
     }
 }
