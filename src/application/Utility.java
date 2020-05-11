@@ -51,4 +51,12 @@ public class Utility {
         int row = spriteIndex/23, col = spriteIndex%23;
         return new WritableImage(tileset.getPixelReader(), col*128, row*128, 128, 128);
     }
+
+    public static Image[] getAnimation(String animationName, int frameCount) {
+        Image[] animation = new Image[frameCount];
+        for (int i = 0; i < frameCount; i++) {
+            animation[i] = new Image(String.format("animation/%s/%s_%d.png", animationName, animationName, i));
+        }
+        return animation;
+    }
 }

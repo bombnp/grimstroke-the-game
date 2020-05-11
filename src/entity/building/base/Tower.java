@@ -2,6 +2,7 @@ package entity.building.base;
 
 import database.TowerData;
 import entity.Updatable;
+import entity.building.MachineGunTower;
 import entity.minion.base.Minion;
 import gui.BoardCell;
 import gui.CellImage;
@@ -94,8 +95,14 @@ public abstract class Tower extends Building implements Updatable{
         }
     }
 
-    public boolean isMinionInRange(Minion minion) {
-        return Vector2.distance(this.getCenterPosition(), minion.getCurrentPosition()) <= range;
+    public boolean isMinionTargetable(Minion minion) {
+        if (Vector2.distance(this.getCenterPosition(), minion.getCurrentPosition()) <= range) {
+            if (minion.isFlying()) {
+                return this instanceof MachineGunTower;
+            }
+            return true;
+        }
+        return false;
     }
 
     public void findNewTarget() {
@@ -103,7 +110,7 @@ public abstract class Tower extends Building implements Updatable{
         currentTarget = null;
 
         for (Minion minion : minions) {
-            if (isMinionInRange(minion)) {
+            if (isMinionTargetable(minion)) {
                 if (currentTarget == null) {
                     currentTarget = minion;
                 } else if (minion.getDestinationIndex() > currentTarget.getDestinationIndex()) {

@@ -1,7 +1,7 @@
-203,Machine Gun Tower,20,40,2,200
-226,Machine Gun Tower Lv. 2,0,0,3,250
-206,Rocket Tower,0,0,0.5,200
-205,Rocket Tower Lv. 2,0,0,1,300
-249,Cannon Tower,0,0,0.5,100
-250,Cannon Tower Lv. 2,0,0,1,100
+203,Machine Gun Tower,20,30,2,200
+226,Machine Gun Tower Lv. 2,30,40,3,250
+206,Rocket Tower,50,70,0.5,200
+205,Rocket Tower Lv. 2,50,70,1,300
+249,Cannon Tower,100,120,0.5,100
+250,Cannon Tower Lv. 2,150,200,0.75,100
 (SPRITE), (NAME), (MIN_DAMAGE), (MAX_DAMAGE), (RATE_OF_FIRE), (RANGE)

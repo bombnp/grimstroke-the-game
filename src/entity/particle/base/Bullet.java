@@ -18,11 +18,11 @@ public abstract class Bullet extends CellImage implements Updatable {
         GameController.addUpdatable(this);
         GUIController.getGamePane().getChildren().add(this);
 
-        this.setTranslateX(-24);
-        this.setTranslateY(-24);
+        this.setCenter();
         this.setX(currentPosition.getX());
         this.setY(currentPosition.getY());
         this.setRotate(currentRotation);
+        this.setVisible(false);
     }
 
     public Bullet(Vector2 currentPosition, double currentRotation, Minion target, int spriteIndex) {
@@ -33,8 +33,7 @@ public abstract class Bullet extends CellImage implements Updatable {
         GameController.getUpdatables().add(this);
         GUIController.getGamePane().getChildren().add(this);
 
-        this.setTranslateX(-24);
-        this.setTranslateY(-24);
+        this.setCenter();
         this.setX(currentPosition.getX());
         this.setY(currentPosition.getY());
         this.setRotate(currentRotation);
@@ -42,6 +41,7 @@ public abstract class Bullet extends CellImage implements Updatable {
 
     public void setTarget(Minion target) {
         this.target = target;
+        this.setVisible(true);
     }
 
     public void lookAt(Vector2 target) {

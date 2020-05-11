@@ -21,6 +21,7 @@ public abstract class Minion extends StackPane implements Updatable {
 
     private int reward;
     private double maxHealth, currentHealth, speed, resist_MG,resist_Rocket,resist_Cannon;
+    private boolean isFlying;
 
     private ProgressBar healthBar;
     private final CellImage minionImage;
@@ -57,6 +58,7 @@ public abstract class Minion extends StackPane implements Updatable {
         this.resist_MG = minionData.resist_MG;
         this.resist_Rocket = minionData.resist_Rocket;
         this.resist_Cannon = minionData.resist_Cannon;
+        this.isFlying = minionData.isFlying;
     }
 
     public void setHealthBar() {
@@ -165,4 +167,9 @@ public abstract class Minion extends StackPane implements Updatable {
         healthBar.setProgress(currentHealth / maxHealth);
         healthBar.setVisible(true);
     }
+
+    public boolean isFlying() {
+        return isFlying;
+    }
+
 }

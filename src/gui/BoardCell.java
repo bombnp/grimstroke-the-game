@@ -29,7 +29,7 @@ public class BoardCell extends StackPane {
         addImage(bgSprite);
         hoverImage = addImage(new CellImage("images/hoverImage.png"));
         hoverImage.setMouseTransparent(true);
-        hoverImage.disable();
+        hoverImage.setVisible(false);
     }
 
     public void addImage(int spriteIndex) {
@@ -49,16 +49,15 @@ public class BoardCell extends StackPane {
         if (building != null) {
             if (building instanceof Tower)
                 GameController.removeUpdatable((Updatable) building);
-            else
-                GUIController.getGamePane().getChildren().remove(building);
+            this.getChildren().remove(building);
         }
         building = newBuilding;
 
-        building.setOnMouseEntered(mouseEvent -> hoverImage.enable());
-        building.setOnMouseExited(mouseEvent -> hoverImage.disable());
+        this.setOnMouseEntered(mouseEvent -> hoverImage.setVisible(true));
+        this.setOnMouseExited(mouseEvent -> hoverImage.setVisible(false));
 
         if (building instanceof Buildspot) {
-            building.setOnMouseClicked(mouseEvent -> {
+            this.setOnMouseClicked(mouseEvent -> {
                 try {
                     this.setBuilding(GameController.generateSelectedTower(this));
                 } catch (InvalidTowerException ignored) {
@@ -66,7 +65,7 @@ public class BoardCell extends StackPane {
                 }
             });
         } else {
-            building.setOnMouseClicked(mouseEvent -> {
+            this.setOnMouseClicked(mouseEvent -> {
                 if (GameController.getSelectedTower().getName().equals("Sell Tool")) {
                     this.setBuilding(new Buildspot(this));
                 } else if (GameController.getSelectedTower().getName().equals("Upgrade Tool") && ((Tower)building).getLevel() == 1) {
@@ -85,7 +84,7 @@ public class BoardCell extends StackPane {
             });
         }
 
-        GUIController.getGamePane().getChildren().add(building);
+        this.getChildren().add(building);
 
         // make hoverImage always on top
         reAddHoverImage();

@@ -5,30 +5,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CellImage extends ImageView {
-
-    private final Image image;
-
     public CellImage(int spriteIndex) {
-        image = Utility.getSprite(spriteIndex);
-        this.setImage(image);
+        this.setImage(Utility.getSprite(spriteIndex));
 
         this.setFitWidth(48);
         this.setFitHeight(48);
     }
 
     public CellImage(String imageName) {
-        image = new Image(imageName);
-        this.setImage(image);
+        this.setImage(new Image(imageName));
 
         this.setFitWidth(48);
         this.setFitHeight(48);
     }
 
-    public void enable() {
-        this.setImage(image);
+    public CellImage() {
+        this.setFitWidth(48);
+        this.setFitHeight(48);
     }
 
-    public void disable() {
-        this.setImage(null);
+    public void setCenter() {
+        this.setTranslateX(-24);
+        this.setTranslateY(-24);
     }
 }

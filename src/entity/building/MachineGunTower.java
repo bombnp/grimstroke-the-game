@@ -35,7 +35,7 @@ public class MachineGunTower extends Tower {
             particle.setTranslateY(-33);
             particle.setScaleX(0.7);
             particle.setScaleY(0.7);
-            particle.disable();
+            particle.setVisible(false);
             this.turret.getChildren().add(particle);
         }
     }
@@ -44,7 +44,7 @@ public class MachineGunTower extends Tower {
     public void attack(Minion target) {
         Thread enableParticle = new Thread(() -> {
             for (CellImage particle : particles) {
-                particle.enable();
+                particle.setVisible(true);
             }
             try {
                 Thread.sleep(100);
@@ -52,7 +52,7 @@ public class MachineGunTower extends Tower {
                 e.printStackTrace();
             }
             for (CellImage particle : particles) {
-                particle.disable();
+                particle.setVisible(false);
             }
         });
         enableParticle.start();

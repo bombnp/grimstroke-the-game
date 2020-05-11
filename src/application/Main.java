@@ -19,6 +19,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("GrimStroke");
         primaryStage.setScene(new Scene(root));
+//        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setResizable(false);
         primaryStage.show();
     }

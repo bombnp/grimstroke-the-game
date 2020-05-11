@@ -17,6 +17,7 @@ public abstract class Building extends StackPane{
         this.setLayoutX(centerPosition.getX()-24);
         this.setLayoutY(centerPosition.getY()-24);
         this.getChildren().add(baseImage);
+        this.setMouseTransparent(true);
     }
 
     public Vector2 getCenterPosition() {

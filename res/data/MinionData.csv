@@ -1,7 +1,7 @@
 245,Conscript,Basic ground unit,1,100,1,0,0,0,FALSE
 246,Armored Conscript,Ground unit with moderate damage resistance,3,100,0.6,0.30,0.225,0.15,FALSE
 247,Infantry,Fast ground unit,2,100,1.2,0.20,0.15,0.10,FALSE
-248,Combat Medic,Ground unit that can heal nearby allies,3,100,1,0.10,0.80,0.50,FALSE
+248,Combat Medic,Ground unit that can heal nearby allies,3,100,1,0.10,0.20,0,FALSE
 268,Light Tank,Fast and fragile tank,5,100,1.25,0.65,0.40,0.25,FALSE
 269,Heavy Tank,Slow but sturdy tank,8,100,0.5,0.95,0.75,0.50,FALSE
 270,Light Plane,Fast and only takes damage from machine gun,4,100,1.4,0.25,1.00,1.00,TRUE
