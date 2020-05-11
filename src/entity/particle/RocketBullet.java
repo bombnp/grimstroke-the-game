@@ -12,20 +12,18 @@ import java.util.ArrayList;
 
 public class RocketBullet extends Bullet {
     private final int level;
-    private final double damage;
     private final double[] explosionScale = {1.25, 1.5};
 
-    public RocketBullet(Vector2 currentPosition, double currentRotation, int level, double damage) {
-        super(currentPosition, currentRotation, Sprite.ROCKET[level-1]);
+    public RocketBullet(Vector2 position, double rotation, int level, double damage) {
+        super(position, rotation, Sprite.ROCKET[level-1], damage);
         this.level = level;
-        this.damage = damage;
     }
 
     private void damageMinionsInRange(double range) {
         ArrayList<Minion> minions = GameController.getMinions();
         for (Minion minion : minions) {
             if (!minion.isFlying() && Vector2.distance(this.currentPosition, minion.getCurrentPosition()) <= range) {
-                minion.takeDamage(damage, DamageType.Rocket);
+                minion.takeDamage(this.damage, DamageType.Rocket);
             }
         }
     }

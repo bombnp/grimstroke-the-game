@@ -10,33 +10,36 @@ import logic.Vector2;
 public abstract class Bullet extends CellImage implements Updatable {
     protected Minion target;
     protected Vector2 currentPosition;
+    protected final double damage;
 
-    public Bullet(Vector2 currentPosition, double currentRotation, int spriteIndex) {
+    public Bullet(Vector2 position, double rotation, int spriteIndex, double damage) {
         super(spriteIndex);
-        this.currentPosition = currentPosition;
+        this.currentPosition = position;
+        this.damage = damage;
 
         GameController.addUpdatable(this);
         GUIController.getGamePane().getChildren().add(this);
 
         this.setCenter();
-        this.setX(currentPosition.getX());
-        this.setY(currentPosition.getY());
-        this.setRotate(currentRotation);
+        this.setX(position.getX());
+        this.setY(position.getY());
+        this.setRotate(rotation);
         this.setVisible(false);
     }
 
-    public Bullet(Vector2 currentPosition, double currentRotation, Minion target, int spriteIndex) {
+    public Bullet(Vector2 position, double rotation, Minion target, int spriteIndex, double damage) {
         super(spriteIndex);
-        this.currentPosition = currentPosition;
+        this.currentPosition = position;
         this.target = target;
+        this.damage = damage;
 
-        GameController.getUpdatables().add(this);
+        GameController.addUpdatable(this);
         GUIController.getGamePane().getChildren().add(this);
 
         this.setCenter();
-        this.setX(currentPosition.getX());
-        this.setY(currentPosition.getY());
-        this.setRotate(currentRotation);
+        this.setX(position.getX());
+        this.setY(position.getY());
+        this.setRotate(rotation);
     }
 
     public void setTarget(Minion target) {

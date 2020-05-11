@@ -7,6 +7,7 @@ public class Sprite {
 
     public static final int BUILD_SPOT = 16;
     public static final int[] TOWER_BASE = {181, 182};
+    public static final int CANNON_BULLET = 272;
     public static final int MG_FIRE = 295;
     public static final int CANNON_FIRE = 296;
     public static final int[] ROCKET_TURRET = {229, 228};

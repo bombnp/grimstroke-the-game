@@ -60,11 +60,11 @@ public class RocketTower extends Tower {
     private void setupRocket(RocketSide side) {
         switch (side) {
             case LEFT:
-                rocketLeft = new RocketBullet(this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()-ROCKET_ALPHA)), this.turret.getRotate(), this.level, this.getDamage());
+                rocketLeft = new RocketBullet(this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()- ROCKET_ALPHA)), this.turret.getRotate(), this.level, this.getDamage());
                 rocketLeftImage.setVisible(true);
                 break;
             case RIGHT:
-                rocketRight = new RocketBullet(this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()+ROCKET_ALPHA)), this.turret.getRotate(), this.level, this.getDamage());
+                rocketRight = new RocketBullet(this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()+ ROCKET_ALPHA)), this.turret.getRotate(), this.level, this.getDamage());
                 rocketRightImage.setVisible(true);
                 break;
         }

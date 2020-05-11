@@ -7,6 +7,7 @@ import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
 import logic.DamageType;
+import logic.Invoker;
 
 public class MachineGunTower extends Tower {
     private CellImage[] particles;
@@ -42,20 +43,14 @@ public class MachineGunTower extends Tower {
 
     @Override
     public void attack(Minion target) {
-        Thread enableParticle = new Thread(() -> {
-            for (CellImage particle : particles) {
-                particle.setVisible(true);
-            }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        for (CellImage particle : particles) {
+            particle.setVisible(true);
+        }
+        new Invoker(() -> {
             for (CellImage particle : particles) {
                 particle.setVisible(false);
             }
-        });
-        enableParticle.start();
+        }).startIn(100);
 
         target.takeDamage(getDamage(), DamageType.MG);
     }

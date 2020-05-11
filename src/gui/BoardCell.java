@@ -52,7 +52,7 @@ public class BoardCell extends StackPane {
                 GameController.removeUpdatable((Updatable) building);
                 Debug.removeTowerRange((Tower) building);
             }
-            this.getChildren().remove(building);
+            GUIController.getGamePane().getChildren().remove(building);
         }
         building = newBuilding;
 
@@ -63,8 +63,8 @@ public class BoardCell extends StackPane {
             this.setOnMouseClicked(mouseEvent -> {
                 try {
                     this.setBuilding(GameController.generateSelectedTower(this));
-                } catch (InvalidTowerException ignored) {
-
+                } catch (InvalidTowerException e) {
+                    e.printStackTrace();
                 }
             });
         } else {
@@ -87,7 +87,7 @@ public class BoardCell extends StackPane {
             });
         }
 
-        this.getChildren().add(building);
+        GUIController.getGamePane().getChildren().add(building);
 
         // make hoverImage always on top
         reAddHoverImage();

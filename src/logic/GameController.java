@@ -57,7 +57,6 @@ public class GameController {
                         for (Updatable updatable : updatables) {
                             if (updatable instanceof Tower && ((Tower) updatable).getCurrentTarget() == garbage) {
                                 ((Tower) updatable).setCurrentTarget(null);
-                                break;
                             }
                         }
 
