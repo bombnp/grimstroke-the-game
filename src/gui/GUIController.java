@@ -28,7 +28,6 @@ public class GUIController {
         controlPane = new ControlPane();
         gamePane = new GamePane();
         boardGrid = gamePane.getBoardGrid();
-
         root = new HBox(controlPane, gamePane);
         root.setPadding(new Insets(10));
         root.setSpacing(10);

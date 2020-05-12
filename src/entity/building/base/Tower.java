@@ -7,6 +7,7 @@ import entity.building.MachineGunTower;
 import entity.minion.base.Minion;
 import gui.BoardCell;
 import gui.CellImage;
+import gui.GamePane;
 import gui.Sprite;
 import javafx.scene.layout.Pane;
 import logic.GameController;
@@ -20,6 +21,7 @@ public abstract class Tower extends Building implements Updatable{
     protected double rateOfFire, range;
     protected Minion currentTarget;
     protected double cooldown = 0;
+    protected int cost;
 
     protected Pane turret = new Pane();
     protected CellImage turretImage;
@@ -30,6 +32,8 @@ public abstract class Tower extends Building implements Updatable{
         super(cell, Sprite.getRandomTowerBase());
         extractData(towerData);
         this.level = level;
+        
+        GameController.ModifyMoney(-1*cost);
 
         if (towerData.name.contains("Rocket Tower"))
             turretImage = new CellImage(Sprite.ROCKET_TURRET[level-1]);
@@ -48,6 +52,7 @@ public abstract class Tower extends Building implements Updatable{
         this.maxDamage = towerData.maxDamage;
         this.rateOfFire = towerData.rateOfFire;
         this.range = towerData.range;
+        this.cost = towerData.cost;
     }
 
     public void lookAt(Vector2 target) {

@@ -1,5 +1,6 @@
 package gui;
 
+import database.Database;
 import debug.Debug;
 import entity.Updatable;
 import entity.building.Buildspot;
@@ -62,7 +63,10 @@ public class BoardCell extends StackPane {
         if (building instanceof Buildspot) {
             this.setOnMouseClicked(mouseEvent -> {
                 try {
-                    this.setBuilding(GameController.generateSelectedTower(this));
+                	if(GameController.getCurrentMoney() < GameController.getSelectedTower().getCost())
+                		GamePane.playerStatusPane.InvokeInsufficinetGold();
+                	else
+                		this.setBuilding(GameController.generateSelectedTower(this));
                 } catch (InvalidTowerException e) {
                     e.printStackTrace();
                 }
@@ -74,13 +78,22 @@ public class BoardCell extends StackPane {
                 } else if (GameController.getSelectedTower().getName().equals("Upgrade Tool") && ((Tower)building).getLevel() == 1) {
                     switch (building.getClass().getName()) {
                         case "entity.building.MachineGunTower" :
-                            this.setBuilding(new MachineGunTower(this, 2));
+                        	if(GameController.getCurrentMoney() < Database.MG[((Tower)building).getLevel()].cost)
+                        		GamePane.playerStatusPane.InvokeInsufficinetGold();
+                        	else
+                        		this.setBuilding(new MachineGunTower(this, 2));
                             break;
                         case "entity.building.RocketTower" :
-                            this.setBuilding(new RocketTower(this, 2));
+                        	if(GameController.getCurrentMoney() < Database.Rocket[((Tower)building).getLevel()].cost)
+                        		GamePane.playerStatusPane.InvokeInsufficinetGold();
+                        	else
+                        		this.setBuilding(new RocketTower(this, 2));
                             break;
                         case "entity.building.CannonTower" :
-                            this.setBuilding(new CannonTower(this, 2));
+                        	if(GameController.getCurrentMoney() < Database.Cannon[((Tower)building).getLevel()].cost)
+                        		GamePane.playerStatusPane.InvokeInsufficinetGold();
+                        	else
+                        		this.setBuilding(new CannonTower(this, 2));
                             break;
                     }
                 }
