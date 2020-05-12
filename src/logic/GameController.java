@@ -2,21 +2,20 @@ package logic;
 
 import application.Utility;
 import entity.Updatable;
-import entity.building.CannonTower;
-import entity.building.MachineGunTower;
-import entity.building.RocketTower;
-import entity.building.base.Tower;
 import entity.minion.base.Minion;
+import entity.tower.CannonTower;
+import entity.tower.MachineGunTower;
+import entity.tower.RocketTower;
+import entity.tower.base.Tower;
 import exception.InvalidTowerException;
-import gui.BoardCell;
-import gui.GUIController;
-import gui.TowerCell;
+import gui.*;
 import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
 
 public class GameController {
-    private static GameMap gameMap;
+    public static final double minionSpeed = 48;
+    public static final double bulletSpeed = 192;
 
     private static TowerCell selectedTower;
 
@@ -30,13 +29,10 @@ public class GameController {
 
     private static final ArrayList<Minion> minions = new ArrayList<>();
 
-    public static final double minionSpeed = 48;
-    public static final double bulletSpeed = 192;
-
     public static void initialize(String mapName) {
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
-        gameMap = new GameMap(mapCSV, decorCSV);
+        initializeMap(mapCSV, decorCSV);
 
         minionPath = Utility.readMinionPath("map/" + mapName + "_MinionPath.csv");
         
@@ -62,6 +58,7 @@ public class GameController {
 
                     }
                     updatables.remove(garbage);
+                    //noinspection SuspiciousMethodCalls
                     GUIController.getGamePane().getChildren().remove(garbage);
 
                     if (minions.isEmpty()) {
@@ -77,6 +74,25 @@ public class GameController {
             }
         }.start();
         
+    }
+
+    public static void initializeMap(String[][] mapCSV, String[][] decorCSV) {
+        int height = mapCSV.length;
+        int width = mapCSV[0].length;
+
+        BoardGrid boardGrid = GUIController.getBoardGrid().initialize(width, height);
+
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                int mapSprite = Integer.parseInt(mapCSV[row][col]);
+                int decorSprite = Integer.parseInt(decorCSV[row][col]);
+
+                BoardCell cell = boardGrid.addCell(mapSprite, row, col, decorSprite == Sprite.BUILD_SPOT);
+                if (decorSprite != -1 && decorSprite != Sprite.BUILD_SPOT) {
+                    cell.addImage(decorSprite);
+                }
+            }
+        }
     }
 
     public static void removeUpdatable(Updatable updatable) {

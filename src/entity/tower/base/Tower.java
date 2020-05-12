@@ -1,25 +1,27 @@
-package entity.building.base;
+package entity.tower.base;
 
 import database.TowerData;
 import debug.Debug;
 import entity.Updatable;
-import entity.building.MachineGunTower;
 import entity.minion.base.Minion;
+import entity.tower.MachineGunTower;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import logic.GameController;
 import logic.Vector2;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Tower extends Building implements Updatable{
+public abstract class Tower extends StackPane implements Updatable{
     protected double minDamage, maxDamage;
     protected double rateOfFire, range;
-    protected Minion currentTarget;
     protected double cooldown = 0;
+    protected final Vector2 centerPosition;
+    protected Minion currentTarget;
 
     protected Pane turret = new Pane();
     protected CellImage turretImage;
@@ -27,16 +29,22 @@ public abstract class Tower extends Building implements Updatable{
     protected int level;
 
     public Tower(BoardCell cell, TowerData towerData, int level) {
-        super(cell, Sprite.getRandomTowerBase());
         extractData(towerData);
+
+        this.centerPosition = new Vector2(cell.getCol()*48 + 24, cell.getRow()*48 + 24);
         this.level = level;
 
+        this.setLayoutX(centerPosition.getX()-24);
+        this.setLayoutY(centerPosition.getY()-24);
+        this.setMouseTransparent(true);
+
+        this.getChildren().add(new CellImage(Sprite.getRandomTowerBase()));
         if (towerData.name.contains("Rocket Tower"))
             turretImage = new CellImage(Sprite.ROCKET_TURRET[level-1]);
         else
             turretImage = new CellImage(towerData.spriteIndex);
-        this.getChildren().add(turret);
         turret.getChildren().add(turretImage);
+        this.getChildren().add(turret);
 
         GameController.getUpdatables().add(this);
 
@@ -87,18 +95,6 @@ public abstract class Tower extends Building implements Updatable{
         if (currentTarget != null) {
             lookAt(currentTarget.getCurrentPosition());
         }
-
-//        if (this instanceof RocketTower) {
-//            switch (level) {
-//                case 1:
-//                    ((RocketTower) this).setupRocket();
-//                    break;
-//                case 2:
-//                    ((RocketTower) this).setupRocket(RocketTower.RocketSide.LEFT);
-//                    ((RocketTower) this).setupRocket(RocketTower.RocketSide.RIGHT);
-//                    break;
-//            }
-//        }
 
         cooldown -= deltaTime;
         if (cooldown < 0)
@@ -158,5 +154,9 @@ public abstract class Tower extends Building implements Updatable{
 
     public double getRange() {
         return range;
+    }
+
+    public Vector2 getCenterPosition() {
+        return centerPosition;
     }
 }

@@ -1,9 +1,9 @@
-package entity.building;
+package entity.tower;
 
 import database.Database;
-import entity.building.base.Tower;
 import entity.minion.base.Minion;
 import entity.particle.CannonBullet;
+import entity.tower.base.Tower;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;

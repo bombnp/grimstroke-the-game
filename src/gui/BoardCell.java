@@ -1,26 +1,23 @@
 package gui;
 
 import debug.Debug;
-import entity.Updatable;
-import entity.building.Buildspot;
-import entity.building.CannonTower;
-import entity.building.MachineGunTower;
-import entity.building.RocketTower;
-import entity.building.base.Building;
-import entity.building.base.Tower;
+import entity.tower.CannonTower;
+import entity.tower.MachineGunTower;
+import entity.tower.RocketTower;
+import entity.tower.base.Tower;
 import exception.InvalidTowerException;
 import javafx.scene.layout.StackPane;
 import logic.GameController;
 
 public class BoardCell extends StackPane {
 
-    private Building building;
+    private Tower tower;
 
     private final int row, col;
 
-    private final CellImage hoverImage;
+    private CellImage hoverImage;
 
-    public BoardCell(int bgSprite, int row, int col) {
+    public BoardCell(int bgSprite, int row, int col, boolean buildable) {
         this.setPrefWidth(48);
         this.setPrefHeight(48);
 
@@ -28,9 +25,23 @@ public class BoardCell extends StackPane {
         this.col = col;
 
         addImage(bgSprite);
-        hoverImage = addImage(new CellImage("images/hoverImage.png"));
-        hoverImage.setMouseTransparent(true);
-        hoverImage.setVisible(false);
+
+        if (buildable) {
+            hoverImage = addImage(new CellImage("images/hoverImage.png"));
+            hoverImage.setMouseTransparent(true);
+            hoverImage.setVisible(false);
+
+            this.setOnMouseEntered(mouseEvent -> hoverImage.setVisible(true));
+            this.setOnMouseExited(mouseEvent -> hoverImage.setVisible(false));
+
+            this.setOnMouseClicked(mouseEvent -> {
+                try {
+                    this.setTower(GameController.generateSelectedTower(this));
+                } catch (InvalidTowerException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 
     public void addImage(int spriteIndex) {
@@ -42,60 +53,38 @@ public class BoardCell extends StackPane {
         return cellImage;
     }
 
-    public Building getBuilding() {
-        return building;
+    public void removeBuilding() {
+        GameController.removeUpdatable(tower);
+        GUIController.getGamePane().getChildren().remove(tower);
+        Debug.removeTowerRange(tower);
     }
 
-    public void setBuilding(Building newBuilding) {
-        if (building != null) {
-            if (building instanceof Tower) {
-                GameController.removeUpdatable((Updatable) building);
-                Debug.removeTowerRange((Tower) building);
+    public void setTower(Tower newTower) {
+        if (tower != null) {
+            removeBuilding();
+        }
+
+        tower = newTower;
+
+        this.setOnMouseClicked(mouseEvent -> {
+            if (GameController.getSelectedTower().getName().equals("Sell Tool")) {
+                removeBuilding();
+            } else if (GameController.getSelectedTower().getName().equals("Upgrade Tool") && tower.getLevel() == 1) {
+                switch (tower.getClass().getName()) {
+                    case "entity.tower.MachineGunTower" :
+                        setTower(new MachineGunTower(this, 2));
+                        break;
+                    case "entity.tower.RocketTower" :
+                        setTower(new RocketTower(this, 2));
+                        break;
+                    case "entity.tower.CannonTower" :
+                        setTower(new CannonTower(this, 2));
+                        break;
+                }
             }
-            GUIController.getGamePane().getChildren().remove(building);
-        }
-        building = newBuilding;
+        });
 
-        this.setOnMouseEntered(mouseEvent -> hoverImage.setVisible(true));
-        this.setOnMouseExited(mouseEvent -> hoverImage.setVisible(false));
-
-        if (building instanceof Buildspot) {
-            this.setOnMouseClicked(mouseEvent -> {
-                try {
-                    this.setBuilding(GameController.generateSelectedTower(this));
-                } catch (InvalidTowerException e) {
-                    e.printStackTrace();
-                }
-            });
-        } else {
-            this.setOnMouseClicked(mouseEvent -> {
-                if (GameController.getSelectedTower().getName().equals("Sell Tool")) {
-                    this.setBuilding(new Buildspot(this));
-                } else if (GameController.getSelectedTower().getName().equals("Upgrade Tool") && ((Tower)building).getLevel() == 1) {
-                    switch (building.getClass().getName()) {
-                        case "entity.building.MachineGunTower" :
-                            this.setBuilding(new MachineGunTower(this, 2));
-                            break;
-                        case "entity.building.RocketTower" :
-                            this.setBuilding(new RocketTower(this, 2));
-                            break;
-                        case "entity.building.CannonTower" :
-                            this.setBuilding(new CannonTower(this, 2));
-                            break;
-                    }
-                }
-            });
-        }
-
-        GUIController.getGamePane().getChildren().add(building);
-
-        // make hoverImage always on top
-        reAddHoverImage();
-    }
-
-    public void reAddHoverImage() {
-        this.getChildren().remove(hoverImage);
-        this.getChildren().add(hoverImage);
+        GUIController.getGamePane().getChildren().add(tower);
     }
 
     public int getRow() {

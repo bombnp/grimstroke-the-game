@@ -1,6 +1,6 @@
 package debug;
 
-import entity.building.base.Tower;
+import entity.tower.base.Tower;
 import gui.GUIController;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Debug {
-    private static Map<Tower, Shape> rangeCircleMap = new HashMap<>();
+    private static final Map<Tower, Shape> rangeCircleMap = new HashMap<>();
 
     public static void drawTowerRange(Tower tower) {
-        Shape rangeCircle = new Circle(tower.getRange(), Color.color(1, 0, 0, 0.25));
+        Shape rangeCircle = new Circle(tower.getRange(), Color.color(1, 0, 0, 0.10));
         rangeCircle.setLayoutX(tower.getCenterPosition().getX());
         rangeCircle.setLayoutY(tower.getCenterPosition().getY());
         rangeCircle.setMouseTransparent(true);

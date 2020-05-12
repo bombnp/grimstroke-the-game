@@ -14,8 +14,8 @@ public class BoardGrid extends GridPane {
         return this;
     }
 
-    public BoardCell addCell(int bgSprite, int row, int col) {
-        BoardCell boardCell = new BoardCell(bgSprite, row, col);
+    public BoardCell addCell(int bgSprite, int row, int col, boolean buildable) {
+        BoardCell boardCell = new BoardCell(bgSprite, row, col, buildable);
         this.getChildren().add(boardCell);
         boardCells[row][col] = boardCell;
         BoardGrid.setColumnIndex(boardCell, col);

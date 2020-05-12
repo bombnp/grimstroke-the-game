@@ -1,9 +1,9 @@
-package entity.building;
+package entity.tower;
 
 import database.Database;
-import entity.building.base.Tower;
 import entity.minion.base.Minion;
 import entity.particle.RocketBullet;
+import entity.tower.base.Tower;
 import gui.BoardCell;
 import gui.CellImage;
 import gui.Sprite;
@@ -16,8 +16,6 @@ public class RocketTower extends Tower {
 
     private CellImage rocketBulletImage;
     private CellImage rocketLeftImage, rocketRightImage;
-
-    private final double ROCKET_ALPHA = 54.462;
 
     public enum RocketSide {
         LEFT,
@@ -33,7 +31,7 @@ public class RocketTower extends Tower {
                 rocketBulletImage = new CellImage(Sprite.ROCKET[0]);
                 rocketBulletImage.setTranslateY(-5);
                 this.turret.getChildren().add(rocketBulletImage);
-                new Invoker(this::setupRocket).startIn(1);
+                new Invoker(this::setupRocket).startIn(1); // need to finish setting Tower of BoardCell before setting up rocket
                 break;
             case 2:
                 rocketLeftImage = new CellImage(Sprite.ROCKET[1]);
@@ -48,7 +46,7 @@ public class RocketTower extends Tower {
                 new Invoker(() -> {
                     setupRocket(RocketSide.LEFT);
                     setupRocket(RocketSide.RIGHT);
-                }).startIn(1);
+                }).startIn(1); // need to finish setting Tower of BoardCell before setting up rocket
                 break;
         }
 
@@ -74,6 +72,7 @@ public class RocketTower extends Tower {
 
     @Override
     public void attack(Minion target) {
+        double ROCKET_ANGLE_ALPHA = 54.462;
         switch(this.level) {
             case 1:
                 rocketBullet.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(5, this.turret.getRotate())), this.turret.getRotate());
@@ -85,13 +84,13 @@ public class RocketTower extends Tower {
                 break;
             case 2:
                 if (rocketLeft != null) {
-                    rocketLeft.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()-ROCKET_ALPHA)), this.turret.getRotate());
+                    rocketLeft.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()- ROCKET_ANGLE_ALPHA)), this.turret.getRotate());
                     rocketLeft = null;
                     rocketLeftImage.setVisible(false);
 
                     new Invoker(() -> setupRocket(RocketSide.LEFT)).startIn((long) ((7.0/5)*(1/rateOfFire)*(1000)));
                 } else if (rocketRight != null) {
-                    rocketRight.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()+ROCKET_ALPHA)), this.turret.getRotate());
+                    rocketRight.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()+ ROCKET_ANGLE_ALPHA)), this.turret.getRotate());
                     rocketRight = null;
                     rocketRightImage.setVisible(false);
 
