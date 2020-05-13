@@ -2,11 +2,68 @@ package database;
 
 import application.Utility;
 
+/**
+ * The Database class stores all information of {@link entity.tower.base.Tower Towers},
+ * {@link entity.minion.base.Minion Minions}, and {@link WaveData Waves}.
+ * All datas are stored in public fields and can be accessed from anywhere
+ *
+ * @see TowerData
+ * @see MinionData
+ * @see WaveData
+ */
 public class Database {
-    public static TowerData[] MG, Rocket, Cannon;
+    /**
+     * Data of {@link entity.tower.MachineGunTower Machine Gun Tower},
+     * such as name, damage, rate of fire, range, etc.
+     *
+     * @see TowerData
+     * @see entity.tower.base.Tower Tower
+     * @see entity.tower.MachineGunTower MachineGunTower
+     */
+    public static TowerData[] MG;
+
+    /**
+     * Data of {@link entity.tower.RocketTower Rocket Tower},
+     * such as name, damage, rate of fire, range, etc.
+     *
+     * @see TowerData
+     * @see entity.tower.base.Tower Tower
+     * @see entity.tower.RocketTower RocketTower
+     */
+    public static TowerData[] Rocket;
+
+    /**
+     * Data of {@link entity.tower.CannonTower Cannon Tower},
+     * such as name, damage, rate of fire, range, etc.
+     *
+     * @see TowerData
+     * @see entity.tower.base.Tower Tower
+     * @see entity.tower.CannonTower CannonTower
+     */
+    public static TowerData[] Cannon;
+
+    /**
+     * Data of all {@link entity.minion.base.Minion Minions},
+     * such as name, health, speed, resistances, etc. Data is stored
+     * as an array of {@link MinionData data} of each {@link entity.minion.base.Minion Minion}.
+     *
+     * @see MinionData
+     * @see entity.minion.base.Minion Minion
+     */
     public static MinionData[] minions;
+
+    /**
+     * Stores all {@link WaveData Wave} information, such as minion counts in each wave.
+     * Data is stored as an array of {@link WaveData Waves}.
+     *
+     * @see WaveData
+     * @see logic.MinionWaveController MinionWaveController
+     */
     public static WaveData[] waves;
 
+    /**
+     * Initializes the database. This method reads from the data files and load them into public fields for access.
+     */
     public static void initialize() {
         String[][] towerData = Utility.readCSV("data/TowerData.csv");
         String[][] minionData = Utility.readCSV("data/MinionData.csv");

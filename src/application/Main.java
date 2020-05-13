@@ -8,8 +8,15 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import logic.GameController;
 
+/**
+ * Main class of the application.
+ */
 public class Main extends Application {
 
+    /**
+     * JavaFX method. Called when the JavaFX application launches.
+     * @param primaryStage The main stage of the application.
+     */
     @Override
     public void start(Stage primaryStage) {
         Database.initialize();
@@ -24,6 +31,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Launches the JavaFX application.
+     * @param args Application arguments.
+     */
     public static void main(String[] args) {
         launch(args);
     }

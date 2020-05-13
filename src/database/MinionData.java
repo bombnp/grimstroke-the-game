@@ -1,18 +1,73 @@
 package database;
 
+/**
+ * The MinionData class stores information of each {@link entity.minion.base.Minion Minion}.
+ * The data can be accessed publicly from the {@link Database} class.
+ */
 public class MinionData {
+    /**
+     * The index of the sprite that represents this minion.
+     */
     public int spriteIndex;
+
+    /**
+     * The name of this minion.
+     */
     public String name;
+
+    /**
+     * A short description of this minion.
+     */
     public String description;
+
+    /**
+     * The amount of gold the player receives when this minion is killed.
+     */
     public int reward;
+
+    /**
+     * The amount of health this unit has.
+     */
     public double health;
-    public double speed; // pixels/second
+
+    /**
+     * The speed in which this minion travels, measured in cells/second.
+     */
+    public double speed;
+
+    /**
+     * The minion's resistance to {@link entity.tower.MachineGunTower Machine Gun Towers}.
+     */
     public double resist_MG;
+
+    /**
+     * The minion's resistance to {@link entity.tower.RocketTower Rocket Towers}.
+     */
     public double resist_Rocket;
+
+    /**
+     * The minion's resistance to {@link entity.tower.CannonTower Cannon Towers}.
+     */
     public double resist_Cannon;
+
+    /**
+     * Specifies whether this minion is flying or not.
+     * Flying units can only be targeted by {@link entity.tower.MachineGunTower Machine Gun Towers}.
+     */
     public boolean isFlying;
+
+    /**
+     * The amount of health loss if the minion reaches the end of the path.
+     */
     public int penalty;
 
+    /**
+     * Constructor for the {@link MinionData} class. This constructor receives an array of data
+     * and deconstruct them into fields.
+     *
+     * @param data The data of this minion.
+     * @see entity.minion.base.Minion Minion.
+     */
     public MinionData(String[] data) {
         spriteIndex = Integer.parseInt(data[0]);
         name = data[1];
