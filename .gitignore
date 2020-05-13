@@ -2,3 +2,4 @@
 /src/application/view.fxml
 /bin/
 *.psd
+/javadoc/
