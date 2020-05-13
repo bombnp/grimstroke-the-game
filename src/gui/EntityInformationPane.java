@@ -4,81 +4,82 @@ import entity.minion.base.Minion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class EntityInformationPane extends HBox{
-	public Text nameDisplay,resist_MG_Text,resist_Rocket_Text,resist_Canon_Text,nameText;
-	public ProgressBar hpDisplay,resist_MG,resist_Rocket,resist_Canon;
+	public Text nameDisplay, resist_MG_text, resist_Rocket_text, resist_Cannon_text,nameText;
+	public ProgressBar healthBar, resist_MG_bar, resist_Rocket_bar, resist_Cannon_bar;
 	public String unitName;
-	public double maxhp,hp,re_MG,re_Ro,re_Ca;
+	public double maxHp,hp, resist_MG, resist_Rocket, resist_Cannon;
 	public Minion SelectedMinion;
 	public EntityInformationPane() {
-		CreatePreset();
+		createPreset();
 	}
-	public void CreatePreset() {
+	public void createPreset() {
 		unitName = "ABCDEFGHIJKLMNOP";
 		nameDisplay = new Text("unit");
-		resist_MG_Text = new Text("resist_MG");
-		resist_Rocket_Text = new Text("resist_Rocket");
-		resist_Canon_Text = new Text("resist_Canon");
+		resist_MG_text = new Text("resist_MG");
+		resist_Rocket_text = new Text("resist_Rocket");
+		resist_Cannon_text = new Text("resist_Cannon");
 		nameText = new Text(unitName);
-		hpDisplay = new ProgressBar(hp);
-		resist_MG = new ProgressBar(re_MG);	
-		resist_Rocket = new ProgressBar(re_Ro);
-		resist_Canon = new ProgressBar(re_Ca);
+		healthBar = new ProgressBar(hp);
+		resist_MG_bar = new ProgressBar(resist_MG);
+		resist_Rocket_bar = new ProgressBar(resist_Rocket);
+		resist_Cannon_bar = new ProgressBar(resist_Cannon);
 		setStyle();
-		initailzeAllInfo();
+		initializeAllInfo();
 		this.setVisible(false);
 	}
+
 	public Minion getSelectedMinion() {
 		return SelectedMinion;
 	}
-	public void SendInfo(Minion SelectedMinion,String unitName,double maxhp,double hp,double re_MG,double re_Ro,double re_ca) {
-		this.SelectedMinion = SelectedMinion;
+
+	public void sendInfo(Minion selectedMinion, String unitName, double maxHp, double hp, double resist_MG, double resist_Rocket, double resist_Cannon) {
+		this.SelectedMinion = selectedMinion;
 		this.nameText.setText(unitName);
-		this.hpDisplay.setProgress(hp/maxhp);
-		this.resist_MG.setProgress(re_MG);
-		this.resist_Rocket.setProgress(re_Ro);
-		this.resist_Canon.setProgress(re_ca);
-		if(SelectedMinion != null)
-			this.setVisible(true);
-		else
-			this.setVisible(false);
+		this.healthBar.setProgress(hp/maxHp);
+		this.resist_MG_bar.setProgress(resist_MG);
+		this.resist_Rocket_bar.setProgress(resist_Rocket);
+		this.resist_Cannon_bar.setProgress(resist_Cannon);
+		this.setVisible(selectedMinion != null);
 	}
+
 	public void setStyle() {
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setPadding(new Insets(10,10,10,10));
 		this.setSpacing(20);		
 	}
-	public void initailzeAllInfo() {
+
+	public void initializeAllInfo() {
 		addContext(groupContext(nameDisplay, nameText));
-		initailzeResistInfo();
+		initializeResistInfo();
 	}
-	public void initailzeResistInfo() {
-		addContext(groupContext(resist_MG_Text, resist_MG));
-		addContext(groupContext(resist_Rocket_Text, resist_Rocket));
-		addContext(groupContext(resist_Canon_Text, resist_Canon));		
+
+	public void initializeResistInfo() {
+		addContext(groupContext(resist_MG_text, resist_MG_bar));
+		addContext(groupContext(resist_Rocket_text, resist_Rocket_bar));
+		addContext(groupContext(resist_Cannon_text, resist_Cannon_bar));
 	}
+
 	public VBox groupContext(Text text1,Text text2) {
-		VBox Context = new VBox();
-		Context.getChildren().addAll(text1,text2);
-		Context.setAlignment(Pos.TOP_CENTER);
-		Context.setSpacing(5);
-		return Context;
+		VBox context = new VBox();
+		context.getChildren().addAll(text1,text2);
+		context.setAlignment(Pos.TOP_CENTER);
+		context.setSpacing(5);
+		return context;
 	}
+
 	public VBox groupContext(Text text,ProgressBar bar) {
-		VBox Context = new VBox();
-		Context.getChildren().addAll(text,bar);
-		Context.setAlignment(Pos.TOP_CENTER);
-		Context.setSpacing(5);
-		return Context;
+		VBox context = new VBox();
+		context.getChildren().addAll(text,bar);
+		context.setAlignment(Pos.TOP_CENTER);
+		context.setSpacing(5);
+		return context;
 	}
+
 	public void addContext(VBox context) {
 		this.getChildren().add(context);
 	}

@@ -48,7 +48,7 @@ public class TowerCell extends StackPane {
 		this.bgSprite = towerData.spriteIndex;
 		this.name = towerData.name;
 		this.damage = (int)towerData.minDamage + "-" + (int)towerData.maxDamage;
-		this.rateOfFire = towerData.rateOfFire;
+		this.rateOfFire = towerData.rate;
 		this.range = towerData.range;
 		this.cost = towerData.cost;
 
@@ -68,7 +68,7 @@ public class TowerCell extends StackPane {
 	public void setTooltip() {
     	Tooltip tooltip = new Tooltip();
     	tooltip.setFont(new Font(12));
-    	this.SetTooltipText(tooltip);
+    	this.setTooltipText(tooltip);
 
 		this.setOnMouseMoved(mouseEvent -> tooltip.show(this, mouseEvent.getScreenX() + 5, mouseEvent.getScreenY() + 10));
 		this.setOnMouseExited(mouseEvent -> {
@@ -111,12 +111,12 @@ public class TowerCell extends StackPane {
 		return "\nRange : "+(int)this.range;
 	}
 	public String getCostWithText() {
-		return "\nCost : "+(int)this.cost;
+		return "\nCost : "+this.cost;
 	}
 	public int getCost() {
 		return this.cost;
 	}
-	public void SetTooltipText(Tooltip tool) {
+	public void setTooltipText(Tooltip tool) {
 		if(this.isTool())
 			tool.setText(this.getName());
 		else

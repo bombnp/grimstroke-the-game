@@ -2,14 +2,8 @@ package gui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
@@ -17,19 +11,19 @@ import logic.GameController;
 public class PlayerInformationPane extends HBox{
 	public ProgressBar hpBar;
 	public Text hpText,goldText,goldValue;
-	public void CreatePreset() {
+	public void createPreset() {
 		hpText = new Text("Health Points");
 		goldText = new Text("Golds");
-		goldValue = new Text(Integer.toString(GameController.getCurrentMoney()));
-		hpBar = new ProgressBar(GameController.getCurrentHp()/GameController.getMaxHp());
+		goldValue = new Text(Integer.toString(GameController.getMoney()));
+		hpBar = new ProgressBar((double)GameController.getCurrentHp()/GameController.getMaxHp());
 		setStyle();
-		initailzeAllInfo();
+		initializeAllInfo();
 	}
-	public void UpdateData() {
-		goldValue.setText(Integer.toString(GameController.getCurrentMoney()));
+	public void updateData() {
+		goldValue.setText(Integer.toString(GameController.getMoney()));
 		hpBar.setProgress((float)GameController.getCurrentHp()/(float)GameController.getMaxHp());
 	}
-	public void InvokeInsufficinetGold() {
+	public void InvokeInsufficientGold() {
 		//Warning
 	}
 	public void setStyle() {
@@ -37,7 +31,7 @@ public class PlayerInformationPane extends HBox{
 		this.setPadding(new Insets(10,10,10,10));
 		this.setSpacing(20);		
 	}
-	public void initailzeAllInfo() {
+	public void initializeAllInfo() {
 		addContext(groupContext(hpText, hpBar));	
 		addContext(groupContext(goldText, goldValue));
 	}

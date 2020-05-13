@@ -3,29 +3,17 @@ package entity.minion.base;
 import database.MinionData;
 import entity.Updatable;
 import gui.CellImage;
-import gui.ControlPane;
-import gui.EntityInformationPane;
 import gui.GUIController;
-import gui.GameOverPane;
 import gui.GamePane;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import jdk.internal.org.jline.terminal.MouseEvent.Button;
 import logic.DamageType;
 import logic.GameController;
 import logic.Vector2;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 
 public abstract class Minion extends StackPane implements Updatable {
@@ -44,8 +32,8 @@ public abstract class Minion extends StackPane implements Updatable {
     private ProgressBar healthBar;
     private final CellImage minionImage;
     
-    private DropShadow ds;
-    private DropShadow ds2;
+    private DropShadow dropShadow;
+    private DropShadow dropShadow2;
     public Minion(MinionData minionData) {
         extractData(minionData);
 
@@ -68,10 +56,10 @@ public abstract class Minion extends StackPane implements Updatable {
         minionImage = new CellImage(minionData.spriteIndex);
         this.getChildren().add(minionImage);
         
-        ds = new DropShadow();
-        ds.setColor(Color.GREEN);
-        ds.setHeight(20);
-        ds.setWidth(20);
+        dropShadow = new DropShadow();
+        dropShadow.setColor(Color.GREEN);
+        dropShadow.setHeight(20);
+        dropShadow.setWidth(20);
                
         setHealthBar();
     }
@@ -105,9 +93,9 @@ public abstract class Minion extends StackPane implements Updatable {
         destinationIndex++;
         if (destinationIndex == path.size()) {
             GameController.removeUpdatable(this);
-            GameController.ModifyHp(-1*penalty);
+            GameController.addHp(-1*penalty);
             if(GameController.getCurrentHp() <= 0) {
-            	GameController.GameOver();
+            	GameController.lose();
             }
         }
         else {
@@ -124,12 +112,12 @@ public abstract class Minion extends StackPane implements Updatable {
         this.setLayoutX(currentPosition.getX());
         this.setLayoutY(currentPosition.getY());
         if(this.equals(GamePane.informationPane.getSelectedMinion()))
-        	minionImage.setEffect(ds);
+        	minionImage.setEffect(dropShadow);
         else
         	minionImage.setEffect(null);
         this.setOnMouseClicked(e -> {
-        	minionImage.setEffect(ds);
-            GamePane.informationPane.SendInfo(this,name, maxHealth, currentHealth, resist_MG,resist_Rocket,resist_Cannon);
+        	minionImage.setEffect(dropShadow);
+            GamePane.informationPane.sendInfo(this,name, maxHealth, currentHealth, resist_MG,resist_Rocket,resist_Cannon);
     	});        	
     }
 
@@ -200,8 +188,8 @@ public abstract class Minion extends StackPane implements Updatable {
         currentHealth -= damage;
         if (currentHealth <= 0) {
             GameController.removeUpdatable(this);
-            GamePane.informationPane.SendInfo(null,name, maxHealth, currentHealth, resist_MG,resist_Rocket,resist_Cannon);
-            GameController.ModifyMoney(reward);
+            GamePane.informationPane.sendInfo(null,name, maxHealth, currentHealth, resist_MG,resist_Rocket,resist_Cannon);
+            GameController.addMoney(reward);
             //System.out.println("UpdateMoney");
         }
 

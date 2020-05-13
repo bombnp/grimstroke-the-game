@@ -5,7 +5,7 @@ public class TowerData {
     public String name;
     public double minDamage;
     public double maxDamage;
-    public double rateOfFire; // shots/second
+    public double rate; // shots/second
     public double range;
     public int cost;
 
@@ -14,7 +14,7 @@ public class TowerData {
         name = data[1];
         minDamage = Double.parseDouble(data[2]);
         maxDamage = Double.parseDouble(data[3]);
-        rateOfFire = Double.parseDouble(data[4]);
+        rate = Double.parseDouble(data[4]);
         range = Double.parseDouble(data[5]);
         cost = Integer.parseInt(data[6]);
     }

@@ -1,6 +1,5 @@
 package gui;
 
-import database.Database;
 import debug.Debug;
 import entity.tower.CannonTower;
 import entity.tower.MachineGunTower;
@@ -37,10 +36,11 @@ public class BoardCell extends StackPane {
 
             this.setOnMouseClicked(mouseEvent -> {
                 try {
-                	if(GameController.getCurrentMoney() < GameController.getSelectedTower().getCost())
-                		GamePane.playerStatusPane.InvokeInsufficinetGold();
-                	else
-                		this.setTower(GameController.generateSelectedTower(this));
+                	if (GameController.canBuy(GameController.getSelectedTower())) {
+                        this.setTower(GameController.generateSelectedTower(this));
+                    } else {
+                        GamePane.playerStatusPane.InvokeInsufficientGold();
+                    }
                 } catch (InvalidTowerException e) {
                     e.printStackTrace();
                 }
@@ -57,7 +57,7 @@ public class BoardCell extends StackPane {
         return cellImage;
     }
 
-    public void removeBuilding() {
+    public void removeTower() {
         GameController.removeUpdatable(tower);
         GUIController.getGamePane().getChildren().remove(tower);
         Debug.removeTowerRange(tower);
@@ -65,34 +65,29 @@ public class BoardCell extends StackPane {
 
     public void setTower(Tower newTower) {
         if (tower != null) {
-            removeBuilding();
+            removeTower();
         }
 
         tower = newTower;
 
         this.setOnMouseClicked(mouseEvent -> {
             if (GameController.getSelectedTower().getName().equals("Sell Tool")) {
-                removeBuilding();
+                removeTower();
             } else if (GameController.getSelectedTower().getName().equals("Upgrade Tool") && tower.getLevel() == 1) {
-                switch (tower.getClass().getName()) {
-                    case "entity.tower.MachineGunTower" :
-                        if(GameController.getCurrentMoney() < Database.MG[1].cost)
-                            GamePane.playerStatusPane.InvokeInsufficinetGold();
-                        else
+                if (GameController.canBuy(tower, 2)) {
+                    switch (tower.getClass().getName()) {
+                        case "entity.tower.MachineGunTower" :
                             setTower(new MachineGunTower(this, 2));
-                        break;
-                    case "entity.tower.RocketTower" :
-                        if(GameController.getCurrentMoney() < Database.Rocket[1].cost)
-                            GamePane.playerStatusPane.InvokeInsufficinetGold();
-                        else
+                            break;
+                        case "entity.tower.RocketTower" :
                             setTower(new RocketTower(this, 2));
-                        break;
-                    case "entity.tower.CannonTower" :
-                        if(GameController.getCurrentMoney() < Database.Cannon[1].cost)
-                            GamePane.playerStatusPane.InvokeInsufficinetGold();
-                        else
+                            break;
+                        case "entity.tower.CannonTower" :
                             setTower(new CannonTower(this, 2));
-                        break;
+                            break;
+                    }
+                } else {
+                    GamePane.playerStatusPane.InvokeInsufficientGold();
                 }
             }
         });

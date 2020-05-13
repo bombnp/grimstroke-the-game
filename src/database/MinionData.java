@@ -5,13 +5,13 @@ public class MinionData {
     public String name;
     public String description;
     public int reward;
-    public int penalty;
+    public double health;
     public double speed; // pixels/second
     public double resist_MG;
     public double resist_Rocket;
     public double resist_Cannon;
     public boolean isFlying;
-    public double health;
+    public int penalty;
 
     public MinionData(String[] data) {
         spriteIndex = Integer.parseInt(data[0]);

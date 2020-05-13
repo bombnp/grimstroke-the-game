@@ -1,6 +1,7 @@
 package logic;
 
 import application.Utility;
+import database.Database;
 import entity.Updatable;
 import entity.minion.base.Minion;
 import entity.tower.CannonTower;
@@ -8,11 +9,6 @@ import entity.tower.MachineGunTower;
 import entity.tower.RocketTower;
 import entity.tower.base.Tower;
 import exception.InvalidTowerException;
-import gui.BoardCell;
-import gui.GUIController;
-import gui.GameOverPane;
-import gui.GamePane;
-import gui.TowerCell;
 import gui.*;
 import javafx.animation.AnimationTimer;
 
@@ -34,13 +30,11 @@ public class GameController {
     public static final double minionSpeed = 48;
     public static final double bulletSpeed = 192;
 
-	private static int maxHp,curHp,money;
-	private static boolean isGameOver;
+	private static final int maxHp = 20;
+	private static int curHp = 20, money = 10;
+	private static boolean isGameOver = false;
     public static void initialize(String mapName) {
-		curHp = maxHp = 20;
-		money = 10;
-		isGameOver = false;
-		GamePane.playerStatusPane.CreatePreset();
+		GamePane.playerStatusPane.createPreset();
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         initializeMap(mapCSV, decorCSV);
@@ -139,6 +133,7 @@ public class GameController {
     public static ArrayList<Vector2> getMinionPath() {
         return minionPath;
     }
+
     public static MinionWaveController getWaveController() {
     	return WaveController;
     }
@@ -150,27 +145,46 @@ public class GameController {
     public static ArrayList<Minion> getMinions() {
         return minions;
     }
+
     public static int getMaxHp() {
     	return maxHp;
     }
+
 	public static int getCurrentHp() {
 		return curHp;
 	}
-	public static int getCurrentMoney() {
+
+	public static int getMoney() {
 		return money;
 	}
-	public static void ModifyMoney(int value) {
+
+	public static boolean canBuy(Tower tower, int level) {
+        switch (tower.getClass().getName()) {
+            case "entity.tower.MachineGunTower" : return money >= Database.MG[level-1].cost;
+            case "entity.tower.RocketTower" : return money >= Database.Rocket[level-1].cost;
+            case "entity.tower.CannonTower" : return money >= Database.Cannon[level-1].cost;
+            default: return false;
+        }
+    }
+
+    public static boolean canBuy(TowerCell towerCell) {
+        return money >= towerCell.getCost();
+    }
+
+	public static void addMoney(int value) {
 		money+=value;
-		GamePane.playerStatusPane.UpdateData();
+		GamePane.playerStatusPane.updateData();
 	}
-	public static void ModifyHp(int value) {
+
+	public static void addHp(int value) {
 		if(value > 0)
 			curHp = Math.min(curHp+value, maxHp);
 		else
 			curHp = Math.max(curHp+value, 0);
-		GamePane.playerStatusPane.UpdateData();
+		GamePane.playerStatusPane.updateData();
 	}
-	public static void GameOver() {
+
+	public static void lose() {
 		if(!isGameOver) {
 			isGameOver = true;
 			GameOverPane GameOver = new GameOverPane();
