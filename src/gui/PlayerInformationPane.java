@@ -14,13 +14,13 @@ public class PlayerInformationPane extends HBox{
 	public void createPreset() {
 		hpText = new Text("Health Points");
 		goldText = new Text("Golds");
-		goldValue = new Text(Integer.toString(GameController.getMoney()));
+		goldValue = new Text(Integer.toString(GameController.getGold()));
 		hpBar = new ProgressBar((double)GameController.getCurrentHp()/GameController.getMaxHp());
 		setStyle();
 		initializeAllInfo();
 	}
 	public void updateData() {
-		goldValue.setText(Integer.toString(GameController.getMoney()));
+		goldValue.setText(Integer.toString(GameController.getGold()));
 		hpBar.setProgress((float)GameController.getCurrentHp()/(float)GameController.getMaxHp());
 	}
 	public void InvokeInsufficientGold() {

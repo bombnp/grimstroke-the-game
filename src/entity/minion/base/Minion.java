@@ -91,7 +91,7 @@ public abstract class Minion extends StackPane implements Updatable {
 
     public void changeDestination() {
         destinationIndex++;
-        if (destinationIndex == path.size()) {
+        if (destinationIndex >= path.size()) {
             GameController.removeUpdatable(this);
             GameController.addHp(-1*penalty);
             if(GameController.getCurrentHp() <= 0) {

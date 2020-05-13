@@ -31,7 +31,7 @@ public class GameController {
     public static final double bulletSpeed = 192;
 
 	private static final int maxHp = 20;
-	private static int curHp = 20, money = 10;
+	private static int currentHp = 20, gold = 10;
 	private static boolean isGameOver = false;
     public static void initialize(String mapName) {
 		GamePane.playerStatusPane.createPreset();
@@ -48,8 +48,10 @@ public class GameController {
             public void handle(long currentNanoTime) {
                 double deltaTime = (currentNanoTime - lastFrameNanoTime) / 1000000000.0;
 
-                for (Updatable updatable : updatables) {
-                    updatable.update(deltaTime);
+                if (!isGameOver) {
+                    for (Updatable updatable : updatables) {
+                        updatable.update(deltaTime);
+                    }
                 }
 
                 for (Updatable garbage : garbageCollector) {
@@ -151,43 +153,45 @@ public class GameController {
     }
 
 	public static int getCurrentHp() {
-		return curHp;
+		return currentHp;
 	}
 
-	public static int getMoney() {
-		return money;
+	public static int getGold() {
+		return gold;
 	}
 
 	public static boolean canBuy(Tower tower, int level) {
         switch (tower.getClass().getName()) {
-            case "entity.tower.MachineGunTower" : return money >= Database.MG[level-1].cost;
-            case "entity.tower.RocketTower" : return money >= Database.Rocket[level-1].cost;
-            case "entity.tower.CannonTower" : return money >= Database.Cannon[level-1].cost;
+            case "entity.tower.MachineGunTower" : return gold >= Database.MG[level-1].cost;
+            case "entity.tower.RocketTower" : return gold >= Database.Rocket[level-1].cost;
+            case "entity.tower.CannonTower" : return gold >= Database.Cannon[level-1].cost;
             default: return false;
         }
     }
 
     public static boolean canBuy(TowerCell towerCell) {
-        return money >= towerCell.getCost();
+        if (towerCell == null)
+            return false;
+        return gold >= towerCell.getCost();
     }
 
 	public static void addMoney(int value) {
-		money+=value;
+		gold +=value;
 		GamePane.playerStatusPane.updateData();
 	}
 
 	public static void addHp(int value) {
 		if(value > 0)
-			curHp = Math.min(curHp+value, maxHp);
+			currentHp = Math.min(currentHp +value, maxHp);
 		else
-			curHp = Math.max(curHp+value, 0);
+			currentHp = Math.max(currentHp +value, 0);
 		GamePane.playerStatusPane.updateData();
 	}
 
 	public static void lose() {
 		if(!isGameOver) {
 			isGameOver = true;
-			GameOverPane GameOver = new GameOverPane();
+            new GameOverPane();
 		}
 	}
 }
