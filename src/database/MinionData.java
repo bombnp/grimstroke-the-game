@@ -5,6 +5,7 @@ public class MinionData {
     public String name;
     public String description;
     public int reward;
+    public int penalty;
     public double speed; // pixels/second
     public double resist_MG;
     public double resist_Rocket;
@@ -23,5 +24,6 @@ public class MinionData {
         resist_Rocket = Double.parseDouble(data[7]);
         resist_Cannon = Double.parseDouble(data[8]);
         isFlying = Boolean.parseBoolean(data[9]);
+        penalty = Integer.parseInt(data[10]);
     }
 }

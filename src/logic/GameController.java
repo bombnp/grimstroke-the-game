@@ -8,15 +8,17 @@ import entity.tower.MachineGunTower;
 import entity.tower.RocketTower;
 import entity.tower.base.Tower;
 import exception.InvalidTowerException;
+import gui.BoardCell;
+import gui.GUIController;
+import gui.GameOverPane;
+import gui.GamePane;
+import gui.TowerCell;
 import gui.*;
 import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
 
 public class GameController {
-    public static final double minionSpeed = 48;
-    public static final double bulletSpeed = 192;
-
     private static TowerCell selectedTower;
 
     private static ArrayList<Vector2> minionPath;
@@ -29,7 +31,16 @@ public class GameController {
 
     private static final ArrayList<Minion> minions = new ArrayList<>();
 
+    public static final double minionSpeed = 48;
+    public static final double bulletSpeed = 192;
+
+	private static int maxHp,curHp,money;
+	private static boolean isGameOver;
     public static void initialize(String mapName) {
+		curHp = maxHp = 20;
+		money = 10;
+		isGameOver = false;
+		GamePane.playerStatusPane.CreatePreset();
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         initializeMap(mapCSV, decorCSV);
@@ -139,4 +150,30 @@ public class GameController {
     public static ArrayList<Minion> getMinions() {
         return minions;
     }
+    public static int getMaxHp() {
+    	return maxHp;
+    }
+	public static int getCurrentHp() {
+		return curHp;
+	}
+	public static int getCurrentMoney() {
+		return money;
+	}
+	public static void ModifyMoney(int value) {
+		money+=value;
+		GamePane.playerStatusPane.UpdateData();
+	}
+	public static void ModifyHp(int value) {
+		if(value > 0)
+			curHp = Math.min(curHp+value, maxHp);
+		else
+			curHp = Math.max(curHp+value, 0);
+		GamePane.playerStatusPane.UpdateData();
+	}
+	public static void GameOver() {
+		if(!isGameOver) {
+			isGameOver = true;
+			GameOverPane GameOver = new GameOverPane();
+		}
+	}
 }

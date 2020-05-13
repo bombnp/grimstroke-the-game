@@ -3,14 +3,30 @@ package entity.minion.base;
 import database.MinionData;
 import entity.Updatable;
 import gui.CellImage;
+import gui.ControlPane;
+import gui.EntityInformationPane;
 import gui.GUIController;
+import gui.GameOverPane;
+import gui.GamePane;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import jdk.internal.org.jline.terminal.MouseEvent.Button;
 import logic.DamageType;
 import logic.GameController;
 import logic.Vector2;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
 
 public abstract class Minion extends StackPane implements Updatable {
     private final ArrayList<Vector2> path;
@@ -19,13 +35,17 @@ public abstract class Minion extends StackPane implements Updatable {
     private Vector2 destination;
     private Vector2 currentPosition;
 
+    private String name;
     private int reward;
+    private int penalty;
     private double maxHealth, currentHealth, speed, resist_MG,resist_Rocket,resist_Cannon;
     private boolean isFlying;
 
     private ProgressBar healthBar;
     private final CellImage minionImage;
-
+    
+    private DropShadow ds;
+    private DropShadow ds2;
     public Minion(MinionData minionData) {
         extractData(minionData);
 
@@ -47,11 +67,17 @@ public abstract class Minion extends StackPane implements Updatable {
 
         minionImage = new CellImage(minionData.spriteIndex);
         this.getChildren().add(minionImage);
-
+        
+        ds = new DropShadow();
+        ds.setColor(Color.GREEN);
+        ds.setHeight(20);
+        ds.setWidth(20);
+               
         setHealthBar();
     }
 
     public void extractData(MinionData minionData) {
+    	this.name = minionData.name;
         this.reward = minionData.reward;
         this.currentHealth = this.maxHealth = minionData.health;
         this.speed = minionData.speed;
@@ -59,6 +85,7 @@ public abstract class Minion extends StackPane implements Updatable {
         this.resist_Rocket = minionData.resist_Rocket;
         this.resist_Cannon = minionData.resist_Cannon;
         this.isFlying = minionData.isFlying;
+        this.penalty = minionData.penalty;
     }
 
     public void setHealthBar() {
@@ -78,6 +105,10 @@ public abstract class Minion extends StackPane implements Updatable {
         destinationIndex++;
         if (destinationIndex == path.size()) {
             GameController.removeUpdatable(this);
+            GameController.ModifyHp(-1*penalty);
+            if(GameController.getCurrentHp() <= 0) {
+            	GameController.GameOver();
+            }
         }
         else {
             destination = path.get(destinationIndex);
@@ -92,6 +123,14 @@ public abstract class Minion extends StackPane implements Updatable {
 
         this.setLayoutX(currentPosition.getX());
         this.setLayoutY(currentPosition.getY());
+        if(this.equals(GamePane.informationPane.getSelectedMinion()))
+        	minionImage.setEffect(ds);
+        else
+        	minionImage.setEffect(null);
+        this.setOnMouseClicked(e -> {
+        	minionImage.setEffect(ds);
+            GamePane.informationPane.SendInfo(this,name, maxHealth, currentHealth, resist_MG,resist_Rocket,resist_Cannon);
+    	});        	
     }
 
     public void move(double deltaTime) {
@@ -160,8 +199,10 @@ public abstract class Minion extends StackPane implements Updatable {
         }
         currentHealth -= damage;
         if (currentHealth <= 0) {
-            // TODO: Increase money on death
             GameController.removeUpdatable(this);
+            GamePane.informationPane.SendInfo(null,name, maxHealth, currentHealth, resist_MG,resist_Rocket,resist_Cannon);
+            GameController.ModifyMoney(reward);
+            //System.out.println("UpdateMoney");
         }
 
         healthBar.setProgress(currentHealth / maxHealth);

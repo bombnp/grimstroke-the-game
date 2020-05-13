@@ -16,6 +16,7 @@ public class TowerCell extends StackPane {
 	private String damage;
 	private double rateOfFire;
 	private double range;
+	private int cost;
 
 	protected Background currentBG;
 
@@ -49,6 +50,7 @@ public class TowerCell extends StackPane {
 		this.damage = (int)towerData.minDamage + "-" + (int)towerData.maxDamage;
 		this.rateOfFire = towerData.rateOfFire;
 		this.range = towerData.range;
+		this.cost = towerData.cost;
 
 		this.setPrefWidth(prefSize);
 		this.setPrefHeight(prefSize);
@@ -108,11 +110,16 @@ public class TowerCell extends StackPane {
 	public String getRangeWithText() {
 		return "\nRange : "+(int)this.range;
 	}
-
+	public String getCostWithText() {
+		return "\nCost : "+(int)this.cost;
+	}
+	public int getCost() {
+		return this.cost;
+	}
 	public void SetTooltipText(Tooltip tool) {
 		if(this.isTool())
 			tool.setText(this.getName());
 		else
-			tool.setText(this.getNameWithText() + this.getDamageWithText() + this.getRatesWithText() + this.getRangeWithText());
+			tool.setText(this.getNameWithText() + this.getDamageWithText() + this.getRatesWithText() + this.getRangeWithText() + this.getCostWithText());
 	}
 }

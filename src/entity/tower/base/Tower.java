@@ -7,6 +7,7 @@ import entity.minion.base.Minion;
 import entity.tower.MachineGunTower;
 import gui.BoardCell;
 import gui.CellImage;
+import gui.GamePane;
 import gui.Sprite;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,6 +21,7 @@ public abstract class Tower extends StackPane implements Updatable{
     protected double minDamage, maxDamage;
     protected double rateOfFire, range;
     protected double cooldown = 0;
+    protected int cost;
     protected final Vector2 centerPosition;
     protected Minion currentTarget;
 
@@ -33,6 +35,8 @@ public abstract class Tower extends StackPane implements Updatable{
 
         this.centerPosition = new Vector2(cell.getCol()*48 + 24, cell.getRow()*48 + 24);
         this.level = level;
+
+        GameController.ModifyMoney(-1*cost);
 
         this.setLayoutX(centerPosition.getX()-24);
         this.setLayoutY(centerPosition.getY()-24);
@@ -56,6 +60,7 @@ public abstract class Tower extends StackPane implements Updatable{
         this.maxDamage = towerData.maxDamage;
         this.rateOfFire = towerData.rateOfFire;
         this.range = towerData.range;
+        this.cost = towerData.cost;
     }
 
     public void lookAt(Vector2 target) {
