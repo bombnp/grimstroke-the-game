@@ -1,7 +1,7 @@
 package entity.tower;
 
 import database.Database;
-import entity.minion.base.Minion;
+import entity.minion.Minion;
 import entity.particle.RocketBullet;
 import entity.tower.base.Tower;
 import gui.BoardCell;

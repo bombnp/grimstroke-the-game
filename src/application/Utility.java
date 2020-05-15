@@ -1,5 +1,6 @@
 package application;
 
+import entity.minion.Minion;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import logic.Vector2;
@@ -51,7 +52,7 @@ public class Utility {
     }
 
     /**
-     * Reads the path to be used by {@link entity.minion.base.Minion Minions}.
+     * Reads the path to be used by {@link Minion Minions}.
      * The directory of the file to be read must be provided.
      *
      * @param filename The directory of the CSV file to be read.

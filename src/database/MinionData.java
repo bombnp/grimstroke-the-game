@@ -1,7 +1,9 @@
 package database;
 
+import entity.minion.Minion;
+
 /**
- * The MinionData class stores information of each {@link entity.minion.base.Minion Minion}.
+ * The MinionData class stores information of each {@link Minion Minion}.
  * The data can be accessed publicly from the {@link Database} class.
  */
 public class MinionData {
@@ -66,7 +68,7 @@ public class MinionData {
      * and deconstruct them into fields.
      *
      * @param data The data of this minion.
-     * @see entity.minion.base.Minion Minion.
+     * @see Minion Minion.
      */
     public MinionData(String[] data) {
         spriteIndex = Integer.parseInt(data[0]);

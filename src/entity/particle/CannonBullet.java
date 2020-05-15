@@ -1,6 +1,6 @@
 package entity.particle;
 
-import entity.minion.base.Minion;
+import entity.minion.Minion;
 import entity.particle.base.Bullet;
 import gui.Sprite;
 import logic.DamageType;

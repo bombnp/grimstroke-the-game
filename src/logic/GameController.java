@@ -3,7 +3,7 @@ package logic;
 import application.Utility;
 import database.Database;
 import entity.Updatable;
-import entity.minion.base.Minion;
+import entity.minion.Minion;
 import entity.tower.CannonTower;
 import entity.tower.MachineGunTower;
 import entity.tower.RocketTower;

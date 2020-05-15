@@ -1,7 +1,7 @@
 package entity.particle.base;
 
 import entity.Updatable;
-import entity.minion.base.Minion;
+import entity.minion.Minion;
 import gui.CellImage;
 import gui.GUIController;
 import logic.GameController;

@@ -2,8 +2,7 @@ package logic;
 
 import database.Database;
 import database.MinionData;
-import entity.minion.AirUnit;
-import entity.minion.GroundUnit;
+import entity.minion.Minion;
 import javafx.application.Platform;
 
 public class MinionWaveController{
@@ -19,14 +18,7 @@ public class MinionWaveController{
 				for(int j = 0; j < Database.waves[waveNumber].minionsCount[i] ; j++) {
 					MinionData minionData = Database.minions[i];
 
-					Platform.runLater(() -> {
-						boolean isFlying = minionData.isFlying;
-						if (isFlying) {
-							new AirUnit(minionData);
-						} else {
-							new GroundUnit(minionData);
-						}
-					});
+					Platform.runLater(() -> new Minion(minionData));
 
 					try {
 						//noinspection BusyWait

@@ -3,7 +3,7 @@ package entity.tower.base;
 import database.TowerData;
 import debug.Debug;
 import entity.Updatable;
-import entity.minion.base.Minion;
+import entity.minion.Minion;
 import entity.tower.MachineGunTower;
 import gui.BoardCell;
 import gui.CellImage;

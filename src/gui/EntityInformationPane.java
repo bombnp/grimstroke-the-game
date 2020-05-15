@@ -1,6 +1,6 @@
 package gui;
 
-import entity.minion.base.Minion;
+import entity.minion.Minion;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;

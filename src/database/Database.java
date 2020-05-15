@@ -1,10 +1,11 @@
 package database;
 
 import application.Utility;
+import entity.minion.Minion;
 
 /**
  * The Database class stores all information of {@link entity.tower.base.Tower Towers},
- * {@link entity.minion.base.Minion Minions}, and {@link WaveData Waves}.
+ * {@link Minion Minions}, and {@link WaveData Waves}.
  * All datas are stored in public fields and can be accessed from anywhere
  *
  * @see TowerData
@@ -43,12 +44,12 @@ public class Database {
     public static TowerData[] Cannon;
 
     /**
-     * Data of all {@link entity.minion.base.Minion Minions},
+     * Data of all {@link Minion Minions},
      * such as name, health, speed, resistances, etc. Data is stored
-     * as an array of {@link MinionData data} of each {@link entity.minion.base.Minion Minion}.
+     * as an array of {@link MinionData data} of each {@link Minion Minion}.
      *
      * @see MinionData
-     * @see entity.minion.base.Minion Minion
+     * @see Minion Minion
      */
     public static MinionData[] minions;
 

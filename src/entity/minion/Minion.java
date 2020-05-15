@@ -1,4 +1,4 @@
-package entity.minion.base;
+package entity.minion;
 
 import database.MinionData;
 import entity.Updatable;
@@ -15,8 +15,7 @@ import logic.Vector2;
 
 import java.util.ArrayList;
 
-
-public abstract class Minion extends StackPane implements Updatable {
+public class Minion extends StackPane implements Updatable {
     private final ArrayList<Vector2> path;
     private int destinationIndex;
 
