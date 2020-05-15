@@ -7,13 +7,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import logic.GameController;
+import logic.MinionWaveController;
 
 public class PlayerInformationPane extends HBox{
 	public ProgressBar hpBar;
-	public Text hpText,goldText,goldValue;
+	public Text hpText,goldText,goldValue,waveText,waveNumberText;
 	public void createPreset() {
 		hpText = new Text("Health Points");
 		goldText = new Text("Golds");
+		waveText = new Text("Waves");
+		waveNumberText = new Text(Integer.toString(MinionWaveController.getWaveNumber()-1));
 		goldValue = new Text(Integer.toString(GameController.getGold()));
 		hpBar = new ProgressBar((double)GameController.getCurrentHp()/GameController.getMaxHp());
 		setStyle();
@@ -22,6 +25,7 @@ public class PlayerInformationPane extends HBox{
 	public void updateData() {
 		goldValue.setText(Integer.toString(GameController.getGold()));
 		hpBar.setProgress((float)GameController.getCurrentHp()/(float)GameController.getMaxHp());
+		waveNumberText.setText(Integer.toString(MinionWaveController.getWaveNumber()-1));
 	}
 	public void InvokeInsufficientGold() {
 		//Warning
@@ -34,6 +38,7 @@ public class PlayerInformationPane extends HBox{
 	public void initializeAllInfo() {
 		addContext(groupContext(hpText, hpBar));	
 		addContext(groupContext(goldText, goldValue));
+		addContext(groupContext(waveText, waveNumberText));
 	}
 	public VBox groupContext(Text text1,Text text2) {
 		VBox Context = new VBox();

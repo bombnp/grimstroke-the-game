@@ -14,13 +14,17 @@ public class WinGamePane {
 		alert.setTitle("Congratulations!");
 		alert.setHeaderText(null);
 		alert.setContentText("There're no more waves. You win!");
-		ButtonType NewGame = new ButtonType("New Game");
+//		ButtonType NewGame = new ButtonType("New Game");
 		ButtonType ExitGame = new ButtonType("Close Game");
-		alert.getButtonTypes().setAll(NewGame,ExitGame);
+//		alert.getButtonTypes().setAll(NewGame,ExitGame);
+		alert.getButtonTypes().setAll(ExitGame);
 		Platform.runLater(() -> alert.showAndWait().ifPresent(response -> {
-			if (response == NewGame) {
-				System.out.println("New Game");
-			} else if (response == ExitGame) {
+//			if (response == NewGame) {
+//				System.out.println("New Game");
+//			} else if (response == ExitGame) {
+//				System.exit(0);
+//			}
+			if (response == ExitGame) {
 				System.exit(0);
 			}
 			System.out.println(response);
