@@ -1,13 +1,8 @@
 package gui;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import logic.GameController;
+import logic.MinionWaveController;
 
 public class GamePane extends AnchorPane{
     private final BoardGrid boardGrid;
@@ -28,7 +23,7 @@ public class GamePane extends AnchorPane{
         setRightAnchor(nextWaveButton, 10.0);
         setBottomAnchor(nextWaveButton, 10.0);
         nextWaveButton.setOnAction(arg0 -> {
-            GameController.getWaveController().generateNextWave();
+            MinionWaveController.generateNextWave();
             nextWaveButton.setDisable(true);
         });
     }

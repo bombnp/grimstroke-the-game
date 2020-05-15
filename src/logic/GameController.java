@@ -18,8 +18,6 @@ public class GameController {
     private static TowerCell selectedTower;
 
     private static ArrayList<Vector2> minionPath;
-    
-    private static final MinionWaveController WaveController = new MinionWaveController();
 
     private static final ArrayList<Updatable> updatables = new ArrayList<>();
     private static final ArrayList<Updatable> garbageCollector = new ArrayList<>();
@@ -69,7 +67,11 @@ public class GameController {
                     GUIController.getGamePane().getChildren().remove(garbage);
 
                     if (minions.isEmpty()) {
-                        GUIController.getGamePane().getNextWaveButton().setDisable(false);
+                        if (MinionWaveController.getWaveNumber() == Database.waves.length) {
+                            new WinGamePane();
+                        } else {
+                            GUIController.getGamePane().getNextWaveButton().setDisable(false);
+                        }
                     }
                 }
                 garbageCollector.clear();
@@ -134,10 +136,6 @@ public class GameController {
 
     public static ArrayList<Vector2> getMinionPath() {
         return minionPath;
-    }
-
-    public static MinionWaveController getWaveController() {
-    	return WaveController;
     }
 
     public static ArrayList<Updatable> getUpdatables() {
