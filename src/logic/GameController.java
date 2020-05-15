@@ -66,7 +66,7 @@ public class GameController {
                     //noinspection SuspiciousMethodCalls
                     GUIController.getGamePane().getChildren().remove(garbage);
 
-                    if (minions.isEmpty()) {
+                    if (garbage instanceof Minion && minions.isEmpty()) {
                         if (MinionWaveController.getWaveNumber() == Database.waves.length && MinionWaveController.isSpawning()) {
                             new WinGamePane();
                         } else {

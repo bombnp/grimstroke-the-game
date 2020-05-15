@@ -160,6 +160,10 @@ public abstract class Tower extends StackPane implements Updatable{
         return range;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
     public Vector2 getCenterPosition() {
         return centerPosition;
     }
