@@ -17,13 +17,17 @@ public class GameOverPane extends VBox{
 		alert.setTitle("Game Over!");
 		alert.setHeaderText("Your health point is below or equal zero");
 		alert.setContentText("Choose your option:");
-		ButtonType NewGame = new ButtonType("New Game");
+//		ButtonType NewGame = new ButtonType("New Game");
 		ButtonType ExitGame = new ButtonType("Exit Game");
-		alert.getButtonTypes().setAll(NewGame,ExitGame);
+//		alert.getButtonTypes().setAll(NewGame,ExitGame);
+		alert.getButtonTypes().setAll(ExitGame);
 		Platform.runLater(() -> alert.showAndWait().ifPresent(response -> {
-			if (response == NewGame) {
-				System.out.println("New Game");
-			} else if (response == ExitGame) {
+//			if (response == NewGame) {
+//				System.out.println("New Game");
+//			} else if (response == ExitGame) {
+//				System.exit(0);
+//			}
+			if (response == ExitGame) {
 				System.exit(0);
 			}
 		}));
