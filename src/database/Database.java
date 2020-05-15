@@ -84,8 +84,7 @@ public class Database {
                 new MinionData(minionData[6]),
                 new MinionData(minionData[7])
         };
-
-        waves = new WaveData[waveData.length-1];
+        waves = new WaveData[waveData.length];
         for (int i = 1; i < waves.length; i++) {
             waves[i] = new WaveData(waveData[i]);
         }
