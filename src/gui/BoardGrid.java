@@ -23,7 +23,7 @@ public class BoardGrid extends GridPane {
         return boardCell;
     }
 
-    public BoardCell getCell(int row, int col) {
-        return boardCells[row][col];
+    public BoardCell[][] getBoardCells() {
+        return boardCells;
     }
 }

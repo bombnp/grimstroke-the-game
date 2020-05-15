@@ -66,8 +66,8 @@ public class GameController {
                     //noinspection SuspiciousMethodCalls
                     GUIController.getGamePane().getChildren().remove(garbage);
 
-                    if (garbage instanceof Minion && minions.isEmpty()) {
-                        if (MinionWaveController.getWaveNumber() == Database.waves.length && MinionWaveController.isSpawning()) {
+                    if (garbage instanceof Minion && minions.isEmpty() && !MinionWaveController.isSpawning()) {
+                        if (MinionWaveController.getWaveNumber() == Database.waves.length-1) {
                             new WinGamePane();
                         } else {
                             GUIController.getGamePane().getNextWaveButton().setDisable(false);
@@ -105,6 +105,27 @@ public class GameController {
         }
     }
 
+    public static void restart() {
+        BoardCell[][] boardCells = GUIController.getBoardGrid().getBoardCells();
+        for (BoardCell[] row : boardCells) {
+            for (BoardCell cell : row) {
+                cell.removeTower();
+            }
+        }
+        currentHp = 20;
+        gold = 10;
+        isGameOver = false;
+
+        updatables.clear();
+        minions.clear();
+        updatablesAddList.clear();
+        MinionWaveController.setWaveNumber(1);
+        GamePane.playerStatusPane.updateData();
+
+        setSelectedTower(null);
+        GUIController.getGamePane().getNextWaveButton().setDisable(false);
+    }
+
     public static void removeUpdatable(Updatable updatable) {
         garbageCollector.add(updatable);
     }
@@ -117,7 +138,8 @@ public class GameController {
         if (selectedTower != null)
             selectedTower.setCurrentBG(GUIController.BG.TOWER_UNSELECTED);
         selectedTower = tower;
-        selectedTower.setCurrentBG(GUIController.BG.TOWER_SELECTED);
+        if (selectedTower != null)
+            selectedTower.setCurrentBG(GUIController.BG.TOWER_SELECTED);
     }
 
     public static Tower generateSelectedTower(BoardCell targetCell) throws InvalidTowerException {

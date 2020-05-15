@@ -33,6 +33,10 @@ public class MinionWaveController{
 		return waveNumber;
 	}
 
+	public static void setWaveNumber(int waveNumber) {
+		MinionWaveController.waveNumber = waveNumber;
+	}
+
 	public static void increaseWaveNumber() {
 		waveNumber++;
 		GamePane.playerStatusPane.updateData();

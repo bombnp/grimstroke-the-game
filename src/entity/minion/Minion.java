@@ -170,6 +170,8 @@ public class Minion extends StackPane implements Updatable {
     }
 
     public void takeDamage(double rawDamage, DamageType damageType) {
+        if (currentHealth <= 0)
+            return;
         double damage;
         switch (damageType) {
             case MG:
@@ -189,7 +191,6 @@ public class Minion extends StackPane implements Updatable {
             GameController.removeUpdatable(this);
             GamePane.informationPane.sendInfo(null,name, maxHealth, currentHealth, resist_MG,resist_Rocket,resist_Cannon);
             GameController.addMoney(reward);
-            //System.out.println("UpdateMoney");
         }
 
         healthBar.setProgress(currentHealth / maxHealth);
