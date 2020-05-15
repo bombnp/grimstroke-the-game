@@ -109,7 +109,8 @@ public class GameController {
         BoardCell[][] boardCells = GUIController.getBoardGrid().getBoardCells();
         for (BoardCell[] row : boardCells) {
             for (BoardCell cell : row) {
-                cell.removeTower();
+                if (cell.getTower() != null)
+                    cell.removeTower();
             }
         }
         currentHp = 20;

@@ -18,14 +18,12 @@ public class WinGamePane {
 		ButtonType NewGame = new ButtonType("New Game");
 		ButtonType ExitGame = new ButtonType("Close Game");
 		alert.getButtonTypes().setAll(NewGame,ExitGame);
-//		alert.getButtonTypes().setAll(ExitGame);
 		Platform.runLater(() -> alert.showAndWait().ifPresent(response -> {
 			if (response == NewGame) {
 				GameController.restart();
 			} else if (response == ExitGame) {
 				System.exit(0);
 			}
-			System.out.println(response);
 		}));
 	}
 }
