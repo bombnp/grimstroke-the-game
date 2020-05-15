@@ -39,7 +39,6 @@ public abstract class Tower extends StackPane implements Updatable{
 
         this.setLayoutX(centerPosition.getX()-24);
         this.setLayoutY(centerPosition.getY()-24);
-        this.setMouseTransparent(true);
 
         this.getChildren().add(new CellImage(Sprite.getRandomTowerBase()));
         if (towerData.name.contains("Rocket Tower"))
@@ -48,6 +47,7 @@ public abstract class Tower extends StackPane implements Updatable{
             turretImage = new CellImage(towerData.spriteIndex);
         turret.getChildren().add(turretImage);
         this.getChildren().add(turret);
+        this.setMouseTransparent(true);
 
         GameController.getUpdatables().add(this);
 

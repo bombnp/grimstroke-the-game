@@ -22,6 +22,7 @@ public abstract class Bullet extends CellImage implements Updatable {
 
         this.setCenter();
         this.setVisible(false);
+        this.setMouseTransparent(true);
     }
 
     // for CannonBullet
@@ -37,6 +38,7 @@ public abstract class Bullet extends CellImage implements Updatable {
 
         this.setCenter();
         this.setRotate(rotation);
+        this.setMouseTransparent(true);
     }
 
     public void updatePosition() {

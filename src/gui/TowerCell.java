@@ -91,31 +91,42 @@ public class TowerCell extends StackPane {
 		return this.name.contains("Tool");
 	}
 
+	public boolean isUpgradeTool() {
+		return this.name.equals("Upgrade Tool");
+	}
+
+	public boolean isSellTool() {
+		return this.name.equals("Sell Tool");
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public String getNameWithText() {
-		return "Name : "+this.name;
+		return "Name: "+this.name;
 	}
 
 	public String getDamageWithText() {
-		return "\nDamage : "+this.damage;
+		return "\nDamage: "+this.damage;
 	}
 
 	public String getRatesWithText() {
-		return "\nRates : "+this.rateOfFire+" shots/sec";
+		return "\nRates: "+this.rateOfFire+" shots/sec";
 	}
 
 	public String getRangeWithText() {
-		return "\nRange : "+(int)this.range;
+		return "\nRange: "+(int)this.range;
 	}
+
 	public String getCostWithText() {
-		return "\nCost : "+this.cost;
+		return "\nCost: "+this.cost+" Gold";
 	}
+
 	public int getCost() {
 		return this.cost;
 	}
+
 	public void setTooltipText(Tooltip tool) {
 		if(this.isTool())
 			tool.setText(this.getName());
