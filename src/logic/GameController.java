@@ -67,10 +67,11 @@ public class GameController {
                     GUIController.getGamePane().getChildren().remove(garbage);
 
                     if (minions.isEmpty()) {
-                        if (MinionWaveController.getWaveNumber() == Database.waves.length && MinionWaveController.getspawnStatus()) {
+                        if (MinionWaveController.getWaveNumber() == Database.waves.length && MinionWaveController.isSpawning()) {
                             new WinGamePane();
                         } else {
                             GUIController.getGamePane().getNextWaveButton().setDisable(false);
+                            MinionWaveController.increaseWaveNumber();
                         }
                     }
                 }

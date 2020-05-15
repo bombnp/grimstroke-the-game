@@ -15,8 +15,8 @@ public class PlayerInformationPane extends HBox{
 	public void createPreset() {
 		hpText = new Text("Health Points");
 		goldText = new Text("Golds");
-		waveText = new Text("Waves");
-		waveNumberText = new Text(Integer.toString(MinionWaveController.getWaveNumber()-1));
+		waveText = new Text("Wave");
+		waveNumberText = new Text(Integer.toString(MinionWaveController.getWaveNumber()));
 		goldValue = new Text(Integer.toString(GameController.getGold()));
 		hpBar = new ProgressBar((double)GameController.getCurrentHp()/GameController.getMaxHp());
 		setStyle();
@@ -25,7 +25,7 @@ public class PlayerInformationPane extends HBox{
 	public void updateData() {
 		goldValue.setText(Integer.toString(GameController.getGold()));
 		hpBar.setProgress((float)GameController.getCurrentHp()/(float)GameController.getMaxHp());
-		waveNumberText.setText(Integer.toString(MinionWaveController.getWaveNumber()-1));
+		waveNumberText.setText(Integer.toString(MinionWaveController.getWaveNumber()));
 	}
 	public void InvokeInsufficientGold() {
 		//Warning
