@@ -8,13 +8,13 @@ import javafx.scene.text.Font;
 import logic.GameController;
 
 public class TowerCell extends StackPane {
-	int prefSize = ControlPane.getControlPaneWidth();
+	int prefSize = TowerConstructionPane.TOWER_PANE_HEIGHT;
 
 	protected int bgSprite;
 
 	private String name;
 	private String damage;
-	private double rateOfFire;
+	private double rate;
 	private double range;
 	private int cost;
 
@@ -48,7 +48,7 @@ public class TowerCell extends StackPane {
 		this.bgSprite = towerData.spriteIndex;
 		this.name = towerData.name;
 		this.damage = (int)towerData.minDamage + "-" + (int)towerData.maxDamage;
-		this.rateOfFire = towerData.rate;
+		this.rate = towerData.rate;
 		this.range = towerData.range;
 		this.cost = towerData.cost;
 
@@ -103,26 +103,6 @@ public class TowerCell extends StackPane {
 		return name;
 	}
 
-	public String getNameWithText() {
-		return "Name: "+this.name;
-	}
-
-	public String getDamageWithText() {
-		return "\nDamage: "+this.damage;
-	}
-
-	public String getRatesWithText() {
-		return "\nRates: "+this.rateOfFire+" shots/sec";
-	}
-
-	public String getRangeWithText() {
-		return "\nRange: "+(int)this.range;
-	}
-
-	public String getCostWithText() {
-		return "\nCost: "+this.cost+" Gold";
-	}
-
 	public int getCost() {
 		return this.cost;
 	}
@@ -131,6 +111,13 @@ public class TowerCell extends StackPane {
 		if(this.isTool())
 			tool.setText(this.getName());
 		else
-			tool.setText(this.getNameWithText() + this.getDamageWithText() + this.getRatesWithText() + this.getRangeWithText() + this.getCostWithText());
+			tool.setText(
+					String.format("Upgrade to %s\n", name) +
+					String.format("Damage: %s\n", damage) +
+					String.format("Rates: %.1f shots/sec\n", rate) +
+					String.format("Range: %d\n", (int)range) +
+					String.format("Cost: %d\n", cost)
+			);
+
 	}
 }

@@ -79,7 +79,7 @@ public class RocketTower extends Tower {
                 rocketBullet = null;
                 rocketBulletImage.setVisible(false);
 
-                new Invoker(this::setupRocket).startIn((long) ((1.0/2)*(1/rateOfFire)*(1000)));
+                new Invoker(this::setupRocket).startIn((long) ((1.0/2)*(1/rate)*(1000)));
 
                 break;
             case 2:
@@ -88,13 +88,13 @@ public class RocketTower extends Tower {
                     rocketLeft = null;
                     rocketLeftImage.setVisible(false);
 
-                    new Invoker(() -> setupRocket(RocketSide.LEFT)).startIn((long) ((7.0/5)*(1/rateOfFire)*(1000)));
+                    new Invoker(() -> setupRocket(RocketSide.LEFT)).startIn((long) ((7.0/5)*(1/rate)*(1000)));
                 } else if (rocketRight != null) {
                     rocketRight.fire(target, this.getCenterPosition().add(Vector2.fromMagnitudeAndDirection(8.6023, this.turret.getRotate()+ ROCKET_ANGLE_ALPHA)), this.turret.getRotate());
                     rocketRight = null;
                     rocketRightImage.setVisible(false);
 
-                    new Invoker(() -> setupRocket(RocketSide.RIGHT)).startIn((long) ((7.0/5)*(1/rateOfFire)*(1000)));
+                    new Invoker(() -> setupRocket(RocketSide.RIGHT)).startIn((long) ((7.0/5)*(1/rate)*(1000)));
                 }
                 break;
         }

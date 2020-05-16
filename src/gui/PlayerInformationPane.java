@@ -15,8 +15,8 @@ public class PlayerInformationPane extends HBox{
 	public Text hpText,goldText,goldValue,waveText,waveNumberText;
 
 	public void createPreset() {
-		hpText = new Text("Health Points");
-		goldText = new Text("Golds");
+		hpText = new Text("Health");
+		goldText = new Text("Gold");
 		waveText = new Text("Wave");
 		waveNumberText = new Text(Integer.toString(MinionWaveController.getWaveNumber()));
 		goldValue = new Text(Integer.toString(GameController.getGold()));

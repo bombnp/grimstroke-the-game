@@ -2,6 +2,7 @@ package gui;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import logic.MinionWaveController;
 
 public class GamePane extends AnchorPane{
@@ -14,7 +15,7 @@ public class GamePane extends AnchorPane{
         this.getChildren().add(boardGrid);
         createNextWaveButton();
         createEntityInformationPane();
-        createPlayerStatusPane();
+        createPlayerAndTowerPane();
     }
     public void createNextWaveButton() {
         nextWaveButton = new Button("NEXT");
@@ -35,11 +36,13 @@ public class GamePane extends AnchorPane{
     	this.getChildren().add(informationPane);
     }
     
-    public void createPlayerStatusPane() {
+    public void createPlayerAndTowerPane() {
     	playerStatusPane = new PlayerInformationPane();
-    	setLeftAnchor(playerStatusPane, 10.0);
-    	setTopAnchor(playerStatusPane, 10.0);
-    	this.getChildren().add(playerStatusPane);
+        HBox box = new HBox(playerStatusPane, new TowerConstructionPane());
+        box.setSpacing(10);
+        setLeftAnchor(box, 10.0);
+        setTopAnchor(box, 10.0);
+        this.getChildren().add(box);
     }
     public BoardGrid getBoardGrid() {
         return boardGrid;

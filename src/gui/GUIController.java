@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 public class GUIController {
     private static HBox root;
 
-    private static ControlPane controlPane;
     private static GamePane gamePane;
 
     private static BoardGrid boardGrid;
@@ -19,10 +18,9 @@ public class GUIController {
     public static final Background BG_TOWER_HOVER = new Background(new BackgroundFill(Color.LIMEGREEN.desaturate(), CornerRadii.EMPTY, Insets.EMPTY));
 
     public static HBox initialize() {
-        controlPane = new ControlPane();
         gamePane = new GamePane();
         boardGrid = gamePane.getBoardGrid();
-        root = new HBox(controlPane, gamePane);
+        root = new HBox(gamePane);
         root.setPadding(new Insets(10));
         root.setSpacing(10);
 
@@ -30,10 +28,6 @@ public class GUIController {
     }
 
     public static HBox getRoot() { return root; }
-
-    public static ControlPane getControlPane() {
-        return controlPane;
-    }
 
     public static GamePane getGamePane() {
         return gamePane;

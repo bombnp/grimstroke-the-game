@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Tower extends StackPane implements Updatable{
-    protected double minDamage, maxDamage, rateOfFire, range, cooldown = 0;
+    protected double minDamage, maxDamage, rate, range, cooldown = 0;
     protected int cost, level;
     protected final Vector2 centerPosition;
     protected Minion currentTarget;
@@ -56,7 +56,7 @@ public abstract class Tower extends StackPane implements Updatable{
     public void extractData(TowerData towerData) {
         this.minDamage = towerData.minDamage;
         this.maxDamage = towerData.maxDamage;
-        this.rateOfFire = towerData.rate;
+        this.rate = towerData.rate;
         this.range = towerData.range;
         this.cost = towerData.cost;
     }
@@ -105,7 +105,7 @@ public abstract class Tower extends StackPane implements Updatable{
 
         if (cooldown == 0 && currentTarget != null) {
             this.attack(currentTarget);
-            cooldown = 1/rateOfFire;
+            cooldown = 1/ rate;
         }
     }
 

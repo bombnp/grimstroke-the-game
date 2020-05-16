@@ -3,21 +3,18 @@ package gui;
 import database.Database;
 import database.TowerData;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
-public class ControlPane extends VBox {
-	private static final int CONTROL_PANE_WIDTH = 100;
+public class TowerConstructionPane extends HBox {
+	public static final int TOWER_PANE_HEIGHT = 59;
 
-    public ControlPane() {
+    public TowerConstructionPane() {
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        this.setPrefWidth(CONTROL_PANE_WIDTH);
-        this.setSpacing(10);
-        this.setAlignment(Pos.CENTER);
+        this.setPrefHeight(TOWER_PANE_HEIGHT);
 
         addTower(Database.MG[0]);
         addTower(Database.Rocket[0]);
@@ -32,7 +29,4 @@ public class ControlPane extends VBox {
         this.getChildren().add(towerCell);
     }
 
-    public static int getControlPaneWidth() {
-    	return CONTROL_PANE_WIDTH;
-    }
 }
