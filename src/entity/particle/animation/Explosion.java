@@ -7,10 +7,27 @@ import javafx.application.Platform;
 import javafx.scene.image.Image;
 import logic.Vector2;
 
+/**
+ * The Explosion class represents an explosion from the {@link entity.tower.RocketTower RocketTower}.
+ * This class, when instantiated, loads the explosion animation and play through it at the given position,
+ * then removes itself.
+ */
 public class Explosion extends CellImage {
+    /**
+     * The explosion animation.
+     */
     private final Image[] animation;
+
+    /**
+     * The FPS of this animation ({@value})
+     */
     private final double FPS = 15;
 
+    /**
+     * The constructor of the Explosion class. Loads the animation and create a {@link Thread} to play through it.
+     * @param position The position of the explosion.
+     * @param explosionScale The size of the explosion, compared to the original size.
+     */
     public Explosion(Vector2 position, double explosionScale) {
         animation = Utility.getAnimation("explosion", 8);
 

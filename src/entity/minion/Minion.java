@@ -46,37 +46,37 @@ public class Minion extends StackPane implements Updatable {
     private Vector2 destination;
 
     /**
-     * The current position of this minion.
+     * The current position of the minion.
      */
     private Vector2 currentPosition;
 
     /**
-     * The name of this minion.
+     * The name of the minion.
      */
     private String name;
 
     /**
-     * The reward for killing this minion.
+     * The reward for killing the minion.
      */
     private int reward;
 
     /**
-     * The damage this minion will deal to the player's health if it reaches the end of path.
+     * The damage the minion will deal to the player's health if it reaches the end of path.
      */
     private int penalty;
 
     /**
-     * The maximum amount of health of this minion.
+     * The maximum amount of health of the minion.
      */
     private double maxHealth;
 
     /**
-     * The current amount of health of this minion.
+     * The current amount of health of the minion.
      */
     private double currentHealth;
 
     /**
-     * The speed in which this minion moves.
+     * The speed in which the minion moves.
      */
     private double speed;
 
@@ -96,23 +96,23 @@ public class Minion extends StackPane implements Updatable {
     private double resist_Cannon;
 
     /**
-     * This field indicates whether this minion is flying or not.
+     * This field indicates whether the minion is flying or not.
      */
     private boolean isFlying;
 
     /**
-     * The health bar above this minion.
+     * The health bar above the minion.
      * It only appears after it has taken a hit from a {@link entity.tower.base.Tower Tower}.
      */
     private ProgressBar healthBar;
 
     /**
-     * The {@link CellImage Image} that represents this minion.
+     * The {@link CellImage Image} that represents the minion.
      */
     private final CellImage minionImage;
 
     /**
-     * The drop shadow for when this minion is selected.
+     * The drop shadow for when the minion is selected.
      */
     private final DropShadow dropShadow;
 
