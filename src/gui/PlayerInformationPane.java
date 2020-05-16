@@ -11,7 +11,9 @@ import logic.MinionWaveController;
 
 public class PlayerInformationPane extends HBox{
 	public ProgressBar hpBar;
+
 	public Text hpText,goldText,goldValue,waveText,waveNumberText;
+
 	public void createPreset() {
 		hpText = new Text("Health Points");
 		goldText = new Text("Golds");
@@ -22,24 +24,25 @@ public class PlayerInformationPane extends HBox{
 		setStyle();
 		initializeAllInfo();
 	}
+
 	public void updateData() {
 		goldValue.setText(Integer.toString(GameController.getGold()));
 		hpBar.setProgress((float)GameController.getCurrentHp()/(float)GameController.getMaxHp());
 		waveNumberText.setText(Integer.toString(MinionWaveController.getWaveNumber()));
 	}
-	public void InvokeInsufficientGold() {
-		//Warning
-	}
+
 	public void setStyle() {
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.setPadding(new Insets(10,10,10,10));
 		this.setSpacing(20);		
 	}
+
 	public void initializeAllInfo() {
 		addContext(groupContext(hpText, hpBar));	
 		addContext(groupContext(goldText, goldValue));
 		addContext(groupContext(waveText, waveNumberText));
 	}
+
 	public VBox groupContext(Text text1,Text text2) {
 		VBox Context = new VBox();
 		Context.getChildren().addAll(text1,text2);
@@ -47,6 +50,7 @@ public class PlayerInformationPane extends HBox{
 		Context.setSpacing(5);
 		return Context;
 	}
+
 	public VBox groupContext(Text text,ProgressBar bar) {
 		VBox Context = new VBox();
 		Context.getChildren().addAll(text,bar);
@@ -54,6 +58,7 @@ public class PlayerInformationPane extends HBox{
 		Context.setSpacing(5);
 		return Context;
 	}
+
 	public void addContext(VBox context) {
 		this.getChildren().add(context);
 	}

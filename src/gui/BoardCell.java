@@ -54,8 +54,6 @@ public class BoardCell extends StackPane {
                 try {
                 	if (GameController.canBuy(GameController.getSelectedTower())) {
                         this.setTower(GameController.generateSelectedTower(this));
-                    } else {
-                        GamePane.playerStatusPane.InvokeInsufficientGold();
                     }
                 } catch (InvalidTowerException e) {
                     e.printStackTrace();
@@ -108,8 +106,6 @@ public class BoardCell extends StackPane {
             try {
                 if (GameController.canBuy(GameController.getSelectedTower())) {
                     this.setTower(GameController.generateSelectedTower(this));
-                } else {
-                    GamePane.playerStatusPane.InvokeInsufficientGold();
                 }
             } catch (InvalidTowerException e) {
                 e.printStackTrace();
@@ -147,8 +143,6 @@ public class BoardCell extends StackPane {
                             break;
                     }
                     upgradeTooltip.hide();
-                } else {
-                    GamePane.playerStatusPane.InvokeInsufficientGold();
                 }
             }
         });
