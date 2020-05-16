@@ -52,7 +52,6 @@ public class BoardCell extends StackPane {
 
             this.setOnMouseClicked(mouseEvent -> {
                 try {
-                    System.out.println(buildable);
                 	if (GameController.canBuy(GameController.getSelectedTower())) {
                         this.setTower(GameController.generateSelectedTower(this));
                     } else {

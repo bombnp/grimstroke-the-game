@@ -17,23 +17,22 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Tower extends StackPane implements Updatable{
-    protected double minDamage, maxDamage;
-    protected double rateOfFire, range;
-    protected double cooldown = 0;
-    protected int cost;
+    protected double minDamage, maxDamage, rateOfFire, range, cooldown = 0;
+    protected int cost, level;
     protected final Vector2 centerPosition;
     protected Minion currentTarget;
 
     protected Pane turret = new Pane();
     protected CellImage turretImage;
 
-    protected int level;
+    protected BoardCell cell;
 
     public Tower(BoardCell cell, TowerData towerData, int level) {
         extractData(towerData);
 
         this.centerPosition = new Vector2(cell.getCol()*48 + 24, cell.getRow()*48 + 24);
         this.level = level;
+        this.cell = cell;
 
         GameController.addMoney(-1*cost);
 
@@ -166,5 +165,9 @@ public abstract class Tower extends StackPane implements Updatable{
 
     public Vector2 getCenterPosition() {
         return centerPosition;
+    }
+
+    public BoardCell getCell() {
+        return cell;
     }
 }

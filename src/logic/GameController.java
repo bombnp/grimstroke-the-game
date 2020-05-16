@@ -106,16 +106,18 @@ public class GameController {
     }
 
     public static void restart() {
-        BoardCell[][] boardCells = GUIController.getBoardGrid().getBoardCells();
-        for (BoardCell[] row : boardCells) {
-            for (BoardCell cell : row) {
-                if (cell.getTower() != null)
-                    cell.removeTower();
-            }
-        }
         currentHp = 20;
         gold = 10;
         isGameOver = false;
+
+        for (Updatable updatable : updatables) {
+            if (updatable instanceof Tower) {
+                ((Tower) updatable).getCell().removeTower();
+            } else {
+                //noinspection SuspiciousMethodCalls
+                GUIController.getGamePane().getChildren().remove(updatable);
+            }
+        }
 
         updatables.clear();
         minions.clear();
