@@ -9,9 +9,22 @@ import gui.Sprite;
 import logic.DamageType;
 import logic.Invoker;
 
+/**
+ * The MachineGunTower class represents the Machine Gun Towers. Machine Gun Towers are the only towers that
+ * can target flying {@link Minion Minions}.
+ */
 public class MachineGunTower extends Tower {
+    /**
+     * The firing particles of the tower.
+     */
     private CellImage[] particles;
 
+    /**
+     * The constructor of the MachineGunTower class. It corrects the position of the
+     * turret image and sets up the firing particle.
+     * @param cell The cell the tower is bound to.
+     * @param level The level of the tower.
+     */
     public MachineGunTower(BoardCell cell, int level) {
         super(cell, Database.MG[level-1], level);
         this.turretImage.setTranslateY(-5);
@@ -19,6 +32,10 @@ public class MachineGunTower extends Tower {
         setupFiringParticle(level);
     }
 
+    /**
+     * Sets up the firing particles of the tower, based on the tower level.
+     * @param level The level of the tower.
+     */
     private void setupFiringParticle(int level) {
         switch(level) {
             case 1:
@@ -41,6 +58,11 @@ public class MachineGunTower extends Tower {
         }
     }
 
+    /**
+     * The implementation of the {@link Tower#attack(Minion) attack} method of the {@link Tower} class. It damages
+     * the target, set the visibility of the particles to true and set it to false later using {@link Invoker}.
+     * @param target The target of the tower.
+     */
     @Override
     public void attack(Minion target) {
         for (CellImage particle : particles) {

@@ -10,9 +10,21 @@ import gui.Sprite;
 import logic.Invoker;
 import logic.Vector2;
 
+/**
+ * The CannonTower class represents the Cannon Towers. They shoot {@link CannonBullet Cannon Bullets} to their targets.
+ */
 public class CannonTower extends Tower {
+    /**
+     * The firing particles of the tower.
+     */
     private CellImage[] particles;
 
+    /**
+     * The constructor of the CannonTower class. It corrects the position of the
+     * turret image and sets up the firing particle.
+     * @param cell The cell the tower is bound to.
+     * @param level The level of the tower.
+     */
     public CannonTower(BoardCell cell, int level) {
         super(cell, Database.Cannon[level-1], level);
         this.turretImage.setTranslateY(-5);
@@ -20,6 +32,10 @@ public class CannonTower extends Tower {
         setupFiringParticle(level);
     }
 
+    /**
+     * Sets up the firing particles of the tower, based on the tower level.
+     * @param level The level of the tower.
+     */
     private void setupFiringParticle(int level) {
         switch(level) {
             case 1:
@@ -40,6 +56,12 @@ public class CannonTower extends Tower {
         }
     }
 
+    /**
+     * The implementation of the {@link Tower#attack(Minion) attack} method of the {@link Tower} class. It creates
+     * a {@link CannonBullet}, sets the visibility of the particles to true and sets it to false later using
+     * {@link Invoker}.
+     * @param target The target of the tower.
+     */
     @Override
     public void attack(Minion target) {
         for (CellImage particle : particles) {

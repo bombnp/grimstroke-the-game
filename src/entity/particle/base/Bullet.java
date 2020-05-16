@@ -150,7 +150,7 @@ public abstract class Bullet extends CellImage implements Updatable {
 
     /**
      * Called when the bullet hits its target.
-     * Different types of bullet have different implementation of this method.
+     * Different types of bullet have different implementations of this method.
      * @param target The target of the bullet.
      */
     public abstract void hit(Minion target);

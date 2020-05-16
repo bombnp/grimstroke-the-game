@@ -10,18 +10,43 @@ import gui.Sprite;
 import logic.Invoker;
 import logic.Vector2;
 
+/**
+ * The RocketTower class represents the Rocket Towers. They shoot {@link RocketBullet Rocket Bullets} to their targets.
+ */
 public class RocketTower extends Tower {
+    /**
+     * The {@link RocketBullet} for firing. (Lv. 1)
+     */
     private RocketBullet rocketBullet;
+
+    /**
+     * The {@link RocketBullet RocketBullets} for firing. (Lv. 2)
+     */
     private RocketBullet rocketLeft, rocketRight;
 
+    /**
+     * The {@link CellImage} of the rocket. (Lv. 1)
+     */
     private CellImage rocketBulletImage;
+
+    /**
+     * The {@link CellImage CellImages} of the rockets. (Lv. 2)
+     */
     private CellImage rocketLeftImage, rocketRightImage;
 
+    /**
+     * The enum for LEFT or RIGHT side of the rockets.
+     */
     public enum RocketSide {
         LEFT,
         RIGHT
     }
 
+    /**
+     * The constructor of the RocketTower class. It sets up the rockets based on its level.
+     * @param cell The cell the tower is bound to.
+     * @param level The level of the tower.
+     */
     public RocketTower(BoardCell cell, int level) {
         super(cell, Database.Rocket[level-1], level);
 
@@ -52,11 +77,18 @@ public class RocketTower extends Tower {
 
     }
 
+    /**
+     * Sets up the rocket. This variant is called if the tower is Lv. 1
+     */
     public void setupRocket() {
         rocketBullet = new RocketBullet(this.level, this.getDamage());
         rocketBulletImage.setVisible(true);
     }
 
+    /**
+     * Sets up the rocket. This variant is called if the tower is Lv. 2
+     * @param side The side of the rockets to setup.
+     */
     public void setupRocket(RocketSide side) {
         switch (side) {
             case LEFT:
@@ -70,6 +102,11 @@ public class RocketTower extends Tower {
         }
     }
 
+    /**
+     * The implementation of the {@link Tower#attack(Minion) attack} method of the {@link Tower} class. It fires the
+     * rockets, and sets up the rocket using {@link Invoker}.
+     * @param target The target of the tower.
+     */
     @Override
     public void attack(Minion target) {
         double ROCKET_ANGLE_ALPHA = 54.462;

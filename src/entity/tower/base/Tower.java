@@ -16,17 +16,86 @@ import logic.Vector2;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The Tower class represents the base class for all types of Towers, namely {@link MachineGunTower Machine Gun Towers},
+ * {@link entity.tower.RocketTower Rocket Towers}, and {@link entity.tower.CannonTower Cannon Towers}. It contains all
+ * the necessary field and methods used by all types of Towers. when created, it extracts the given {@link TowerData}
+ * and adds itself to the {@link gui.GamePane GamePane}. <br>
+ * <br>
+ * This class also implements the {@link Updatable} interface. Every frame, it finds a new target if it doesn't have
+ * one, set the rotation accordingly, and fire if it's ready. {@link Minion Minions} that leaves its range is no longer
+ * targeted, and the Tower must find a new target. <br>
+ * <br>
+ * Each type of Tower has its own damage, rate, range, and cost.
+ */
 public abstract class Tower extends StackPane implements Updatable{
-    protected double minDamage, maxDamage, rate, range, cooldown = 0;
-    protected int cost, level;
-    protected final Vector2 centerPosition;
-    protected Minion currentTarget;
-
-    protected Pane turret = new Pane();
-    protected CellImage turretImage;
-
+    /**
+     * The {@link BoardCell} this tower is bound to.
+     */
     protected BoardCell cell;
 
+    /**
+     * The minimum damage the tower can deal.
+     */
+    protected double minDamage;
+
+    /**
+     * The maximum damage the tower can deal.
+     */
+    protected double maxDamage;
+
+    /**
+     * The rate in which the tower fires, measured in shots per second.
+     */
+    protected double rate;
+
+    /**
+     * The range of the tower, measured in pixels.
+     */
+    protected double range;
+
+    /**
+     * The time until the tower can fire again.
+     */
+    protected double cooldown = 0;
+
+    /**
+     * The cost of the tower.
+     */
+    protected int cost;
+
+    /**
+     * The level of the tower.
+      */
+    protected int level;
+
+    /**
+     * The {@link Vector2 coordinate} of the center position of the tower.
+     */
+    protected final Vector2 centerPosition;
+
+    /**
+     * The current {@link Minion} the tower is targeting.
+     */
+    protected Minion currentTarget;
+
+    /**
+     * The group of {@link javafx.scene.Node Nodes} that represents the turret part of the tower.
+     */
+    protected Pane turret = new Pane();
+
+    /**
+     * The {@link CellImage} that represents the turret image of the tower.
+     */
+    protected CellImage turretImage;
+
+    /**
+     * The constructor for the Tower class. It instantiates the class, extracts the data from the given
+     * {@link TowerData} and positions the image accordingly.
+     * @param cell The cell the tower is bound to.
+     * @param towerData The data of the tower.
+     * @param level The level of the tower.
+     */
     public Tower(BoardCell cell, TowerData towerData, int level) {
         extractData(towerData);
 
@@ -53,6 +122,10 @@ public abstract class Tower extends StackPane implements Updatable{
         Debug.drawTowerRange(this);
     }
 
+    /**
+     * Extracts the data from the given {@link TowerData}
+     * @param towerData The data of the tower.
+     */
     public void extractData(TowerData towerData) {
         this.minDamage = towerData.minDamage;
         this.maxDamage = towerData.maxDamage;
@@ -61,6 +134,10 @@ public abstract class Tower extends StackPane implements Updatable{
         this.cost = towerData.cost;
     }
 
+    /**
+     * Sets the rotation so that the forward axis points to the given {@link Vector2 coordinate}.
+     * @param target The target to have the forward axis point to.
+     */
     public void lookAt(Vector2 target) {
         double dx = target.getX() - this.getCenterPosition().getX();
         double dy = target.getY() - this.getCenterPosition().getY();
@@ -89,6 +166,11 @@ public abstract class Tower extends StackPane implements Updatable{
         }
     }
 
+    /**
+     * The implementation of the {@link Updatable#update(double) update} method of the {@link Updatable} interface.
+     * This method finds a new target if the tower doesn't have one, sets the rotation, and fire if the cooldown is zero.
+     * @param deltaTime The time since the last frame, measured in seconds.
+     */
     @Override
     public void update(double deltaTime) {
         if (currentTarget == null || Vector2.distance(this.getCenterPosition(), currentTarget.getCurrentPosition()) > range) {
@@ -109,6 +191,12 @@ public abstract class Tower extends StackPane implements Updatable{
         }
     }
 
+    /**
+     * Checks if the tower can target the given {@link Minion}. A tower can target a minion if it's
+     * in range and, if the minion is flying, the tower must be {@link MachineGunTower Machine Gun Tower}.
+     * @param minion The minion to be checked if it's targetable.
+     * @return Returns true if the given {@link Minion} is targetable, false otherwise.
+     */
     public boolean isMinionTargetable(Minion minion) {
         if (Vector2.distance(this.getCenterPosition(), minion.getCurrentPosition()) <= range) {
             if (minion.isFlying()) {
@@ -119,6 +207,9 @@ public abstract class Tower extends StackPane implements Updatable{
         return false;
     }
 
+    /**
+     * Finds all targetable {@link Minion Minions} and select a new target based on the minions' progress on the path.
+     */
     public void findNewTarget() {
         ArrayList<Minion> minions = GameController.getMinions();
         currentTarget = null;
@@ -136,37 +227,73 @@ public abstract class Tower extends StackPane implements Updatable{
         }
     }
 
+    /**
+     * Called when the tower attempts to attack. Different types of Towers have different implementations of the method.
+     * @param target The target of the tower.
+     */
+    public abstract void attack(Minion target);
+
+    /**
+     * Randomizes the damage between {@link #minDamage} and {@link #maxDamage}.
+     * @return The randomized damage between {@link #minDamage} and {@link #maxDamage}.
+     */
     public double getDamage() {
         Random randomizer = new Random();
         return randomizer.nextDouble() * (maxDamage-minDamage) + minDamage;
     }
 
+    /**
+     * Gets the {@link #currentTarget}.
+     * @return The {@link #currentTarget}.
+     */
     public Minion getCurrentTarget() {
         return currentTarget;
     }
 
+    /**
+     * Sets the {@link #currentTarget}.
+     * @param currentTarget The minion to be targeted.
+     */
     public void setCurrentTarget(Minion currentTarget) {
         this.currentTarget = currentTarget;
     }
 
-    public abstract void attack(Minion target);
-
+    /**
+     * Gets the {@link #level}.
+     * @return The {@link #level}.
+     */
     public int getLevel() {
         return level;
     }
 
+    /**
+     * Gets the {@link #range}.
+     * @return The {@link #range}.
+     */
     public double getRange() {
         return range;
     }
 
+    /**
+     * Gets the {@link #cost}.
+     * @return The {@link #cost}.
+     */
     public int getCost() {
         return cost;
     }
 
+    /**
+     * Gets the {@link #centerPosition}.
+     * @return The {@link #centerPosition}.
+     */
     public Vector2 getCenterPosition() {
         return centerPosition;
     }
 
+    /**
+     * Gets the {@link #cell}.
+     * @return The {@link #cell}
+     */
     public BoardCell getCell() {
         return cell;
     }

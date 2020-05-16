@@ -107,7 +107,7 @@ public class Minion extends StackPane implements Updatable {
     private ProgressBar healthBar;
 
     /**
-     * The {@link CellImage Image} that represents the minion.
+     * The {@link CellImage} that represents the minion.
      */
     private final CellImage minionImage;
 
