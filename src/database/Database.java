@@ -5,8 +5,14 @@ import entity.minion.Minion;
 
 /**
  * The Database class stores all information of {@link entity.tower.base.Tower Towers},
- * {@link Minion Minions}, and {@link WaveData Waves}.
- * All datas are stored in public fields and can be accessed from anywhere
+ * {@link Minion Minions}, and {@link WaveData Waves}. <br>
+ * <br>
+ * The {@link #initialize()} method is called at the start of the application
+ * and loads all types of data into each respective fields. The class stores tower data in three
+ * arrays of {@link TowerData TowerDatas}, one for each {@link entity.tower.base.Tower Tower} type
+ * (Machine Gun, Rocket, Cannon). For {@link Minion Minion}, the data is stored in an array of 8,
+ * one for each type of {@link Minion Minions}. Lastly, the {@link WaveData WaveData} is stored
+ * as an array of each wave.
  *
  * @see TowerData
  * @see MinionData

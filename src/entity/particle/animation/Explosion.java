@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 import logic.Vector2;
 
 public class Explosion extends CellImage {
-    private Image[] animation;
-    private double FPS = 15;
+    private final Image[] animation;
+    private final double FPS = 15;
 
     public Explosion(Vector2 position, double explosionScale) {
         animation = Utility.getAnimation("explosion", 8);

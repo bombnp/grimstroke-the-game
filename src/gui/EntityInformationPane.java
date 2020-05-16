@@ -13,7 +13,7 @@ public class EntityInformationPane extends HBox{
 	public ProgressBar healthBar, resist_MG_bar, resist_Rocket_bar, resist_Cannon_bar;
 	public String unitName;
 	public double maxHp,hp, resist_MG, resist_Rocket, resist_Cannon;
-	public Minion SelectedMinion;
+	public Minion selectedMinion;
 	public EntityInformationPane() {
 		createPreset();
 	}
@@ -34,16 +34,22 @@ public class EntityInformationPane extends HBox{
 	}
 
 	public Minion getSelectedMinion() {
-		return SelectedMinion;
+		return selectedMinion;
 	}
 
-	public void sendInfo(Minion selectedMinion, String unitName, double maxHp, double hp, double resist_MG, double resist_Rocket, double resist_Cannon) {
-		this.SelectedMinion = selectedMinion;
-		this.nameText.setText(unitName);
-		this.healthBar.setProgress(hp/maxHp);
-		this.resist_MG_bar.setProgress(resist_MG);
-		this.resist_Rocket_bar.setProgress(resist_Rocket);
-		this.resist_Cannon_bar.setProgress(resist_Cannon);
+	public void sendInfo(Minion selectedMinion) {
+		if (this.selectedMinion != null) {
+			this.selectedMinion.setDropShadow(false);
+		}
+		this.selectedMinion = selectedMinion;
+		if (selectedMinion != null) {
+			this.nameText.setText(selectedMinion.getName());
+			this.healthBar.setProgress(selectedMinion.getCurrentHealth()/selectedMinion.getMaxHealth());
+			this.resist_MG_bar.setProgress(selectedMinion.getResist_MG());
+			this.resist_Rocket_bar.setProgress(selectedMinion.getResist_Rocket());
+			this.resist_Cannon_bar.setProgress(selectedMinion.getResist_Cannon());
+			this.selectedMinion.setDropShadow(true);
+		}
 		this.setVisible(selectedMinion != null);
 	}
 

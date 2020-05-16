@@ -60,7 +60,9 @@ public class GameController {
                                 ((Tower) updatable).setCurrentTarget(null);
                             }
                         }
-
+                        if (garbage.equals(GamePane.informationPane.getSelectedMinion())) {
+                            GamePane.informationPane.setVisible(false);
+                        }
                     }
                     updatables.remove(garbage);
                     //noinspection SuspiciousMethodCalls
@@ -124,6 +126,7 @@ public class GameController {
         updatablesAddList.clear();
         MinionWaveController.setWaveNumber(1);
         GamePane.playerStatusPane.updateData();
+        GamePane.informationPane.setVisible(false);
 
         setSelectedTower(null);
         GUIController.getGamePane().getNextWaveButton().setDisable(false);
