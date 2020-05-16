@@ -139,10 +139,10 @@ public class GameController {
 
     public static void setSelectedTower(TowerCell tower) {
         if (selectedTower != null)
-            selectedTower.setCurrentBG(GUIController.BG.TOWER_UNSELECTED);
+            selectedTower.setCurrentBG(GUIController.BG_TOWER_UNSELECTED);
         selectedTower = tower;
         if (selectedTower != null)
-            selectedTower.setCurrentBG(GUIController.BG.TOWER_SELECTED);
+            selectedTower.setCurrentBG(GUIController.BG_TOWER_SELECTED);
     }
 
     public static Tower generateSelectedTower(BoardCell targetCell) throws InvalidTowerException {

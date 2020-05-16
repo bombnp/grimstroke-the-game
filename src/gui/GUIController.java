@@ -14,15 +14,9 @@ public class GUIController {
 
     private static BoardGrid boardGrid;
 
-    public static class BG {
-        public static final Background BLANK = Background.EMPTY;
-
-        public static final Background TOWER_UNSELECTED = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
-        public static final Background TOWER_SELECTED = new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY));
-        public static final Background TOWER_HOVER = new Background(new BackgroundFill(Color.LIMEGREEN.desaturate(), CornerRadii.EMPTY, Insets.EMPTY));
-
-        public static final Background CELL_HOVER= new Background(new BackgroundFill(Color.LIMEGREEN, CornerRadii.EMPTY, Insets.EMPTY));
-    }
+    public static final Background BG_TOWER_UNSELECTED = new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY));
+    public static final Background BG_TOWER_SELECTED = new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY));
+    public static final Background BG_TOWER_HOVER = new Background(new BackgroundFill(Color.LIMEGREEN.desaturate(), CornerRadii.EMPTY, Insets.EMPTY));
 
     public static HBox initialize() {
         controlPane = new ControlPane();

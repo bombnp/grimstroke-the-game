@@ -36,7 +36,7 @@ public class TowerCell extends StackPane {
 		this.setPrefWidth(prefSize);
 		this.setPrefHeight(prefSize);
 
-		this.currentBG = GUIController.BG.TOWER_UNSELECTED;
+		this.currentBG = GUIController.BG_TOWER_UNSELECTED;
 		this.setBackground(currentBG);
 
 		setTooltip();
@@ -55,8 +55,8 @@ public class TowerCell extends StackPane {
 		this.setPrefWidth(prefSize);
 		this.setPrefHeight(prefSize);
 
-		this.currentBG = GUIController.BG.TOWER_UNSELECTED;
-		this.setBackground(currentBG);
+		this.currentBG = GUIController.BG_TOWER_UNSELECTED;
+		this.setBackground(null);
 
 		this.getChildren().add(new TowerImage(bgSprite));
 
@@ -70,7 +70,7 @@ public class TowerCell extends StackPane {
     	tooltip.setFont(new Font(12));
     	this.setTooltipText(tooltip);
 
-		this.setOnMouseMoved(mouseEvent -> tooltip.show(this, mouseEvent.getScreenX() + 5, mouseEvent.getScreenY() + 10));
+		this.setOnMouseMoved(mouseEvent -> tooltip.show(this, mouseEvent.getScreenX() + 10, mouseEvent.getScreenY() + 10));
 		this.setOnMouseExited(mouseEvent -> {
 			tooltip.hide();
 			this.setBackground(currentBG);
@@ -78,7 +78,7 @@ public class TowerCell extends StackPane {
 	}
 
 	public void addListener() {
-		this.setOnMouseEntered(mouseEvent -> this.setBackground(GUIController.BG.TOWER_HOVER));
+		this.setOnMouseEntered(mouseEvent -> this.setBackground(GUIController.BG_TOWER_HOVER));
 		this.setOnMouseClicked(mouseEvent -> GameController.setSelectedTower(this));
 	}
 
