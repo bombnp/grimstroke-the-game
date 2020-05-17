@@ -32,10 +32,10 @@ public class EntityInformationPane extends HBox{
 	 * The constructor of the EntityInformationPane class. It initializes the fields.
 	 */
 	public EntityInformationPane() {
-		nameDisplay = new Text("unit");
-		resist_MG_text = new Text("resist_MG");
-		resist_Rocket_text = new Text("resist_Rocket");
-		resist_Cannon_text = new Text("resist_Cannon");
+		nameDisplay = new Text("Unit Name");
+		resist_MG_text = new Text("MachineGun Resistance");
+		resist_Rocket_text = new Text("Rocket Resistance");
+		resist_Cannon_text = new Text("Cannon Resistance");
 		nameText = new Text();
 		resist_MG_bar = new ProgressBar();
 		resist_Rocket_bar = new ProgressBar();
