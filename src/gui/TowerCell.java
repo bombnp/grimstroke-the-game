@@ -31,11 +31,26 @@ public class TowerCell extends StackPane {
 	 * The rate in which the tower fires, measured in shots per second.
 	 */
 	private double rate;
+
+	/**
+	 * The range of the tower, measured in pixels.
+	 */
 	private double range;
+
+	/**
+	 * The cost of the tower.
+	 */
 	private int cost;
 
-	protected Background currentBG;
+	/**
+	 * The current {@link Background} of the tower.
+	 */
+	private Background currentBG;
 
+	/**
+	 * The constructor of the TowerCell class. This variant of the cell
+	 * @param toolName
+	 */
 	public TowerCell(String toolName) {
 		switch (toolName) {
 			case "Sell Tool":
@@ -127,7 +142,7 @@ public class TowerCell extends StackPane {
 			tool.setText(this.getName());
 		else
 			tool.setText(
-					name +
+					name + "\n" +
 					String.format("Damage: %s\n", damage) +
 					String.format("Rates: %.1f shots/sec\n", rate) +
 					String.format("Range: %d\n", (int)range) +
