@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="entity.particle.RocketBullet" project="project-2019-2-covid-19" 
     file="/project-2019-2-covid-19/src/entity/particle/RocketBullet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1187" y="572"/>    
+    <position height="-1" width="-1" x="1109" y="570"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="entity.particle.CannonBullet" project="project-2019-2-covid-19" 
     file="/project-2019-2-covid-19/src/entity/particle/CannonBullet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="960" y="535"/>    
+    <position height="-1" width="-1" x="883" y="533"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="entity.particle.animation.Explosion" project="project-2019-2-covid-19" 
     file="/project-2019-2-covid-19/src/entity/particle/animation/Explosion.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1265" y="266"/>    
+    <position height="-1" width="-1" x="1168" y="274"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="entity.particle.base.Bullet" project="project-2019-2-covid-19" 
     file="/project-2019-2-covid-19/src/entity/particle/base/Bullet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1070" y="331"/>    
+    <position height="-1" width="-1" x="976" y="335"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -165,7 +165,7 @@
   </class>  
   <class id="19" language="java" name="exception.InvalidTowerException" project="project-2019-2-covid-19" 
     file="/project-2019-2-covid-19/src/exception/InvalidTowerException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="845" y="256"/>    
+    <position height="-1" width="-1" x="1338" y="259"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -210,7 +210,7 @@
   </class>  
   <class id="24" language="java" name="gui.CellImage" project="project-2019-2-covid-19" 
     file="/project-2019-2-covid-19/src/gui/CellImage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1164" y="93"/>    
+    <position height="-1" width="-1" x="1078" y="117"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
