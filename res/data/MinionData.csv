@@ -1,9 +1,9 @@
-245,Conscript,Basic ground unit,1,100,1,0,0,0,FALSE,1
-246,Armored Conscript,Ground unit with moderate damage resistance,3,100,0.6,0.3,0.225,0.15,FALSE,2
-247,Infantry,Fast ground unit,2,100,1.2,0.2,0.15,0.1,FALSE,3
-248,Combat Medic,Ground unit that can heal nearby allies,3,100,1,0.1,0.2,0,FALSE,3
-268,Light Tank,Fast and fragile tank,5,100,1.25,0.65,0.4,0.25,FALSE,4
-269,Heavy Tank,Slow but sturdy tank,8,100,0.5,0.95,0.75,0.5,FALSE,5
-270,Light Plane,Fast and only takes damage from machine gun,4,100,10,0.25,1,1,TRUE,3
-271,Fighter Plane,Sturdy and only takes damage from machine gun,7,100,1,0.4,1,1,TRUE,4
+245,Conscript,Basic ground unit,1,100,1.4,0.2,0.2,0.2,FALSE,1
+246,Armored Conscript,Ground unit with moderate damage resistance,2,100,1.5,0.6,0.5,0.4,FALSE,2
+247,Infantry,Fast ground unit,2,100,1.8,0.4,0.4,0.3,FALSE,3
+248,Combat Medic,Ground unit that can heal nearby allies,2,100,1.7,0.2,0.4,0.3,FALSE,3
+268,Light Tank,Fast and fragile tank,3,100,1.5,0.9,0.8,0.4,FALSE,4
+269,Heavy Tank,Slow but sturdy tank,4,100,0.8,0.95,0.9,0.8,FALSE,5
+270,Light Plane,Fast and only takes damage from machine gun,3,100,2.2,0.4,1,1,TRUE,3
+271,Fighter Plane,Sturdy and only takes damage from machine gun,5,100,1.6,0.8,1,1,TRUE,4
 (SPRITE), (NAME), (DESCRIPTION), (REWARD), (HEALTH), (SPEED), (RESIST_MG), (RESIST_ROCKET), (RESIST_CANNON), (IS_FLYING),(PENALTY)
