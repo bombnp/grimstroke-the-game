@@ -69,12 +69,12 @@ public class GameController {
 	private static final int maxHp = 20;
 
     /**
-     * The current amount of health the player has. Starts the game with ({@value}).
+     * The current amount of health the player has.
      */
 	private static int currentHp = 20;
 
     /**
-     * The current amount of gold the player has. Starts the game with ({@value}).
+     * The current amount of gold the player has.
      */
     private static int gold = 10;
 
