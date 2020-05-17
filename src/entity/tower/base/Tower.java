@@ -1,7 +1,6 @@
 package entity.tower.base;
 
 import database.TowerData;
-import debug.Debug;
 import entity.Updatable;
 import entity.minion.Minion;
 import entity.tower.MachineGunTower;
@@ -118,8 +117,6 @@ public abstract class Tower extends StackPane implements Updatable{
         this.setMouseTransparent(true);
 
         GameController.getUpdatables().add(this);
-
-        Debug.drawTowerRange(this);
     }
 
     /**

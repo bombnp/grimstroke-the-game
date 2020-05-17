@@ -2,7 +2,6 @@ package gui;
 
 import database.Database;
 import database.TowerData;
-import debug.Debug;
 import entity.tower.CannonTower;
 import entity.tower.MachineGunTower;
 import entity.tower.RocketTower;
@@ -160,7 +159,6 @@ public class BoardCell extends StackPane {
 
         GameController.removeUpdatable(tower);
         GUIController.getGamePane().getChildren().remove(tower);
-        Debug.removeTowerRange(tower);
     }
 
     /**
