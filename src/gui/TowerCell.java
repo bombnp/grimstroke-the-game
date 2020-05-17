@@ -7,13 +7,29 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import logic.GameController;
 
+/**
+ * The TowerCell class represents the buttons in the {@link TowerConstructionPane}. Each towerCells represents
+ * each individual {@link entity.tower.base.Tower Towers}.
+ */
 public class TowerCell extends StackPane {
-	int prefSize = TowerConstructionPane.TOWER_PANE_HEIGHT;
+	/**
+	 * The preferred width and height of the cell. ({@value})
+	 */
+	private final int prefSize = TowerConstructionPane.TOWER_PANE_HEIGHT;
 
-	protected int bgSprite;
-
+	/**
+	 * The name of the tower.
+	 */
 	private String name;
+
+	/**
+	 * The damage of the tower.
+	 */
 	private String damage;
+
+	/**
+	 * The rate in which the tower fires, measured in shots per second.
+	 */
 	private double rate;
 	private double range;
 	private int cost;
@@ -45,7 +61,6 @@ public class TowerCell extends StackPane {
 	}
 
 	public TowerCell(TowerData towerData) {
-		this.bgSprite = towerData.spriteIndex;
 		this.name = towerData.name;
 		this.damage = (int)towerData.minDamage + "-" + (int)towerData.maxDamage;
 		this.rate = towerData.rate;
@@ -58,7 +73,7 @@ public class TowerCell extends StackPane {
 		this.currentBG = GUIController.BG_TOWER_UNSELECTED;
 		this.setBackground(null);
 
-		this.getChildren().add(new TowerImage(bgSprite));
+		this.getChildren().add(new TowerImage(towerData.spriteIndex));
 
 		setTooltip();
 
@@ -112,7 +127,7 @@ public class TowerCell extends StackPane {
 			tool.setText(this.getName());
 		else
 			tool.setText(
-					String.format("Upgrade to %s\n", name) +
+					name +
 					String.format("Damage: %s\n", damage) +
 					String.format("Rates: %.1f shots/sec\n", rate) +
 					String.format("Range: %d\n", (int)range) +

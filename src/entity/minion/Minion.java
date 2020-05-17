@@ -150,7 +150,7 @@ public class Minion extends StackPane implements Updatable {
 
         this.setOnMouseClicked(e -> {
             minionImage.setEffect(dropShadow);
-            GamePane.informationPane.sendInfo(this);
+            GamePane.entityInformationPane.setSelectedMinion(this);
         });
                
         setHealthBar();
@@ -329,7 +329,7 @@ public class Minion extends StackPane implements Updatable {
         currentHealth -= damage;
         if (currentHealth <= 0) {
             GameController.removeUpdatable(this);
-            GamePane.informationPane.sendInfo(null);
+            GamePane.entityInformationPane.setSelectedMinion(null);
             GameController.addMoney(reward);
         }
 

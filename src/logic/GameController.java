@@ -32,7 +32,6 @@ public class GameController {
 	private static int currentHp = 20, gold = 10;
 	private static boolean isGameOver = false;
     public static void initialize(String mapName) {
-		GamePane.playerStatusPane.createPreset();
         String[][] mapCSV = Utility.readCSV("map/" + mapName + "_Map.csv");
         String[][] decorCSV = Utility.readCSV("map/" + mapName + "_Decor.csv");
         initializeMap(mapCSV, decorCSV);
@@ -60,8 +59,8 @@ public class GameController {
                                 ((Tower) updatable).setCurrentTarget(null);
                             }
                         }
-                        if (garbage.equals(GamePane.informationPane.getSelectedMinion())) {
-                            GamePane.informationPane.setVisible(false);
+                        if (garbage.equals(GamePane.entityInformationPane.getSelectedMinion())) {
+                            GamePane.entityInformationPane.setVisible(false);
                         }
                     }
                     updatables.remove(garbage);
@@ -92,7 +91,7 @@ public class GameController {
         int height = mapCSV.length;
         int width = mapCSV[0].length;
 
-        BoardGrid boardGrid = GUIController.getBoardGrid().initialize(width, height);
+        BoardGrid boardGrid = GUIController.getBoardGrid();
 
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
@@ -125,8 +124,8 @@ public class GameController {
         minions.clear();
         updatablesAddList.clear();
         MinionWaveController.setWaveNumber(1);
-        GamePane.playerStatusPane.updateData();
-        GamePane.informationPane.setVisible(false);
+        GamePane.playerInformationPane.updateData();
+        GamePane.entityInformationPane.setVisible(false);
 
         setSelectedTower(null);
         GUIController.getGamePane().getNextWaveButton().setDisable(false);
@@ -204,7 +203,7 @@ public class GameController {
 
 	public static void addMoney(int value) {
 		gold +=value;
-		GamePane.playerStatusPane.updateData();
+		GamePane.playerInformationPane.updateData();
 	}
 
 	public static void addHp(int value) {
@@ -212,7 +211,7 @@ public class GameController {
 			currentHp = Math.min(currentHp +value, maxHp);
 		else
 			currentHp = Math.max(currentHp +value, 0);
-		GamePane.playerStatusPane.updateData();
+		GamePane.playerInformationPane.updateData();
 	}
 
 	public static void lose() {

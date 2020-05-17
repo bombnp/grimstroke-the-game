@@ -13,15 +13,43 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import logic.GameController;
 
+/**
+ * The BoardCell class represents each individual cell in the {@link BoardGrid}. This class
+ * contains all the fields and methods to interact with {@link Tower} construction and removal.
+ */
 public class BoardCell extends StackPane {
+    /**
+     * The {@link Tower} the cell is bound to.
+     */
     private Tower tower;
 
-    private final int row, col;
+    /**
+     * The row of the cell in the {@link BoardGrid}.
+     */
+    private final int row;
 
+    /**
+     * The row of the cell in the {@link BoardGrid}.
+     */
+    private final int col;
+
+    /**
+     * The white {@link CellImage} that appears when hovered.
+     */
     private CellImage hoverImage;
 
+    /**
+     * The tooltip that displays the context of Lv. 2 towers before upgrading.
+     */
     private Tooltip upgradeTooltip;
 
+    /**
+     * The constructor of the BoardCell class. It sets the size of the cell and the listeners of the cell.
+     * @param bgSprite The sprite used for the background of the cell.
+     * @param row The row of the cell.
+     * @param col The column of the cell.
+     * @param buildable Indicates whether or not a {@link Tower} can be built on this cell.
+     */
     public BoardCell(int bgSprite, int row, int col, boolean buildable) {
         this.setPrefWidth(48);
         this.setPrefHeight(48);
@@ -62,12 +90,18 @@ public class BoardCell extends StackPane {
         }
     }
 
+    /**
+     * Sets up the {@link #upgradeTooltip}.
+     */
     public void setupTooltip() {
-        upgradeTooltip = new Tooltip("test");
+        upgradeTooltip = new Tooltip();
         upgradeTooltip.setFont(new Font(12));
 
     }
 
+    /**
+     * Sets the text of {@link #upgradeTooltip} based on the type of {@link #tower}.
+     */
     public void setTooltipText() {
         TowerData upgradedTower;
         switch (tower.getClass().getName()) {
@@ -92,15 +126,27 @@ public class BoardCell extends StackPane {
         );
     }
 
+    /**
+     * Adds a sprite with the given {@link Sprite spriteIndex} to the cell.
+     * @param spriteIndex The sprite to be added.
+     */
     public void addImage(int spriteIndex) {
         this.getChildren().add(new CellImage(spriteIndex));
     }
 
+    /**
+     * Adds the given {@link CellImage} to the cell.
+     * @param cellImage The {@link CellImage} to be added.
+     * @return The given {@link CellImage}.
+     */
     public CellImage addImage(CellImage cellImage) {
         this.getChildren().add(cellImage);
         return cellImage;
     }
 
+    /**
+     * Removes the current {@link Tower} bound to the cell.
+     */
     public void removeTower() {
         this.setOnMouseClicked(mouseEvent -> {
             try {
@@ -117,6 +163,10 @@ public class BoardCell extends StackPane {
         Debug.removeTowerRange(tower);
     }
 
+    /**
+     * Sets the {@link Tower} of the cell.
+     * @param newTower The {@link Tower} to be set on the cell.
+     */
     public void setTower(Tower newTower) {
         if (tower != null) {
             removeTower();
@@ -152,14 +202,26 @@ public class BoardCell extends StackPane {
         GUIController.getGamePane().getChildren().add(tower);
     }
 
+    /**
+     * Gets the {@link #row}.
+     * @return The {@link #row}.
+     */
     public int getRow() {
         return row;
     }
 
+    /**
+     * Gets the {@link #col}.
+     * @return The {@link #col}.
+     */
     public int getCol() {
         return col;
     }
 
+    /**
+     * Gets the {@link #tower}.
+     * @return The {@link #tower}.
+     */
     public Tower getTower() {
         return tower;
     }

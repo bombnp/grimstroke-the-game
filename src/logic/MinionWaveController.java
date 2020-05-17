@@ -39,7 +39,7 @@ public class MinionWaveController{
 
 	public static void increaseWaveNumber() {
 		waveNumber++;
-		GamePane.playerStatusPane.updateData();
+		GamePane.playerInformationPane.updateData();
 	}
 
 	public static boolean isSpawning() {

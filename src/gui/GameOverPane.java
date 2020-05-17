@@ -7,11 +7,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 import logic.GameController;
 
+/**
+ * The GameOverPane represents the pane when the player loses.
+ */
 public class GameOverPane extends VBox{
+
+	/**
+	 * The constructor of the GameOverPane. Initializes the pane, sets the buttons, and the listeners.
+	 */
 	public GameOverPane() {
-		createPreset();
-	}
-	public void createPreset() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Game Over!");
 		alert.setHeaderText("Your health point is below or equal zero");
