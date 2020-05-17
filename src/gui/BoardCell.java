@@ -118,7 +118,7 @@ public class BoardCell extends StackPane {
         }
         upgradeTooltip.setText(
                 String.format("Upgrade to %s\n", upgradedTower.name) +
-                String.format("Damage: %d-%d\n", (int)upgradedTower.minDamage, (int)upgradedTower.maxDamage) +
+                String.format("Damage: %d\n", (int)upgradedTower.damage) +
                 String.format("Rates: %.1f shots/sec\n", upgradedTower.rate) +
                 String.format("Range: %d\n", (int)upgradedTower.range) +
                 String.format("Cost: %d\n", upgradedTower.cost)

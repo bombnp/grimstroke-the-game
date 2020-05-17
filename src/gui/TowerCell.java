@@ -25,7 +25,7 @@ public class TowerCell extends StackPane {
 	/**
 	 * The damage of the tower.
 	 */
-	private String damage;
+	private double damage;
 
 	/**
 	 * The rate in which the tower fires, measured in shots per second.
@@ -79,7 +79,7 @@ public class TowerCell extends StackPane {
 	 */
 	public TowerCell(TowerData towerData) {
 		this.name = towerData.name;
-		this.damage = (int)towerData.minDamage + "-" + (int)towerData.maxDamage;
+		this.damage = towerData.damage;
 		this.rate = towerData.rate;
 		this.range = towerData.range;
 		this.cost = towerData.cost;
@@ -178,7 +178,7 @@ public class TowerCell extends StackPane {
 		else
 			tooltip.setText(
 					name + "\n" +
-					String.format("Damage: %s\n", damage) +
+					String.format("Damage: %d\n", (int)damage) +
 					String.format("Rates: %.1f shots/sec\n", rate) +
 					String.format("Range: %d\n", (int)range) +
 					String.format("Cost: %d\n", cost)

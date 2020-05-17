@@ -16,14 +16,9 @@ public class TowerData {
     public String name;
 
     /**
-     * The minimum amount of damage this tower can deal.
+     * The amount of damage this tower can deal.
      */
-    public double minDamage;
-
-    /**
-     * The maximum amount of damage this tower can deal.
-     */
-    public double maxDamage;
+    public double damage;
 
     /**
      * The rate in which this tower fires, measured in shots/second.
@@ -50,10 +45,9 @@ public class TowerData {
     public TowerData(String[] data) {
         spriteIndex = Integer.parseInt(data[0]);
         name = data[1];
-        minDamage = Double.parseDouble(data[2]);
-        maxDamage = Double.parseDouble(data[3]);
-        rate = Double.parseDouble(data[4]);
-        range = Double.parseDouble(data[5]);
-        cost = Integer.parseInt(data[6]);
+        damage = Double.parseDouble(data[2]);
+        rate = Double.parseDouble(data[3]);
+        range = Double.parseDouble(data[4]);
+        cost = Integer.parseInt(data[5]);
     }
 }

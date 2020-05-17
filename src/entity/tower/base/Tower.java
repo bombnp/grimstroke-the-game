@@ -13,7 +13,6 @@ import logic.GameController;
 import logic.Vector2;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * The Tower class represents the base class for all types of Towers, namely {@link MachineGunTower Machine Gun Towers},
@@ -34,14 +33,9 @@ public abstract class Tower extends StackPane implements Updatable{
     protected BoardCell cell;
 
     /**
-     * The minimum damage the tower can deal.
+     * The damage the tower can deal.
      */
-    protected double minDamage;
-
-    /**
-     * The maximum damage the tower can deal.
-     */
-    protected double maxDamage;
+    protected double damage;
 
     /**
      * The rate in which the tower fires, measured in shots per second.
@@ -124,8 +118,7 @@ public abstract class Tower extends StackPane implements Updatable{
      * @param towerData The data of the tower.
      */
     public void extractData(TowerData towerData) {
-        this.minDamage = towerData.minDamage;
-        this.maxDamage = towerData.maxDamage;
+        this.damage = towerData.damage;
         this.rate = towerData.rate;
         this.range = towerData.range;
         this.cost = towerData.cost;
@@ -231,12 +224,11 @@ public abstract class Tower extends StackPane implements Updatable{
     public abstract void attack(Minion target);
 
     /**
-     * Randomizes the damage between {@link #minDamage} and {@link #maxDamage}.
-     * @return The randomized damage between {@link #minDamage} and {@link #maxDamage}.
+     * Gets the {@link #damage}.
+     * @return The {@link #damage}.
      */
     public double getDamage() {
-        Random randomizer = new Random();
-        return randomizer.nextDouble() * (maxDamage-minDamage) + minDamage;
+        return damage;
     }
 
     /**

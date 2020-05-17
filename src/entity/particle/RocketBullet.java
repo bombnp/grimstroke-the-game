@@ -22,7 +22,7 @@ public class RocketBullet extends Bullet {
     /**
      * The explosion size of each rocket level, compared to the original size.
      */
-    private final double[] explosionScale = {1.25, 1.5};
+    private final double[] explosionScale = {1.5, 2};
 
     /**
      * The constructor for the RocketBullet class.
