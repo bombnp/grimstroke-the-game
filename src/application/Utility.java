@@ -3,6 +3,8 @@ package application;
 import entity.minion.Minion;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import logic.Vector2;
 
 import java.io.BufferedReader;
@@ -96,5 +98,11 @@ public class Utility {
             animation[i] = new Image(String.format("animation/%s/%s_%d.png", animationName, animationName, i));
         }
         return animation;
+    }
+
+    private static void playSound(String soundPath){
+        final Media media = new Media(soundPath);
+        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
     }
 }

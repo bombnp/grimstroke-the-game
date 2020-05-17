@@ -48,8 +48,8 @@ public class TowerCell extends StackPane {
 	private Background currentBG;
 
 	/**
-	 * The constructor of the TowerCell class. This variant of the cell
-	 * @param toolName
+	 * The constructor of the TowerCell class. This variant creates the cells for the tools.
+	 * @param toolName The name of the tool.
 	 */
 	public TowerCell(String toolName) {
 		switch (toolName) {
@@ -63,7 +63,6 @@ public class TowerCell extends StackPane {
 				break;
 		}
 
-
 		this.setPrefWidth(prefSize);
 		this.setPrefHeight(prefSize);
 
@@ -71,10 +70,13 @@ public class TowerCell extends StackPane {
 		this.setBackground(currentBG);
 
 		setTooltip();
-
 		addListener();
 	}
 
+	/**
+	 * The constructor of the TowerCell class. This variant creates the cells for the towers.
+	 * @param towerData The data of the tower.
+	 */
 	public TowerCell(TowerData towerData) {
 		this.name = towerData.name;
 		this.damage = (int)towerData.minDamage + "-" + (int)towerData.maxDamage;
@@ -91,10 +93,12 @@ public class TowerCell extends StackPane {
 		this.getChildren().add(new TowerImage(towerData.spriteIndex));
 
 		setTooltip();
-
 		addListener();
 	}
 
+	/**
+	 * Sets the tooltip and its listeners.
+	 */
 	public void setTooltip() {
     	Tooltip tooltip = new Tooltip();
     	tooltip.setFont(new Font(12));
@@ -107,47 +111,77 @@ public class TowerCell extends StackPane {
 		});
 	}
 
+	/**
+	 * Add the listeners to the cell.
+	 */
 	public void addListener() {
 		this.setOnMouseEntered(mouseEvent -> this.setBackground(GUIController.BG_TOWER_HOVER));
 		this.setOnMouseClicked(mouseEvent -> GameController.setSelectedTower(this));
 	}
 
+	/**
+	 * Sets the {@link Background} of the cell.
+	 * @param currentBG The {@link Background} of the cell.
+	 */
 	public void setCurrentBG(Background currentBG) {
 		this.currentBG = currentBG;
 		this.setBackground(currentBG);
 	}
 
+	/**
+	 * Checks whether the cell is a tool or not.
+	 * @return True if the cell is a tool, false otherwise.
+	 */
 	public boolean isTool() {
 		return this.name.contains("Tool");
 	}
 
+	/**
+	 * Checks whether the cell is the Upgrade tool or not.
+	 * @return True if the cell is the Upgrade tool, false otherwise.
+	 */
 	public boolean isUpgradeTool() {
 		return this.name.equals("Upgrade Tool");
 	}
 
+	/**
+	 * Checks whether the cell is the Sell tool or not.
+	 * @return True if the cell is the Sell tool, false otherwise.
+	 */
 	public boolean isSellTool() {
 		return this.name.equals("Sell Tool");
 	}
 
+	/**
+	 * Gets the {@link #name}.
+	 * @return The {@link #name}.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Gets the {@link #cost}.
+	 * @return The {@link #cost}.
+	 */
 	public int getCost() {
 		return this.cost;
 	}
 
-	public void setTooltipText(Tooltip tool) {
+	/**
+	 * Sets the text of the tooltip.
+	 * @param tooltip The tooltip to set the texts.
+	 */
+	public void setTooltipText(Tooltip tooltip) {
 		if(this.isTool())
-			tool.setText(this.getName());
+			tooltip.setText(this.getName());
 		else
-			tool.setText(
+			tooltip.setText(
 					name + "\n" +
 					String.format("Damage: %s\n", damage) +
 					String.format("Rates: %.1f shots/sec\n", rate) +
 					String.format("Range: %d\n", (int)range) +
 					String.format("Cost: %d\n", cost)
 			);
-
 	}
 }

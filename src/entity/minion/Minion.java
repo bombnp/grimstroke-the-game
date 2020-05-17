@@ -330,7 +330,7 @@ public class Minion extends StackPane implements Updatable {
         if (currentHealth <= 0) {
             GameController.removeUpdatable(this);
             GamePane.entityInformationPane.setSelectedMinion(null);
-            GameController.addMoney(reward);
+            GameController.addGold(reward);
         }
 
         healthBar.setProgress(currentHealth / maxHealth);

@@ -177,7 +177,7 @@ public class BoardCell extends StackPane {
         this.setOnMouseClicked(mouseEvent -> {
             System.out.println();
             if (GameController.getSelectedTower().isSellTool()) {
-                GameController.addMoney(tower.getCost()/2);
+                GameController.addGold(tower.getCost()/2);
                 removeTower();
             } else if (GameController.getSelectedTower().isUpgradeTool() && tower.getLevel() == 1) {
                 if (GameController.canBuy(tower, 2)) {
