@@ -103,7 +103,7 @@ public abstract class Tower extends StackPane implements Updatable{
         this.level = level;
         this.cell = cell;
 
-        GameController.addMoney(-1*cost);
+        GameController.addGold(-1*cost);
 
         this.setLayoutX(centerPosition.getX()-24);
         this.setLayoutY(centerPosition.getY()-24);

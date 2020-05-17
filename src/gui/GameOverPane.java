@@ -11,7 +11,6 @@ import logic.GameController;
  * The GameOverPane represents the pane when the player loses.
  */
 public class GameOverPane extends VBox{
-
 	/**
 	 * The constructor of the GameOverPane. Initializes the pane, sets the buttons, and the listeners.
 	 */
